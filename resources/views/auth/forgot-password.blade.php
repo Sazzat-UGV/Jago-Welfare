@@ -1,25 +1,54 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+@extends('frontend.layouts.app')
+@section('title')
+    Forgot Password
+@endsection
+@push('style')
+@endpush
+@section('content')
+    @include('frontend.layouts.include.banner', [
+        'page_name' => 'Forgot Password',
+        'subpage_name' => '',
+    ])
+    <section id="login_arae" class="section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-12">
+                    <div class="section_heading">
+                        <p class="mb-2">Forgot your password? No problem. Just let us know your email address and we will email you a
+                            password reset link that will allow you to choose a new one.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="author_form_area">
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+                        <div class="text-center text-success text-bold">
+                            {{ session('status') }}
+                        </div>
+                        <form method="POST" action="{{ route('password.email') }}" id="author_form">
+                            @csrf
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+                            <div class="form-group">
+                                <input type="text"
+                                    class="form-control @error('email')
+                                is-invalid
+                            @enderror"
+                                    placeholder="Enter email" name="email" value="{{ old('email') }}" required="">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <div class="author_submit_form">
+                                <button class="btn btn_theme btn_md">Email Password Reset Link</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </section>
+@endsection
+@push('script')
+@endpush

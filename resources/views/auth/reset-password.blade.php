@@ -1,39 +1,71 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
-
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@extends('frontend.layouts.app')
+@section('title')
+    Reset Password
+@endsection
+@push('style')
+@endpush
+@section('content')
+    @include('frontend.layouts.include.banner', [
+        'page_name' => 'Reset Password',
+        'subpage_name' => '',
+    ])
+    <section id="login_arae" class="section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-12">
+                    <div class="section_heading">
+                        <h3 class="mb-2">Reset your password</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="author_form_area">
+                        <form method="POST" action="{{ route('password.store') }}" id="author_form">
+                            @csrf
+                            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                            <div class="form-group">
+                                <input type="email"
+                                    class="form-control @error('email')
+                                is-invalid
+                            @enderror"
+                                    placeholder="Enter email" name="email" value="{{ old('email', $request->email) }}"
+                                    required="">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="password"
+                                    class="form-control @error('password')
+                                is-invalid
+                            @enderror"
+                                    placeholder="Enter password" name="password" value="{{ old('password') }}"
+                                    required="">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="password"
+                                    class="form-control @error('password_confirmation')
+                                is-invalid
+                            @enderror"
+                                    placeholder="Retype password" name="password_confirmation"
+                                    value="{{ old('password_confirmation') }}" required="">
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                            <div class="author_submit_form">
+                                <button class="btn btn_theme btn_md">Reset Password</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </section>
+@endsection
+@push('script')
+@endpush

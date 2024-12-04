@@ -51,7 +51,7 @@
                             <button class="btn btn_theme btn_md" type="submit">Login</button>
                             <p>Dont have an account? <a href="{{ route('register') }}">Register now</a></p>
                             <p>Or</p>
-                            <p><a href="{{ route('admin.backup.create') }}">Forget Password</a></p>
+                            <p><a href="{{ route('password.request') }}">Forgot Password</a></p>
                         </div>
                     </form>
                 </div>
