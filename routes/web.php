@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::prefix('/')->group(function () {
+    Route::get('',[HomeController::class,'homePage'])->name('homePage');
 });
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

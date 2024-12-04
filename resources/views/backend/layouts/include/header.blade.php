@@ -5,10 +5,10 @@
             <div class="navbar-brand-box">
                 <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ asset('uploads/settings') }}/{{ $setting->site_logo }}" alt="" height="22">
+                        <img src="{{ asset('uploads/settings') }}/{{ $setting->site_favicon }}" alt="" height="30">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('uploads/settings') }}/{{ $setting->site_logo }}" alt="" height="19">
+                        <img src="{{ asset('uploads/settings') }}/{{ $setting->site_logo }}" alt="" height="35">
                     </span>
                 </a>
             </div>

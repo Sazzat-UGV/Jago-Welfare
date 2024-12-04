@@ -26,7 +26,7 @@ class GeneralSettingController extends Controller
             $request->validate([
                 'site_name' => 'nullable|string|max:50',
                 'site_logo' => 'sometimes|image|mimes:png,jpg,jpeg,ico',
-                'site_favicon' => 'sometimes|mimes:ico',
+                'site_favicon' => 'sometimes|mimes:ico,png',
             ]);
             $setting->update([
                 'site_name' => $request->site_name,

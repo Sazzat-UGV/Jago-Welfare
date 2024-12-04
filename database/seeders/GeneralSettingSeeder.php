@@ -14,7 +14,7 @@ class GeneralSettingSeeder extends Seeder
     {
         GeneralSetting::updateOrCreate([
             'site_logo' => 'logo.png',
-            'site_favicon' => 'favicon.ico',
+            'site_favicon' => 'favicon.png',
             'breadcrumb_image' => 'breadcrumb.jpg',
         ]);
     }

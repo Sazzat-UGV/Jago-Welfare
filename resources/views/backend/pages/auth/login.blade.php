@@ -33,7 +33,7 @@
                         <div class="card-body ">
                             <div class="d-flex justify-content-center my-3">
                                 <img src="{{ asset('uploads/settings') }}/{{ $setting->site_logo }}" alt="Logo"
-                                    class="img-fluid" style="max-width: 100px; margin-top: 20px;">
+                                    class="img-fluid" style="max-width: 180px; margin-top: 20px;">
                             </div>
 
                             <div class="p-2">
