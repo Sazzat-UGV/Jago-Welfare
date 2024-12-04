@@ -69,6 +69,7 @@
                             </div>
                             <div class="author_submit_form">
                                 <button class="btn btn_theme btn_md">Register</button>
+                                <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
                             </div>
                         </form>
                     </div>
