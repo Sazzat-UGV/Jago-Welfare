@@ -14,7 +14,8 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-12">
                     <div class="section_heading">
-                        <p class="mb-2">Forgot your password? No problem. Just let us know your email address and we will email you a
+                        <p class="mb-2">Forgot your password? No problem. Just let us know your email address and we will
+                            email you a
                             password reset link that will allow you to choose a new one.</p>
                     </div>
                 </div>
@@ -23,9 +24,9 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="author_form_area">
 
-                        <div class="text-center text-success text-bold">
+                        <p class="text-center text-success text-bold mb-3">
                             {{ session('status') }}
-                        </div>
+                        </p>
                         <form method="POST" action="{{ route('password.email') }}" id="author_form">
                             @csrf
 

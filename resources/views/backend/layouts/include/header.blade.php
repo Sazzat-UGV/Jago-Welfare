@@ -19,10 +19,7 @@
 
             <!-- App Search-->
             <form class="app-search d-none d-lg-block">
-                <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <span class="bx bx-search-alt"></span>
-                </div>
+                <a href="{{ route('homePage') }}" class="btn btn-danger rounded-pill px-4">Home Page</a>
             </form>
 
         </div>

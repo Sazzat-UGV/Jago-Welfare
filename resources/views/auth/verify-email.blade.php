@@ -24,12 +24,14 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="author_form_area">
                         @if (session('status') == 'verification-link-sent')
-                            <div class="text-center text-success text-bold">
-                                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-                            </div>
+                            <p class="text-center text-success text-bold mb-3">
+                                A new verification link has been sent to the email address you provided during registration.
+                            </p>
                         @endif
+
                         <form method="POST" action="{{ route('verification.send') }}">
-                            @csrf<div class="author_submit_form">
+                            @csrf
+                            <div class="author_submit_form" style="padding-top: 0px !important;">
                                 <button class="btn btn_theme btn_md">Resend Verification Email</button>
                             </div>
                         </form>

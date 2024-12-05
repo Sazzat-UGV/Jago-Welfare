@@ -139,7 +139,7 @@
 
                             <div class="option-item">
                                 @auth
-                                    <a href="{{ route('dashboard') }}" class="btn btn_navber">Dashboard</a>
+                                    <a href="{{ route('admin.dashboard') }}" class="btn btn_navber">Dashboard</a>
                                 @endauth
                                 @guest
                                     <a href="{{ route('login') }}" class="btn btn_navber">Login</a>
@@ -165,7 +165,7 @@
                         <div class="others-options d-flex align-items-center">
                             <div class="option-item">
                                 @auth
-                                    <a href="{{ route('dashboard') }}" class="btn btn_navber">Dashboard</a>
+                                    <a href="{{ route('admin.dashboard') }}" class="btn btn_navber">Dashboard</a>
                                 @endauth
                                 @guest
                                     <a href="{{ route('login') }}" class="btn btn_navber">Login</a>
