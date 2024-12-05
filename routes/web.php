@@ -9,8 +9,6 @@ Route::prefix('/')->group(function () {
     Route::get('',[HomeController::class,'homePage'])->name('homePage');
 });
 
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

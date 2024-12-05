@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->nullable()->constrained('roles');
+            $table->foreignId('role_id')->default(4)->constrained('roles');
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->text('bio')->nullable();

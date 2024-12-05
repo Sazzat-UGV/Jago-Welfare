@@ -22,7 +22,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::post('login', [LoginController::class, 'login'])->name('login');
     });
 
-    Route::middleware(['auth.check'])->group(function () {
+    Route::middleware(['auth.check','verified'])->group(function () {
         // profile route
         Route::get('profile', [ProfileController::class, 'ProfilePage'])->name('profile_page');
         Route::post('edit-profile', [ProfileController::class, 'editProfile'])->name('edit_profile');
