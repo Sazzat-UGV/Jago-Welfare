@@ -3684,16 +3684,8 @@ transform: scale(1.2);
 }
 
 /* homepage five */
-#home_five_banner .bg_one{
-  background-image: url("../img/home-5/connon/banner-one.png");
-  width: 100%;
-}
-#home_five_banner .bg_two{
-  background-image: url("../img/home-5/connon/banner-two.png");
-}
-#home_five_banner .bg_three{
-  background-image: url("../img/home-5/connon/banner-three.png");
-}
+
+
 .banner_slider_item{
 background-position: center;
 background-repeat: no-repeat;

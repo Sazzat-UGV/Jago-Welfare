@@ -10,6 +10,26 @@
                     </a>
                 </li>
 
+                @can('browse-slider')
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-slider"></i>
+                            <span>Sliders</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('browse-slider')
+                                <li class="@if (Route::is('admin.slider.index')) mm-active @endif"><a
+                                        href="{{ route('admin.slider.index') }}"
+                                        class="@if (Route::is('admin.slider.index')) active @endif">Slider List</a></li>
+                            @endcan
+                            @can('add-slider')
+                                <li class="@if (Route::is('admin.slider.create')) mm-active @endif"><a
+                                        href="{{ route('admin.slider.create') }}"
+                                        class="@if (Route::is('admin.slider.create')) active @endif">Add New Slider</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 @can('browse-category')
                     <li>
                         <a href="{{ route('admin.category.index') }}"

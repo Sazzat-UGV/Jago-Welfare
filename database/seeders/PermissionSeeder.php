@@ -29,6 +29,12 @@ class PermissionSeeder extends Seeder
             'Add Module',
             'Delete Module',
         ];
+        $developerSlidersPermissionArray = [
+            'Browse Slider',
+            'Edit Slider',
+            'Add Slider',
+            'Delete Slider',
+        ];
         $developerPermissionsArray = [
             'Browse Permission',
             'Edit Permission',
@@ -73,7 +79,7 @@ class PermissionSeeder extends Seeder
                 ]
             );
         }
-        
+
         //Categories
         $developerCategoryModule = Module::where('name', 'Categories')->select('id')->first();
         for ($i = 0; $i < count($developerCategoriesPermissionArray); $i++) {
@@ -81,6 +87,15 @@ class PermissionSeeder extends Seeder
                 'module_id' => $developerCategoryModule->id,
                 'name' => $developerCategoriesPermissionArray[$i],
                 'slug' => Str::slug($developerCategoriesPermissionArray[$i]),
+            ]);
+        }
+        //Sliders
+        $developerSliderModule = Module::where('name', 'Sliders')->select('id')->first();
+        for ($i = 0; $i < count($developerSlidersPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerSliderModule->id,
+                'name' => $developerSlidersPermissionArray[$i],
+                'slug' => Str::slug($developerSlidersPermissionArray[$i]),
             ]);
         }
 
