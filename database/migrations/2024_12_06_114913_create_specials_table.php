@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('button_link')->nullable();
             $table->string('video_id')->nullable();
             $table->string('video_button_name')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

@@ -48,43 +48,44 @@
     </section>
 
     <!-- special section -->
-    <section id="about_area" class="section_padding_bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                    <div class="about_area_img">
-                        <img src="{{ asset('assets/frontend') }}/img/common/about.png" alt="img">
+    @if ($special->status == 1)
+        <section id="about_area" class="section_padding_bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="about_area_img">
+                            <img src="{{ asset('uploads/others') }}/{{ $special->photo }}" alt="img">
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                    <div class="about_area_main_text">
-                        <div class="about_area_heading">
-                            <img src="{{ asset('assets/frontend') }}/img/icon/about.png" alt="img">
-                        </div>
-                        <div class="about_area_heading_two">
-                            <h2>A world where <span class="color_big_heading">poverty</span> <br>
-                                will not exists</h2>
-                            <h3>We are the largest crowdfunding</h3>
-                        </div>
-                        <div class="about_area_para">
-                            <h5>Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do
-                                eiusmod tempor incididunt ut labore.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do
-                                eiusmod tempor incididunt ut labore et simply free text dolore magna
-                                aliqua lonm andhn.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do
-                                eiusmod tempor incididunt ut labore et simply.</p>
-                        </div>
-                        <div class="about_vedio_area">
-                            <a href="about.html" class="btn btn_theme btn_md">Learn more</a>
-                            <a href="https://vimeo.com/45830194" class="vedio_btn popup-vimeo"><i class="fa fa-play"></i>How
-                                we work</a>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="about_area_main_text">
+                            <div class="about_area_heading">
+                                <img src="{{ asset('assets/frontend') }}/img/icon/about.png" alt="img">
+                            </div>
+                            <div class="about_area_heading_two">
+                                <h2>{{ $special->heading }}</h2>
+                                <h3>{{ $special->sub_heading }}</h3>
+                            </div>
+                            <div class="about_area_para">
+                                <h5>{!! $special->text !!}</h5>
+                            </div>
+                            <div class="about_vedio_area">
+                                @if ($special->button_link)
+                                    <a href="{{ $special->button_link }}"
+                                        class="btn btn_theme btn_md">{{ $special->button_name }}</a>
+                                @endif
+                                @if ($special->video_id)
+                                <a href="https://www.youtube.com/watch?v={{ $special->video_id }}"
+                                    class="vedio_btn popup-vimeo"><i
+                                    class="fa fa-play"></i>{{ $special->video_button_name }}</a>
+                                    @endif
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 @endsection
 @push('script')
 @endpush

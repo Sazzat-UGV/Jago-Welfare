@@ -10,7 +10,7 @@ class Module extends Model
     use HasFactory;
     protected $guarded=["id"];
 
-  /* relationship with permissions */
+  /* relationship with permissionsP */
   public function permissions()
   {
       return $this->hasMany(Permission::class);

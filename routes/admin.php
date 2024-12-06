@@ -12,6 +12,7 @@ use App\Http\Controllers\backend\RoleController;
 use App\Http\Controllers\Backend\Setting\EmailConfigurationController;
 use App\Http\Controllers\Backend\Setting\GeneralSettingController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\SpecialController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::post('login', [LoginController::class, 'login'])->name('login');
     });
 
-    Route::middleware(['auth.check','verified'])->group(function () {
+    Route::middleware(['auth.check', 'verified'])->group(function () {
         // profile route
         Route::get('profile', [ProfileController::class, 'ProfilePage'])->name('profile_page');
         Route::post('edit-profile', [ProfileController::class, 'editProfile'])->name('edit_profile');
@@ -49,6 +50,10 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
         // backup download route
         Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('backupDownload');
+
+        // special route
+        Route::get('special', [SpecialController::class, 'edit'])->name('editSpecial');
+        Route::post('special', [SpecialController::class, 'update'])->name('updateSpecial');
 
         // export route
         Route::get('user_export/pdf', [UserExportController::class, 'exportPDF'])->name('exportPDF');

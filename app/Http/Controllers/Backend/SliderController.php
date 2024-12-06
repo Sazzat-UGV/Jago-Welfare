@@ -2,26 +2,30 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use Image;
 use App\Models\Slider;
 use Illuminate\Http\Request;
-use Image;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class SliderController extends Controller
 {
     public function index()
     {
+        Gate::authorize('browse-slider');
         $sliders = Slider::latest('id')->paginate();
         return view('backend.pages.slider.index', compact('sliders'));
     }
 
     public function create()
     {
+        Gate::authorize('add-slider');
         return view('backend.pages.slider.create');
     }
 
     public function store(Request $request)
     {
+        Gate::authorize('add-slider');
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:300',
@@ -36,12 +40,14 @@ class SliderController extends Controller
 
     public function edit(string $id)
     {
+        Gate::authorize('edit-slider');
         $slider = Slider::findOrFail($id);
         return view('backend.pages.slider.edit', compact('slider'));
     }
 
     public function update(Request $request, string $id)
     {
+        Gate::authorize('edit-slider');
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:300',
@@ -60,6 +66,7 @@ class SliderController extends Controller
 
     public function destroy(string $id)
     {
+        Gate::authorize('delete-slider');
         $slider = Slider::findOrFail($id);
 
         $this->deleteImage($slider->image);

@@ -30,6 +30,15 @@
                         </ul>
                     </li>
                 @endcan
+                @can('edit-special-section')
+                    <li>
+                        <a href="{{ route('admin.editSpecial') }}"
+                            class="waves-effect @if (Route::is('admin.editSpecial')) active @endif">
+                            <i class="bx bxs-hand-right"></i>
+                            <span>Special Section</span>
+                        </a>
+                    </li>
+                @endcan
                 @can('browse-category')
                     <li>
                         <a href="{{ route('admin.category.index') }}"

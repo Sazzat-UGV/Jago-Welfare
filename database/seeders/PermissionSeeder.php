@@ -64,7 +64,9 @@ class PermissionSeeder extends Seeder
             'Add Database Backup',
             'Delete Database Backup',
         ];
-
+        $developerOtherSectionsPermissionArray = [
+            'Edit Special Section',
+        ];
         //Dashboard
         $developerDashboardModule = Module::where('name', 'Dashboard')->select('id')->first();
         for ($i = 0; $i < count($developerDashboardPermissionArray); $i++) {
@@ -136,6 +138,16 @@ class PermissionSeeder extends Seeder
                 'module_id' => $developerUsersModule->id,
                 'name' => $developerUsersPermissionArray[$i],
                 'slug' => Str::slug($developerUsersPermissionArray[$i]),
+            ]);
+        }
+
+        //Other Section
+        $developerOtherSectionModule = Module::where('name', 'Other Sections')->select('id')->first();
+        for ($i = 0; $i < count($developerOtherSectionsPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerOtherSectionModule->id,
+                'name' => $developerOtherSectionsPermissionArray[$i],
+                'slug' => Str::slug($developerOtherSectionsPermissionArray[$i]),
             ]);
         }
 

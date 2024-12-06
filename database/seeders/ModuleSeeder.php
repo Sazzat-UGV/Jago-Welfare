@@ -22,6 +22,7 @@ class ModuleSeeder extends Seeder
             'Roles',
             'Users',
             'Settings',
+            'Other Sections',
             'Database Backup',
         ];
 
