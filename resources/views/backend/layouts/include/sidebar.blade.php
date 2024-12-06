@@ -10,6 +10,15 @@
                     </a>
                 </li>
 
+                @can('browse-category')
+                    <li>
+                        <a href="{{ route('admin.category.index') }}"
+                            class="waves-effect @if (Route::is('admin.category.index')) active @endif">
+                            <i class="bx bx-box"></i>
+                            <span>Categories</span>
+                        </a>
+                    </li>
+                @endcan
                 @can('browse-slider')
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -30,21 +39,35 @@
                         </ul>
                     </li>
                 @endcan
+
+                @can('browse-feature')
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-collection"></i>
+                            <span>Features</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('browse-feature')
+                                <li class="@if (Route::is('admin.feature.index')) mm-active @endif"><a
+                                        href="{{ route('admin.feature.index') }}"
+                                        class="@if (Route::is('admin.feature.index')) active @endif">Feature List</a></li>
+                            @endcan
+                            @can('add-feature')
+                                <li class="@if (Route::is('admin.feature.create')) mm-active @endif"><a
+                                        href="{{ route('admin.feature.create') }}"
+                                        class="@if (Route::is('admin.feature.create')) active @endif">Add New Feature</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+
+
                 @can('edit-special-section')
                     <li>
                         <a href="{{ route('admin.editSpecial') }}"
                             class="waves-effect @if (Route::is('admin.editSpecial')) active @endif">
                             <i class="bx bxs-hand-right"></i>
                             <span>Special Section</span>
-                        </a>
-                    </li>
-                @endcan
-                @can('browse-category')
-                    <li>
-                        <a href="{{ route('admin.category.index') }}"
-                            class="waves-effect @if (Route::is('admin.category.index')) active @endif">
-                            <i class="bx bx-box"></i>
-                            <span>Categories</span>
                         </a>
                     </li>
                 @endcan

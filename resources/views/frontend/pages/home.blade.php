@@ -75,10 +75,10 @@
                                         class="btn btn_theme btn_md">{{ $special->button_name }}</a>
                                 @endif
                                 @if ($special->video_id)
-                                <a href="https://www.youtube.com/watch?v={{ $special->video_id }}"
-                                    class="vedio_btn popup-vimeo"><i
-                                    class="fa fa-play"></i>{{ $special->video_button_name }}</a>
-                                    @endif
+                                    <a href="https://www.youtube.com/watch?v={{ $special->video_id }}"
+                                        class="vedio_btn popup-vimeo"><i
+                                            class="fa fa-play"></i>{{ $special->video_button_name }}</a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -86,6 +86,25 @@
             </div>
         </section>
     @endif
+
+    <!-- feature section -->
+    <section id="home_five_card_area" class="section_padding">
+        <div class="container">
+            <div class="row">
+                @foreach ($features as $feature)
+                    <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
+                        <a href="#!">
+                            <div class="card_five_wrapper">
+                                <img src="{{ asset('uploads/feature') }}/{{ $feature->icon }}" alt="icon">
+                                <h3>{{ $feature->title }}</h3>
+                                <p>{{ $feature->text }}</p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
 @endsection
 @push('script')
 @endpush

@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 @section('title')
-Edit Special Section
+    Edit Special Section
 @endsection
 @push('style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css"
@@ -50,7 +50,7 @@ Edit Special Section
                             </div>
                             <div class="col-12 mb-4">
                                 <label class="form-label">Text<span class="text-danger">*</span></label>
-                                <textarea name="text" id="" cols="30" rows="5"
+                                <textarea name="text" id="text" cols="30" rows="5"
                                     class="form-control @error('text')
                                             is-invalid
                                         @enderror"
@@ -115,7 +115,8 @@ Edit Special Section
                                         is-invalid
                                     @enderror"
                                     name="status">
-                                    <option value="1" {{ old('status', $special->status) == 1 ? 'selected' : '' }}>Active
+                                    <option value="1" {{ old('status', $special->status) == 1 ? 'selected' : '' }}>
+                                        Active
                                     </option>
                                     <option value="0" {{ old('status', $special->status) == 0 ? 'selected' : '' }}>
                                         Inactive
@@ -157,5 +158,14 @@ Edit Special Section
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $('.dropify').dropify();
+    </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#text'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endpush

@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 @section('title')
-    Sliders
+    Features
 @endsection
 @push('style')
     <style>
@@ -12,20 +12,20 @@
 @endpush
 @section('content')
     @include('backend.layouts.include.breadcrumb', [
-        'parent_page' => 'Sliders',
-        'page_name' => 'Slider List',
+        'parent_page' => 'Features',
+        'page_name' => 'Feature List',
     ])
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @can('add-slider')
+                    @can('add-feature')
                         <div class="row mb-3">
                             <div class="col-sm-12">
                                 <div class="text-sm-end">
-                                    <a href="{{ route('admin.slider.create') }}"
+                                    <a href="{{ route('admin.feature.create') }}"
                                         class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
-                                            class="mdi mdi-plus me-1"></i> New Slider</a>
+                                            class="mdi mdi-plus me-1"></i> New Feature</a>
                                 </div>
                             </div>
                         </div>
@@ -37,33 +37,43 @@
                                 <th>Created At</th>
                                 <th>Image</th>
                                 <th>Title</th>
-                                <th>Description</th>
-                                @if (Auth::user()->haspermission('edit-slider') || Auth::user()->haspermission('delete-slider'))
+                                <th>Text</th>
+                                <th>Status</th>
+                                @if (Auth::user()->haspermission('edit-feature') || Auth::user()->haspermission('delete-feature'))
                                     <th>Action</th>
                                 @endif
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($sliders as $index => $slider)
+                            @forelse ($features as $index => $feature)
                                 <tr>
                                     <th>{{ $index + 1 }}</th>
-                                    <td>{{ $slider->created_at->format('d-m-Y') }}</td>
-                                    <td><img src="{{ asset('uploads/slider') }}/{{ $slider->image }}" alt="User Photo"
+                                    <td>{{ $feature->created_at->format('d-m-Y') }}</td>
+                                    <td><img src="{{ asset('uploads/feature') }}/{{ $feature->icon }}" alt="User Photo"
                                             class="rounded img-fluid max-width: 100%;" style="height:auto"></td>
-                                    <td class="wrap">{{ $slider->title }}</td>
-                                    <td class="wrap">{{ $slider->description }}</td>
-                                    @if (Auth::user()->haspermission('edit-slider') || Auth::user()->haspermission('delete-slider'))
+                                    <td class="wrap">{{ $feature->title }}</td>
+                                    <td class="wrap">{{ $feature->text }}</td>
+                                    <td>
+                                        @if ($feature->status == 1)
+                                    <span class="badge rounded-pill badge-soft-success px-2"
+                                        style="font-size: 13px">Active</span>
+                                @else
+                                    <span class="badge rounded-pill badge-soft-danger px-2"
+                                        style="font-size: 13px">Inactive</span>
+                                @endif
+                                    </td>
+                                    @if (Auth::user()->haspermission('edit-feature') || Auth::user()->haspermission('delete-feature'))
                                         <td class="d-flex gap-1">
-                                                @can('edit-slider')
-                                                    <a href="{{ route('admin.slider.edit', $slider->id) }}"
-                                                        class="btn btn-warning position-relative p-0 avatar-xs rounded editModule-btn">
-                                                        <span class="avatar-title bg-transparent">
-                                                            <i class="bx bx-edit" style="font-size: 16px"></i>
-                                                        </span>
-                                                    </a>
-                                                @endcan
-                                            @can('delete-slider')
-                                                <form action="{{ route('admin.slider.destroy', $slider->id) }}" method="POST"
+                                            @can('edit-feature')
+                                                <a href="{{ route('admin.feature.edit', $feature->id) }}"
+                                                    class="btn btn-warning position-relative p-0 avatar-xs rounded editModule-btn">
+                                                    <span class="avatar-title bg-transparent">
+                                                        <i class="bx bx-edit" style="font-size: 16px"></i>
+                                                    </span>
+                                                </a>
+                                            @endcan
+                                            @can('delete-feature')
+                                                <form action="{{ route('admin.feature.destroy', $feature->id) }}" method="POST"
                                                     class="btn btn-danger position-relative p-0 avatar-xs rounded">
                                                     @csrf
                                                     @method('DELETE')
@@ -75,7 +85,6 @@
                                                     </button>
                                                 </form>
                                             @endcan
-                                        
                                         </td>
                                     @endif
                                 </tr>
@@ -86,7 +95,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{ $sliders->links('vendor.pagination.admin_dashboard') }}
+                    {{ $features->links('vendor.pagination.admin_dashboard') }}
                 </div>
             </div>
         </div> <!-- end col -->

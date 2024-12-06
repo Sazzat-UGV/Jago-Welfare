@@ -47,6 +47,12 @@ class PermissionSeeder extends Seeder
             'Add Role',
             'Delete Role',
         ];
+        $developerFeaturesPermissionArray = [
+            'Browse Feature',
+            'Edit Feature',
+            'Add Feature',
+            'Delete Feature',
+        ];
         $developerUsersPermissionArray = [
             'Browse User',
             'Read User',
@@ -82,6 +88,15 @@ class PermissionSeeder extends Seeder
             );
         }
 
+        //Features
+        $developerFeatureModule = Module::where('name', 'Features')->select('id')->first();
+        for ($i = 0; $i < count($developerFeaturesPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerFeatureModule->id,
+                'name' => $developerFeaturesPermissionArray[$i],
+                'slug' => Str::slug($developerFeaturesPermissionArray[$i]),
+            ]);
+        }
         //Categories
         $developerCategoryModule = Module::where('name', 'Categories')->select('id')->first();
         for ($i = 0; $i < count($developerCategoriesPermissionArray); $i++) {
