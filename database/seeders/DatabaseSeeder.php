@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             GeneralSettingSeeder::class,
             SliderSeeder::class,
+            SpecialSeeder::class,
         ]);
     }
 }
