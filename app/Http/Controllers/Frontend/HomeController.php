@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Counter;
+use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Slider;
 use App\Models\Special;
@@ -34,6 +35,12 @@ class HomeController extends Controller
             'testimonials',
             'counter',
         ));
+    }
+
+
+    public function faqPage(){
+        $faqs=Faq::latest('id')->get();
+        return view('frontend.pages.faq',compact('faqs'));
     }
 
 

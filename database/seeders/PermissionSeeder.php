@@ -66,6 +66,13 @@ class PermissionSeeder extends Seeder
             'Add User',
             'Delete User',
         ];
+        $developerFAQsPermissionArray = [
+            'Browse FAQs',
+            'Read FAQs',
+            'Edit FAQs',
+            'Add FAQs',
+            'Delete FAQs',
+        ];
         $developerSettingsPermissionArray = [
             'General Setting',
             'Email Configuration',
@@ -111,6 +118,15 @@ class PermissionSeeder extends Seeder
                 'module_id' => $developerCategoryModule->id,
                 'name' => $developerCategoriesPermissionArray[$i],
                 'slug' => Str::slug($developerCategoriesPermissionArray[$i]),
+            ]);
+        }
+        //FAQs
+        $developerFAQsModule = Module::where('name', 'FAQs')->select('id')->first();
+        for ($i = 0; $i < count($developerFAQsPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerFAQsModule->id,
+                'name' => $developerFAQsPermissionArray[$i],
+                'slug' => Str::slug($developerFAQsPermissionArray[$i]),
             ]);
         }
         //Sliders

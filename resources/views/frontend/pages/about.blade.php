@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('title')
-    Home
+    About
 @endsection
 @push('style')
 @endpush

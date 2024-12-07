@@ -80,6 +80,26 @@
                         </ul>
                     </li>
                 @endcan
+                @can('browse-testimonial')
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bxs-message-dots"></i>
+                            <span>FAQs</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('browse-faqs')
+                                <li class="@if (Route::is('admin.faqs.index')) mm-active @endif"><a
+                                        href="{{ route('admin.faqs.index') }}"
+                                        class="@if (Route::is('admin.faqs.index')) active @endif">FAQ List</a></li>
+                            @endcan
+                            @can('add-faqs')
+                                <li class="@if (Route::is('admin.faqs.create')) mm-active @endif"><a
+                                        href="{{ route('admin.faqs.create') }}"
+                                        class="@if (Route::is('admin.faqs.create')) active @endif">Add New FAQ</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
 
                 @can('edit-special-section')
                     <li>

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             FeatureSeeder::class,
             TestimonialSeeder::class,
             CounterSeeder::class,
+            FaqSeeder::class,
         ]);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CounterController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\Export\UserExportController;
+use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Backend\FeatureController;
 use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\backend\PermissionController;
@@ -52,6 +53,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('slider', SliderController::class);
         Route::resource('feature', FeatureController::class);
         Route::resource('testimonial', TestimonialController::class);
+        Route::resource('faqs', FaqController::class);
 
         // backup download route
         Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('backupDownload');

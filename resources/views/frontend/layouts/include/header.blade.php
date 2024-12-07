@@ -22,10 +22,16 @@
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a href="{{ route('homePage') }}" class="nav-link {{ Route::is('homePage')?'active':''  }}">Home</a>
+                                <a href="{{ route('homePage') }}"
+                                    class="nav-link {{ Route::is('homePage') ? 'active' : '' }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('aboutPage') }}" class="nav-link {{ Route::is('aboutPage')?'active':''  }}">About</a>
+                                <a href="{{ route('aboutPage') }}"
+                                    class="nav-link {{ Route::is('aboutPage') ? 'active' : '' }}">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('faqPage') }}"
+                                    class="nav-link {{ Route::is('faqPage') ? 'active' : '' }}">FAQ</a>
                             </li>
 
                             <li class="nav-item">
@@ -48,20 +54,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link active">
-                                    Events
-                                    <i class="fas fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="events.html" class="nav-link">Events</a>
-                                    </li>
-                                    <li class="nav-item active">
-                                        <a href="event-details.html" class="nav-link">Events Details</a>
-                                    </li>
-                                </ul>
-                            </li>
+
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     Gallery
@@ -90,50 +83,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    Pages
-                                    <i class="fas fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="about.html" class="nav-link">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="about-2.html" class="nav-link">About v2</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="about-3.html" class="nav-link">About v3</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="make-donation.html" class="nav-link">Make Donation</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="testimonials.html" class="nav-link">Testimonials</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="volunter.html" class="nav-link">Volunter</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="login.html" class="nav-link">Login</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="registration.html" class="nav-link">Register</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="faqs.html" class="nav-link">FAQ</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="terms-service.html" class="nav-link">Terms Service</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="error.html" class="nav-link">404 Error</a>
-                                    </li>
-                                </ul>
-                            </li>
+
                             <li class="nav-item">
                                 <a href="contact.html" class="nav-link">Contact</a>
                             </li>
