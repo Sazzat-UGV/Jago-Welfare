@@ -50,12 +50,17 @@
                                 <tr>
                                     <th>{{ $index + 1 }}</th>
                                     <td><img src="{{ asset('uploads/testimonial') }}/{{ $testimonial->photo }}"
-                                            alt="User Photo" class="rounded img-fluid max-width: 100%;" style="height:auto">
+                                            alt="User Photo" class="rounded img-fluid;" style="max-width: 100px">
                                     </td>
                                     <td class="">{{ $testimonial->name }}</td>
                                     <td class="wrap">{{ $testimonial->designation }}</td>
                                     <td class="wrap">{{ $testimonial->comment }}</td>
-                                    <td class="">{{ $testimonial->rating }}</td>
+                                    {{-- <td class="">{{  }}</td> --}}
+                                    <td>
+                                        @for ($i=0;$i<$testimonial->rating;$i++)
+                                        <span class="mdi mdi-star text-primary fs-5"></span>
+                                        @endfor
+                                    </td>
                                     <td>
                                         @if ($testimonial->status == 1)
                                             <span class="badge rounded-pill badge-soft-success px-2"

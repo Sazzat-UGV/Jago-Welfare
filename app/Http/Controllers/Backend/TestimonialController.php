@@ -68,7 +68,8 @@ class TestimonialController extends Controller
     public function edit(string $id)
     {
         Gate::authorize('edit-testimonial');
-        return view('backend.pages.testimonial.edit');
+        $testimonial = Testimonial::findOrFail($id);
+        return view('backend.pages.testimonial.edit', compact('testimonial'));
     }
 
     /**
@@ -77,6 +78,23 @@ class TestimonialController extends Controller
     public function update(Request $request, string $id)
     {
         Gate::authorize('edit-testimonial');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'designation' => 'required|string|max:255',
+            'comment' => 'required|string|max:255',
+            'rating' => 'required|numeric|max:5',
+            'photo' => 'sometimes|image|mimes:png,jpg,jpeg|max:10240',
+        ]);
+        $testimonial = Testimonial::findOrFail($id);
+        $testimonial->update([
+            'name' => $request->name,
+            'designation' => $request->designation,
+            'comment' => $request->comment,
+            'rating' => $request->rating,
+            'status' => $request->status,
+        ]);
+        $this->image_upload($request, $testimonial->id);
+        return redirect()->route('admin.testimonial.index')->with('success', 'Testimonial updated successfully.');
     }
 
     /**
@@ -85,6 +103,15 @@ class TestimonialController extends Controller
     public function destroy(string $id)
     {
         Gate::authorize('delete-testimonial');
+        $testimonial = Testimonial::findOrFail($id);
+        if ($testimonial->photo != 'default_testimonial.png') {
+            //delete old photo
+            $photo_location = 'public/uploads/testimonial/';
+            $old_photo_location = $photo_location . $testimonial->photo;
+            unlink(base_path($old_photo_location));
+        }
+        $testimonial->delete();
+        return redirect()->route('admin.testimonial.index')->with('success', 'Testimonial deleted successfully.');
     }
 
     public function image_upload($request, $testimonial_id)
@@ -101,7 +128,7 @@ class TestimonialController extends Controller
             $uploaded_photo = $request->file('photo');
             $new_photo_name = time() . '.' . $uploaded_photo->getClientOriginalExtension();
             $new_photo_location = $photo_loation . $new_photo_name;
-            Image::make($uploaded_photo)->save(base_path($new_photo_location));
+            Image::make($uploaded_photo)->resize(800, 800)->save(base_path($new_photo_location));
             $check = $testimonial->update([
                 'photo' => $new_photo_name,
             ]);

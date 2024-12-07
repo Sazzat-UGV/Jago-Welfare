@@ -123,7 +123,7 @@
                         <div class="testimonial_three_boxed">
                             <img src="{{ asset('assets/frontend') }}/img/home-3/common/quate.png" alt="icon"
                                 class="test_quate_area">
-                            <img src="{{ asset('uploads/testimonial') }}/{{ $testimonial->photo }}" alt="img">
+                            <img src="{{ asset('uploads/testimonial') }}/{{ $testimonial->photo }}" alt="img" class="w-25 rounded">
                             <p>{{ $testimonial->comment }}</p>
                             <div class="test_three_bottom">
                                 <div class="test_three_bottom_left">

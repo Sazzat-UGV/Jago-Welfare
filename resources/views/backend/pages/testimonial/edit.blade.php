@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 @section('title')
-    Edit Feature
+    Edit Testimonial
 @endsection
 @push('style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css"
@@ -14,79 +14,98 @@
 @endpush
 @section('content')
     @include('backend.layouts.include.breadcrumb', [
-        'parent_page' => 'Features',
-        'page_name' => 'Edit Feature',
+        'parent_page' => 'Testimonials',
+        'page_name' => 'Edit Testimonial',
     ])
     <div class="row">
         <div class="col-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @can('browse-feature')
+                    @can('browse-testimonial')
                         <div class="row mb-3">
                             <div class="col-sm-12">
                                 <div class="">
-                                    <a href="{{ route('admin.feature.index') }}"
+                                    <a href="{{ route('admin.testimonial.index') }}"
                                         class="btn btn-secondary btn-rounded waves-effect waves-light addContact-modal mb-2">
-                                        <i class="mdi mdi-arrow-left me-1"></i> Back to Features
+                                        <i class="mdi mdi-arrow-left me-1"></i> Back to Testimonials
                                     </a>
                                 </div>
                             </div>
                         </div>
                     @endcan
-                    <form action="{{ route('admin.feature.update',$feature->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.testimonial.update',$testimonial->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <div class="col-12 col-md-10 mb-4">
-                                <label class="form-label">Title<span class="text-danger">*</span></label>
+                            <div class="col-12 col-md-6 mb-4">
+                                <label class="form-label">Name<span class="text-danger">*</span></label>
                                 <input
-                                    class="form-control @error('title')
+                                    class="form-control @error('name')
                                             is-invalid
                                         @enderror"
-                                    type="text" placeholder="Enter title" name="title" value="{{ old('title',$feature->title) }}">
-                                @error('title')
+                                    type="text" placeholder="Enter name" name="name" value="{{ old('name',$testimonial->name) }}">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                            <div class="col-12 col-md-6 mb-4">
+                                <label class="form-label">Designation<span class="text-danger">*</span></label>
+                                <input
+                                    class="form-control @error('designation')
+                                            is-invalid
+                                        @enderror"
+                                    type="text" placeholder="Enter designation" name="designation"
+                                    value="{{ old('designation',$testimonial->designation) }}">
+                                @error('designation')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
 
-                            <div class="col-12 col-md-2 mb-4">
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Comment<span class="text-danger">*</span></label>
+                                <textarea name="comment" id="" cols="30" rows="5"
+                                    class="form-control @error('comment')
+                                is-invalid
+                                @enderror"
+                                    placeholder="Enter comment">{{ old('comment',$testimonial->comment) }}</textarea>
+                                @error('comment')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                            <div class="col-12 col-md-6 mb-4">
+                                <label class="form-label">Rating<span class="text-danger">*</span></label>
+                                <input
+                                    class="form-control @error('rating')
+                                            is-invalid
+                                        @enderror"
+                                    type="number" placeholder="Enter rating" name="rating" value="{{ old('rating',$testimonial->rating) }}">
+                                @error('rating')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                            <div class="col-12 col-md-6 mb-4">
                                 <label class="form-label">Status</label>
-                                <select
-                                    class="form-select @error('status')
-                                        is-invalid
-                                    @enderror"
-                                    name="status">
-                                    <option value="1" {{ old('status', $feature->status) == 1 ? 'selected' : '' }}>
+                                <select class="form-select @error('status') is-invalid @enderror" name="status">
+                                    <option value="1" {{ old('status', $testimonial->status) == 1 ? 'selected' : '' }}>
                                         Active
                                     </option>
-                                    <option value="0" {{ old('status', $feature->status) == 0 ? 'selected' : '' }}>
+                                    <option value="0" {{ old('status', $testimonial->status) == 0 ? 'selected' : '' }}>
                                         Inactive
                                     </option>
                                 </select>
+
                                 @error('status')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-
                             <div class="col-12 mb-4">
-                                <label class="form-label">Text<span class="text-danger">*</span></label>
-                                <textarea name="text" id="" cols="30" rows="5"
-                                    class="form-control @error('text')
-                                is-invalid
-                                @enderror"
-                                    placeholder="Enter text">{{ old('text',$feature->text) }}</textarea>
-                                @error('text')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="col-12 mb-4">
-                                <label class="form-label">Icon<span class="text-danger">*</span></label>
+                                <label class="form-label">Photo<span class="text-danger">*</span></label>
                                 <input
-                                    class="form-control dropify @error('icon')
+                                    class="form-control dropify @error('photo')
                                     is-invalid
                                 @enderror"
-                                    type="file" name="icon" data-default-file="{{ asset('uploads/feature') }}/{{ $feature->icon }}">
-                                @error('icon')
+                                    type="file" name="photo" data-default-file="{{ asset('uploads/testimonial') }}/{{ $testimonial->photo }}">
+                                @error('photo')
                                     <span class="text-danger" style="font-size: 11px"
                                         role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
