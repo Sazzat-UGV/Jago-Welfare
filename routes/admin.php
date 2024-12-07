@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\Setting\EmailConfigurationController;
 use App\Http\Controllers\Backend\Setting\GeneralSettingController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SpecialController;
+use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('category', CategoryController::class);
         Route::resource('slider', SliderController::class);
         Route::resource('feature', FeatureController::class);
+        Route::resource('testimonial', TestimonialController::class);
 
         // backup download route
         Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('backupDownload');

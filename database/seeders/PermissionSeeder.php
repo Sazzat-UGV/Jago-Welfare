@@ -35,6 +35,12 @@ class PermissionSeeder extends Seeder
             'Add Slider',
             'Delete Slider',
         ];
+        $developerTestimonialsPermissionArray = [
+            'Browse Testimonial',
+            'Edit Testimonial',
+            'Add Testimonial',
+            'Delete Testimonial',
+        ];
         $developerPermissionsArray = [
             'Browse Permission',
             'Edit Permission',
@@ -113,6 +119,15 @@ class PermissionSeeder extends Seeder
                 'module_id' => $developerSliderModule->id,
                 'name' => $developerSlidersPermissionArray[$i],
                 'slug' => Str::slug($developerSlidersPermissionArray[$i]),
+            ]);
+        }
+        //Testimonials
+        $developerTestimonialModule = Module::where('name', 'Testimonials')->select('id')->first();
+        for ($i = 0; $i < count($developerTestimonialsPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerTestimonialModule->id,
+                'name' => $developerTestimonialsPermissionArray[$i],
+                'slug' => Str::slug($developerTestimonialsPermissionArray[$i]),
             ]);
         }
 

@@ -60,7 +60,26 @@
                         </ul>
                     </li>
                 @endcan
-
+                @can('browse-testimonial')
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bxs-user-badge"></i>
+                            <span>Testimonials</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('browse-testimonial')
+                                <li class="@if (Route::is('admin.testimonial.index')) mm-active @endif"><a
+                                        href="{{ route('admin.testimonial.index') }}"
+                                        class="@if (Route::is('admin.testimonial.index')) active @endif">Testimonial List</a></li>
+                            @endcan
+                            @can('add-testimonial')
+                                <li class="@if (Route::is('admin.testimonial.create')) mm-active @endif"><a
+                                        href="{{ route('admin.testimonial.create') }}"
+                                        class="@if (Route::is('admin.testimonial.create')) active @endif">Add New Testimonial</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
 
                 @can('edit-special-section')
                     <li>

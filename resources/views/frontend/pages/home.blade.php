@@ -105,6 +105,46 @@
             </div>
         </div>
     </section>
+
+    <!-- testimonial section -->
+    <section id="testimonial_area_three" class="section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-12">
+                    <div class="section_heading_two">
+                        <h3>Our testimonials</h3>
+                        <h2>What they are talking about our expertise</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($testimonials as $testimonial)
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="testimonial_three_boxed">
+                            <img src="{{ asset('assets/frontend') }}/img/home-3/common/quate.png" alt="icon"
+                                class="test_quate_area">
+                            <img src="{{ asset('uploads/testimonial') }}/{{ $testimonial->photo }}" alt="img">
+                            <p>{{ $testimonial->comment }}</p>
+                            <div class="test_three_bottom">
+                                <div class="test_three_bottom_left">
+                                    <h3>{{ $testimonial->name }}</h3>
+                                    <h6>{{ $testimonial->designation }}</h6>
+                                </div>
+                                <div class="test_three_bottom_right">
+                                    <div class="test_three_icon">
+                                        @for ($i = 0; $i < $testimonial->rating; $i++)
+                                            <i class="fas fa-star"></i>
+                                        @endfor
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
 @endsection
 @push('script')
 @endpush

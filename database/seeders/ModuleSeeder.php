@@ -17,6 +17,7 @@ class ModuleSeeder extends Seeder
             'Dashboard',
             'Categories',
             'Sliders',
+            'Testimonials',
             'Features',
             'Modules',
             'Permissions',

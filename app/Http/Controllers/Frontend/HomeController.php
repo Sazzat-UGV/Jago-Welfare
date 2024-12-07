@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Feature;
 use App\Models\Slider;
 use App\Models\Special;
+use App\Models\Testimonial;
 
 class HomeController extends Controller
 {
@@ -13,11 +14,13 @@ class HomeController extends Controller
     {
         $sliders = Slider::latest('id')->get();
         $special = Special::where('id', 1)->first();
-        $features=Feature::where('status',1)->get();
+        $features = Feature::where('status', 1)->get();
+        $testimonials = Testimonial::where('status', 1)->latest('id')->limit(3)->get();
         return view('frontend.pages.home', compact(
             'sliders',
             'special',
             'features',
+            'testimonials',
         ));
     }
 }
