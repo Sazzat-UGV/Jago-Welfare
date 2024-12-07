@@ -78,6 +78,7 @@ class PermissionSeeder extends Seeder
         ];
         $developerOtherSectionsPermissionArray = [
             'Edit Special Section',
+            'Edit Counter',
         ];
         //Dashboard
         $developerDashboardModule = Module::where('name', 'Dashboard')->select('id')->first();

@@ -24,6 +24,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('homePage') }}" class="nav-link {{ Route::is('homePage')?'active':''  }}">Home</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('aboutPage') }}" class="nav-link {{ Route::is('aboutPage')?'active':''  }}">About</a>
+                            </li>
 
                             <li class="nav-item">
                                 <a href="#" class="nav-link">

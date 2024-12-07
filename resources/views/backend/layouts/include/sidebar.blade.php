@@ -90,6 +90,15 @@
                         </a>
                     </li>
                 @endcan
+                @can('edit-counter')
+                    <li>
+                        <a href="{{ route('admin.editCounter') }}"
+                            class="waves-effect @if (Route::is('admin.editCounter')) active @endif">
+                            <i class="bx bxs-hand-right"></i>
+                            <span>Counter</span>
+                        </a>
+                    </li>
+                @endcan
 
                 @can('browse-user')
                     <li>

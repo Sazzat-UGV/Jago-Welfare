@@ -18,4 +18,7 @@
 <script src="{{ asset('assets/frontend') }}/js/custom-progress-bar.js"></script>
 <script src="{{ asset('assets/frontend') }}/js/custom.js"></script>
 <script src="{{ asset('assets/frontend') }}/js/video.js"></script>
+
+<script src="{{ asset('assets/frontend') }}/js/custom-scroll-count.js"></script>
 @stack('script')
+

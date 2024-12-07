@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\Auth\ProfileController;
 use App\Http\Controllers\Backend\BackupController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CounterController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\Export\UserExportController;
 use App\Http\Controllers\Backend\FeatureController;
@@ -58,6 +59,10 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         // special route
         Route::get('special', [SpecialController::class, 'edit'])->name('editSpecial');
         Route::post('special', [SpecialController::class, 'update'])->name('updateSpecial');
+
+        //counter
+        Route::get('counter', [CounterController::class, 'edit'])->name('editCounter');
+        Route::post('counter', [CounterController::class, 'update'])->name('updateCounter');
 
         // export route
         Route::get('user_export/pdf', [UserExportController::class, 'exportPDF'])->name('exportPDF');
