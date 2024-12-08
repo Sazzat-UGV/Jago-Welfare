@@ -4092,3 +4092,52 @@ padding-bottom: 16px;
 #partner_area_two{
   margin-bottom: 100px;
 }
+
+
+
+
+.pagination {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.pagination ul {
+    display: flex;
+    /* Ensure horizontal alignment */
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+    /* Add spacing between items */
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #222;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #f5f5f5;
+    color: #222;
+}
+
+.pagination a.active,
+.pagination span.active {
+    background-color: #E03C33;
+    color: #fff;
+    border: none;
+}

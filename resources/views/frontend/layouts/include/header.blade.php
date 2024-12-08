@@ -30,60 +30,39 @@
                                     class="nav-link {{ Route::is('aboutPage') ? 'active' : '' }}">About</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('faqPage') }}"
-                                    class="nav-link {{ Route::is('faqPage') ? 'active' : '' }}">FAQ</a>
+                                <a href="contact.html" class="nav-link">Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="contact.html" class="nav-link">Causes</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    Causes
-                                    <i class="fas fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="causes.html" class="nav-link">Causes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="causes-1.html" class="nav-link">Causes v1</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="cause-details.html" class="nav-link">Causes Details</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="cause-details-1.html" class="nav-link">Causes Details v1</a>
-                                    </li>
-                                </ul>
+                                <a href="{{ route('volunteerPage') }}"
+                                    class="nav-link {{ Route::is('volunteerPage') ? 'active' : '' }}">Volunteers</a>
                             </li>
 
-                            <li class="nav-item">
+                            <li class="nav-item active">
                                 <a href="#" class="nav-link">
                                     Gallery
                                     <i class="fas fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                        <a href="gallery-grid.html" class="nav-link">Gallery One</a>
+                                        <a href="gallery-grid.html" class="nav-link">Photo Gallery</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="gallery-slider.html" class="nav-link">Gallery Two</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    News
-                                    <i class="fas fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="news.html" class="nav-link">News</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="news-details.html" class="nav-link">News Details</a>
+                                    <li class="nav-item active">
+                                        <a href="gallery-slider.html" class="nav-link">Video Gallery</a>
                                     </li>
                                 </ul>
                             </li>
 
+                            <li class="nav-item">
+                                <a href="{{ route('faqPage') }}"
+                                    class="nav-link {{ Route::is('faqPage') ? 'active' : '' }}">FAQ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="contact.html" class="nav-link">Blog</a>
+                            </li>
                             <li class="nav-item">
                                 <a href="contact.html" class="nav-link">Contact</a>
                             </li>

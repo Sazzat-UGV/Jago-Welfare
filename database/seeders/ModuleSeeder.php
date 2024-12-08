@@ -20,6 +20,7 @@ class ModuleSeeder extends Seeder
             'Testimonials',
             'Features',
             'Modules',
+            'Volunteers',
             'FAQs',
             'Permissions',
             'Roles',

@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SpecialController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\VolunteerController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/admin', '/admin/login');
@@ -54,6 +55,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('feature', FeatureController::class);
         Route::resource('testimonial', TestimonialController::class);
         Route::resource('faqs', FaqController::class);
+        Route::resource('volunteer', VolunteerController::class);
 
         // backup download route
         Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('backupDownload');

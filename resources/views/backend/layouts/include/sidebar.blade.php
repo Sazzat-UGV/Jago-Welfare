@@ -80,7 +80,7 @@
                         </ul>
                     </li>
                 @endcan
-                @can('browse-testimonial')
+                @can('browse-faqs')
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bxs-message-dots"></i>
@@ -96,6 +96,26 @@
                                 <li class="@if (Route::is('admin.faqs.create')) mm-active @endif"><a
                                         href="{{ route('admin.faqs.create') }}"
                                         class="@if (Route::is('admin.faqs.create')) active @endif">Add New FAQ</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('browse-volunteers')
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bxs-user-circle"></i>
+                            <span>Volunteers</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('browse-volunteers')
+                                <li class="@if (Route::is('admin.volunteer.index')) mm-active @endif"><a
+                                        href="{{ route('admin.volunteer.index') }}"
+                                        class="@if (Route::is('admin.volunteer.index')) active @endif">Volunteer List</a></li>
+                            @endcan
+                            @can('add-volunteers')
+                                <li class="@if (Route::is('admin.volunteer.create')) mm-active @endif"><a
+                                        href="{{ route('admin.volunteer.create') }}"
+                                        class="@if (Route::is('admin.volunteer.create')) active @endif">Add New Volunteer</a></li>
                             @endcan
                         </ul>
                     </li>

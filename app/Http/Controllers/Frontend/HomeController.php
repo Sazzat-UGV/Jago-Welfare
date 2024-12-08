@@ -9,6 +9,7 @@ use App\Models\Feature;
 use App\Models\Slider;
 use App\Models\Special;
 use App\Models\Testimonial;
+use App\Models\Volunteer;
 
 class HomeController extends Controller
 {
@@ -37,10 +38,14 @@ class HomeController extends Controller
         ));
     }
 
-
     public function faqPage(){
         $faqs=Faq::latest('id')->get();
         return view('frontend.pages.faq',compact('faqs'));
+    }
+
+    public function volunteerPage(){
+        $volunteers=Volunteer::paginate(8);
+        return view('frontend.pages.volunteer',compact('volunteers'));
     }
 
 

@@ -68,10 +68,15 @@ class PermissionSeeder extends Seeder
         ];
         $developerFAQsPermissionArray = [
             'Browse FAQs',
-            'Read FAQs',
             'Edit FAQs',
             'Add FAQs',
             'Delete FAQs',
+        ];
+        $developerVolunteersPermissionArray = [
+            'Browse Volunteers',
+            'Edit Volunteers',
+            'Add Volunteers',
+            'Delete Volunteers',
         ];
         $developerSettingsPermissionArray = [
             'General Setting',
@@ -109,6 +114,15 @@ class PermissionSeeder extends Seeder
                 'module_id' => $developerFeatureModule->id,
                 'name' => $developerFeaturesPermissionArray[$i],
                 'slug' => Str::slug($developerFeaturesPermissionArray[$i]),
+            ]);
+        }
+        //Volunteers
+        $developerVolunteerModule = Module::where('name', 'Volunteers')->select('id')->first();
+        for ($i = 0; $i < count($developerVolunteersPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerVolunteerModule->id,
+                'name' => $developerVolunteersPermissionArray[$i],
+                'slug' => Str::slug($developerVolunteersPermissionArray[$i]),
             ]);
         }
         //Categories

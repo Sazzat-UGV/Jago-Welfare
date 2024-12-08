@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             CounterSeeder::class,
             FaqSeeder::class,
+            VolunteerSeeder::class,
         ]);
     }
 }
