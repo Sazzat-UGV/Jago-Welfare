@@ -100,19 +100,19 @@
                         </ul>
                     </li>
                 @endcan
-                @can('browse-volunteers')
+                @can('browse-volunteer')
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bxs-user-circle"></i>
                             <span>Volunteers</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            @can('browse-volunteers')
+                            @can('browse-volunteer')
                                 <li class="@if (Route::is('admin.volunteer.index')) mm-active @endif"><a
                                         href="{{ route('admin.volunteer.index') }}"
                                         class="@if (Route::is('admin.volunteer.index')) active @endif">Volunteer List</a></li>
                             @endcan
-                            @can('add-volunteers')
+                            @can('add-volunteer')
                                 <li class="@if (Route::is('admin.volunteer.create')) mm-active @endif"><a
                                         href="{{ route('admin.volunteer.create') }}"
                                         class="@if (Route::is('admin.volunteer.create')) active @endif">Add New Volunteer</a></li>
@@ -127,6 +127,15 @@
                             class="waves-effect @if (Route::is('admin.editSpecial')) active @endif">
                             <i class="bx bxs-hand-right"></i>
                             <span>Special Section</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('browse-gallery')
+                    <li>
+                        <a href="{{ route('admin.gallery.index') }}"
+                            class="waves-effect @if (Route::is('admin.gallery.index')) active @endif">
+                            <i class="bx bxs-photo-album"></i>
+                            <span>Galleries</span>
                         </a>
                     </li>
                 @endcan

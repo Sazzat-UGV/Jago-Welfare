@@ -21,7 +21,7 @@
         <div class="col-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @can('browse-volunteers')
+                    @can('browse-volunteer')
                         <div class="row mb-3">
                             <div class="col-sm-12">
                                 <div class="">

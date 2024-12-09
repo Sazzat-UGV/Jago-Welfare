@@ -15,7 +15,7 @@ class VolunteerController extends Controller
      */
     public function index()
     {
-        Gate::authorize('browse-volunteers');
+        Gate::authorize('browse-volunteer');
         $volunteers=Volunteer::latest()->paginate();
         return view('backend.pages.volunteer.index',compact('volunteers'));
     }
@@ -25,7 +25,7 @@ class VolunteerController extends Controller
      */
     public function create()
     {
-        Gate::authorize('add-volunteers');
+        Gate::authorize('add-volunteer');
         return view('backend.pages.volunteer.create');
     }
 
@@ -34,7 +34,7 @@ class VolunteerController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('add-volunteers');
+        Gate::authorize('add-volunteer');
         $request->validate([
             'name'=>'required|string|max:255',
             'title'=>'required|string|max:255',
@@ -65,7 +65,7 @@ class VolunteerController extends Controller
      */
     public function edit(string $id)
     {
-        Gate::authorize('edit-volunteers');
+        Gate::authorize('edit-volunteer');
         $volunteer=Volunteer::findOrFail($id);
         return view('backend.pages.volunteer.edit',compact('volunteer'));
     }
@@ -75,7 +75,7 @@ class VolunteerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Gate::authorize('edit-volunteers');
+        Gate::authorize('edit-volunteer');
         $request->validate([
             'name'=>'required|string|max:255',
             'title'=>'required|string|max:255',
@@ -99,7 +99,7 @@ class VolunteerController extends Controller
      */
     public function destroy(string $id)
     {
-        Gate::authorize('delete-volunteers');
+        Gate::authorize('delete-volunteer');
         $volunteer=Volunteer::findOrFail($id);
         if ($volunteer->photo != 'default_volunteer.png') {
             //delete old photo

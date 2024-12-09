@@ -40,20 +40,9 @@
                                 <a href="{{ route('volunteerPage') }}"
                                     class="nav-link {{ Route::is('volunteerPage') ? 'active' : '' }}">Volunteers</a>
                             </li>
-
-                            <li class="nav-item active">
-                                <a href="#" class="nav-link">
-                                    Gallery
-                                    <i class="fas fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="gallery-grid.html" class="nav-link">Photo Gallery</a>
-                                    </li>
-                                    <li class="nav-item active">
-                                        <a href="gallery-slider.html" class="nav-link">Video Gallery</a>
-                                    </li>
-                                </ul>
+                            <li class="nav-item">
+                                <a href="{{ route('galleryPage') }}"
+                                    class="nav-link {{ Route::is('galleryPage') ? 'active' : '' }}">Gallery</a>
                             </li>
 
                             <li class="nav-item">

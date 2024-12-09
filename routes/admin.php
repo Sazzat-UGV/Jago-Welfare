@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\Export\UserExportController;
 use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Backend\FeatureController;
+use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\backend\PermissionController;
 use App\Http\Controllers\backend\RoleController;
@@ -56,6 +57,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('testimonial', TestimonialController::class);
         Route::resource('faqs', FaqController::class);
         Route::resource('volunteer', VolunteerController::class);
+        Route::resource('gallery', GalleryController::class);
 
         // backup download route
         Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('backupDownload');

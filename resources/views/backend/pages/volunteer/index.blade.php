@@ -19,7 +19,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @can('add-volunteers')
+                    @can('add-volunteer')
                         <div class="row mb-3">
                             <div class="col-sm-12">
                                 <div class="text-sm-end">
@@ -38,7 +38,7 @@
                                 <th>Name</th>
                                 <th>Title</th>
                                 <th>Social Media</th>
-                                @if (Auth::user()->haspermission('edit-volunteers') || Auth::user()->haspermission('delete-volunteers'))
+                                @if (Auth::user()->haspermission('edit-volunteer') || Auth::user()->haspermission('delete-volunteer'))
                                     <th>Action</th>
                                 @endif
                             </tr>
@@ -71,9 +71,9 @@
                                         @endif
                                     </td>
 
-                                    @if (Auth::user()->haspermission('edit-volunteers') || Auth::user()->haspermission('delete-volunteers'))
+                                    @if (Auth::user()->haspermission('edit-volunteer') || Auth::user()->haspermission('delete-volunteer'))
                                         <td class="d-flex gap-1">
-                                            @can('edit-volunteers')
+                                            @can('edit-volunteer')
                                                 <a href="{{ route('admin.volunteer.edit', $volunteer->id) }}"
                                                     class="btn btn-warning position-relative p-0 avatar-xs rounded editModule-btn">
                                                     <span class="avatar-title bg-transparent">
@@ -81,7 +81,7 @@
                                                     </span>
                                                 </a>
                                             @endcan
-                                            @can('delete-volunteers')
+                                            @can('delete-volunteer')
                                                 <form action="{{ route('admin.volunteer.destroy', $volunteer->id) }}"
                                                     method="POST"
                                                     class="btn btn-danger position-relative p-0 avatar-xs rounded">

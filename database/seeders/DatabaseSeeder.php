@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CounterSeeder::class,
             FaqSeeder::class,
             VolunteerSeeder::class,
+            GallerySeeder::class,
         ]);
     }
 }

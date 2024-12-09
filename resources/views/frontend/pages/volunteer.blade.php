@@ -3,7 +3,6 @@
     Volunteers
 @endsection
 @push('style')
-
 @endpush
 @section('content')
     @include('frontend.layouts.include.banner', ['page_name' => 'Volunteers', 'subpage_name' => ''])
@@ -62,7 +61,6 @@
                 <div class="pagination p1 d-flex justify-content-center align-items-center text-center">
                     {{ $volunteers->links('vendor.pagination.frontend') }}
                 </div>
-
 
             </div>
         </div>

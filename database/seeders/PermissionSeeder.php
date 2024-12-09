@@ -72,11 +72,17 @@ class PermissionSeeder extends Seeder
             'Add FAQs',
             'Delete FAQs',
         ];
-        $developerVolunteersPermissionArray = [
-            'Browse Volunteers',
-            'Edit Volunteers',
-            'Add Volunteers',
-            'Delete Volunteers',
+        $developerGalleryPermissionArray = [
+            'Browse Gallery',
+            'Edit Gallery',
+            'Add Gallery',
+            'Delete Gallery',
+        ];
+        $developerVolunteerPermissionArray = [
+            'Browse Volunteer',
+            'Edit Volunteer',
+            'Add Volunteer',
+            'Delete Volunteer',
         ];
         $developerSettingsPermissionArray = [
             'General Setting',
@@ -116,13 +122,23 @@ class PermissionSeeder extends Seeder
                 'slug' => Str::slug($developerFeaturesPermissionArray[$i]),
             ]);
         }
-        //Volunteers
+
+        //Gallery
+        $developerGalleryModule = Module::where('name', 'Features')->select('id')->first();
+        for ($i = 0; $i < count($developerGalleryPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerGalleryModule->id,
+                'name' => $developerGalleryPermissionArray[$i],
+                'slug' => Str::slug($developerGalleryPermissionArray[$i]),
+            ]);
+        }
+        //Volunteer
         $developerVolunteerModule = Module::where('name', 'Volunteers')->select('id')->first();
-        for ($i = 0; $i < count($developerVolunteersPermissionArray); $i++) {
+        for ($i = 0; $i < count($developerVolunteerPermissionArray); $i++) {
             Permission::updateOrCreate([
                 'module_id' => $developerVolunteerModule->id,
-                'name' => $developerVolunteersPermissionArray[$i],
-                'slug' => Str::slug($developerVolunteersPermissionArray[$i]),
+                'name' => $developerVolunteerPermissionArray[$i],
+                'slug' => Str::slug($developerVolunteerPermissionArray[$i]),
             ]);
         }
         //Categories

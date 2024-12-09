@@ -22,6 +22,7 @@ class ModuleSeeder extends Seeder
             'Modules',
             'Volunteers',
             'FAQs',
+            'Galleries',
             'Permissions',
             'Roles',
             'Users',

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Counter;
 use App\Models\Faq;
 use App\Models\Feature;
+use App\Models\gallery;
 use App\Models\Slider;
 use App\Models\Special;
 use App\Models\Testimonial;
@@ -25,12 +26,11 @@ class HomeController extends Controller
         ));
     }
 
-
     public function aboutPage()
     {
         $testimonials = Testimonial::where('status', 1)->latest('id')->limit(3)->get();
         $special = Special::where('id', 1)->first();
-        $counter=Counter::where('id',1)->first();
+        $counter = Counter::where('id', 1)->first();
         return view('frontend.pages.about', compact(
             'special',
             'testimonials',
@@ -38,16 +38,22 @@ class HomeController extends Controller
         ));
     }
 
-    public function faqPage(){
-        $faqs=Faq::latest('id')->get();
-        return view('frontend.pages.faq',compact('faqs'));
+    public function faqPage()
+    {
+        $faqs = Faq::latest('id')->get();
+        return view('frontend.pages.faq', compact('faqs'));
     }
 
-    public function volunteerPage(){
-        $volunteers=Volunteer::paginate(8);
-        return view('frontend.pages.volunteer',compact('volunteers'));
+    public function volunteerPage()
+    {
+        $volunteers = Volunteer::paginate(8);
+        return view('frontend.pages.volunteer', compact('volunteers'));
     }
 
-
+    public function galleryPage()
+    {
+        $photos = gallery::latest('id')->paginate(9);
+        return view('frontend.pages.gallery', compact('photos'));
+    }
 
 }
