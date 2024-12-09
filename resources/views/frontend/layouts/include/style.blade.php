@@ -23,7 +23,7 @@
 
     <style>
         #common_banner_area {
-            background-image: url("{{ asset('uploads/settings/breadcrumb.jpg') }}");
+            background-image: url("{{ asset('uploads/settings/' . $setting->breadcrumb_image) }}");
             background-size: cover;
             background-position: center;
             padding: 145px 0;

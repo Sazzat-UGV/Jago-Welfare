@@ -133,7 +133,7 @@
                 @can('browse-gallery')
                     <li>
                         <a href="{{ route('admin.gallery.index') }}"
-                            class="waves-effect @if (Route::is('admin.gallery.index')) active @endif">
+                            class="waves-effect @if (Route::is('admin.gallery.index')||Route::is('admin.gallery.create')) active @endif">
                             <i class="bx bxs-photo-album"></i>
                             <span>Galleries</span>
                         </a>
