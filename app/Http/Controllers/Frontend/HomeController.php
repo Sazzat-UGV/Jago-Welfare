@@ -59,8 +59,14 @@ class HomeController extends Controller
 
     public function blogPage()
     {
-        $blogs = Blog::latest('id')->paginate();
-        return view('frontend.pages.blog', compact('blogs'));
+        $blogs = Blog::latest('id')->paginate(9);
+        return view('frontend.pages.blog.index', compact('blogs'));
+    }
+
+    public function singleBlogPage($id)
+    {
+        $blog_detail = Blog::with('category')->first();
+        return view('frontend.pages.blog.show', compact('blog_detail'));
     }
 
 }

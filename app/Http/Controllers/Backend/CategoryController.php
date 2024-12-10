@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -88,6 +89,16 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         Gate::authorize('delete-blog-category');
+        $blogs = Blog::where('category_id', $id)->get();
+        foreach ($blogs as $blog) {
+            if ($blog->photo != 'default_blog.png') {
+                //delete old photo
+                $photo_location = 'public/uploads/blog/';
+                $old_photo_location = $photo_location . $blog->photo;
+                unlink(base_path($old_photo_location));
+            }
+        }
+        $blogs = Blog::where('category_id', $id)->delete();
         $category = Category::findOrFail($id);
         $category->delete();
         return redirect()->back()->with('success', "Category deleted successfully.");

@@ -10,6 +10,7 @@ Route::prefix('/')->group(function () {
     Route::get('volunteer', [HomeController::class, 'volunteerPage'])->name('volunteerPage');
     Route::get('gallery', [HomeController::class, 'galleryPage'])->name('galleryPage');
     Route::get('blog', [HomeController::class, 'blogPage'])->name('blogPage');
+    Route::get('blog-details/{id}', [HomeController::class, 'singleBlogPage'])->name('singleBlogPage');
 });
 
 require 'auth.php';
