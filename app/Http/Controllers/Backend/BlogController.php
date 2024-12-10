@@ -124,7 +124,7 @@ class BlogController extends Controller
         ]);
 
         $this->image_upload($request, $blog->id);
-        return redirect()->route('admin.blog.index')->with('success', 'Blog Updated successfully.');
+        return redirect()->route('admin.blog.index')->with('success', 'Blog updated successfully.');
     }
 
     /**
@@ -140,7 +140,8 @@ class BlogController extends Controller
             $old_photo_location = $photo_location . $blog->photo;
             unlink(base_path($old_photo_location));
         }
-        return redirect()->route('admin.blog.index')->with('success', 'Blog Deleted successfully.');
+        $blog->delete();
+        return redirect()->route('admin.blog.index')->with('success', 'Blog deleted successfully.');
     }
 
     public function image_upload($request, $blog_id)

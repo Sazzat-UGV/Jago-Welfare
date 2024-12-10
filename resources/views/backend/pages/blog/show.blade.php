@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 @section('title')
-    Create Testimonial
+    Blog Details
 @endsection
 @push('style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css"
@@ -14,111 +14,89 @@
 @endpush
 @section('content')
     @include('backend.layouts.include.breadcrumb', [
-        'parent_page' => 'Testimonials',
-        'page_name' => 'Add New Testimonial',
+        'parent_page' => 'Blogs',
+        'page_name' => 'Blog Details',
     ])
     <div class="row">
-        <div class="col-12 col-md-12">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    @can('browse-testimonial')
-                        <div class="row mb-3">
-                            <div class="col-sm-12">
-                                <div class="">
-                                    <a href="{{ route('admin.testimonial.index') }}"
-                                        class="btn btn-secondary btn-rounded waves-effect waves-light addContact-modal mb-2">
-                                        <i class="mdi mdi-arrow-left me-1"></i> Back to Testimonials
-                                    </a>
+                    <div class="pt-3">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8">
+                                <div>
+                                    <div class="text-center">
+                                        <div class="mb-4">
+                                            @if (!empty($blog->tags))
+                                                @foreach (explode(',', $blog->tags) as $tag)
+                                                    <a href="javascript: void(0);" class="badge bg-light font-size-12">
+                                                        <i class="bx bx-purchase-tag-alt align-middle text-muted me-1"></i>
+                                                        {{ trim($tag) }}
+                                                    </a>
+                                                @endforeach
+                                            @else
+                                                <span class="text-muted">No tags available</span>
+                                            @endif
+                                        </div>
+
+                                        <h4>{{ $blog->title }}</h4>
+                                    </div>
+
+                                    <hr>
+                                    <div class="text-center">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div>
+                                                    <p class="text-muted mb-2">Categories</p>
+                                                    <h5 class="font-size-15">{{ $blog->category->name }}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="mt-4 mt-sm-0">
+                                                    <p class="text-muted mb-2">Date</p>
+                                                    <h5 class="font-size-15">{{ $blog->created_at->format('d M ,Y') }}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="mt-4 mt-sm-0">
+                                                    <p class="text-muted mb-2">Post by</p>
+                                                    <h5 class="font-size-15">Admin</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="my-5">
+                                        <img src="{{ asset('uploads/blog') }}/{{ $blog->photo }}" alt=""
+                                            class="img-thumbnail mx-auto d-block">
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="mt-4">
+                                        <div class="text-muted font-size-14">
+                                            <div class="mt-4">
+                                                <h5 class="mb-3">Short Description: </h5>
+                                                <p>{{ $blog->short_description }}</p>
+                                                <h5 class="mb-3">Description: </h5>
+                                                <p>{!! $blog->description !!}</p>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
-                    @endcan
-                    <form action="{{ route('admin.testimonial.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-12 col-md-6 mb-4">
-                                <label class="form-label">Name<span class="text-danger">*</span></label>
-                                <input
-                                    class="form-control @error('name')
-                                            is-invalid
-                                        @enderror"
-                                    type="text" placeholder="Enter name" name="name" value="{{ old('name') }}">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="col-12 col-md-6 mb-4">
-                                <label class="form-label">Designation<span class="text-danger">*</span></label>
-                                <input
-                                    class="form-control @error('designation')
-                                            is-invalid
-                                        @enderror"
-                                    type="text" placeholder="Enter designation" name="designation"
-                                    value="{{ old('designation') }}">
-                                @error('designation')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-
-                            <div class="col-12 mb-4">
-                                <label class="form-label">Comment<span class="text-danger">*</span></label>
-                                <textarea name="comment" id="" cols="30" rows="5"
-                                    class="form-control @error('comment')
-                                is-invalid
-                                @enderror"
-                                    placeholder="Enter comment">{{ old('comment') }}</textarea>
-                                @error('comment')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="col-12 col-md-6 mb-4">
-                                <label class="form-label">Rating<span class="text-danger">*</span></label>
-                                <input
-                                    class="form-control @error('rating')
-                                            is-invalid
-                                        @enderror"
-                                    type="number" placeholder="Enter rating" name="rating" value="{{ old('rating') }}">
-                                @error('rating')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="col-12 col-md-6 mb-4">
-                                <label class="form-label">Status</label>
-                                <select class="form-select @error('status') is-invalid @enderror" name="status">
-                                    <option value="1" {{ old('status', 1) == 1 ? 'selected' : '' }}>
-                                        Active
-                                    </option>
-                                    <option value="0" {{ old('status', 1) == 0 ? 'selected' : '' }}>
-                                        Inactive
-                                    </option>
-                                </select>
-
-                                @error('status')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="col-12 mb-4">
-                                <label class="form-label">Photo<span class="text-danger">*</span></label>
-                                <input
-                                    class="form-control dropify @error('photo')
-                                    is-invalid
-                                @enderror"
-                                    type="file" name="photo">
-                                @error('photo')
-                                    <span class="text-danger" style="font-size: 11px"
-                                        role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <button class="btn btn-success rounded-pill px-4" type="submit">Save</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
+                <!-- end card body -->
             </div>
+            <!-- end card -->
         </div>
+        <!-- end col -->
     </div>
 @endsection
 

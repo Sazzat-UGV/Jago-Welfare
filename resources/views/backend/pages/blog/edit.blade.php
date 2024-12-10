@@ -98,7 +98,7 @@
                             </div>
 
                             <div class="col-12 mb-4">
-                                <label class="form-label">Photo<span class="text-danger">*</span></label>
+                                <label class="form-label">Photo</label>
                                 <input
                                     class="form-control dropify @error('photo')
                                     is-invalid

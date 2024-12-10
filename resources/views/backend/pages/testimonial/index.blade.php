@@ -55,7 +55,6 @@
                                     <td class="">{{ $testimonial->name }}</td>
                                     <td class="wrap">{{ $testimonial->designation }}</td>
                                     <td class="wrap">{{ $testimonial->comment }}</td>
-                                    {{-- <td class="">{{  }}</td> --}}
                                     <td>
                                         @for ($i=0;$i<$testimonial->rating;$i++)
                                         <span class="mdi mdi-star text-primary fs-5"></span>
