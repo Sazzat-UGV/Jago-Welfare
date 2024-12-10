@@ -1,20 +1,20 @@
 @extends('backend.layouts.app')
 @section('title')
-    Categories
+    Blog Categories
 @endsection
 @push('style')
 @endpush
 @section('content')
     @include('backend.layouts.include.breadcrumb', [
         'parent_page' => 'Categories',
-        'page_name' => 'Category List',
+        'page_name' => 'Blog Category List',
     ])
 
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @can('add-category')
+                    @can('add-blog-category')
                         <div class="row mb-3">
                             <div class="col-sm-12">
                                 <div class="text-sm-end">
@@ -33,7 +33,7 @@
                                 <th>Category Name</th>
                                 <th>Category Slug</th>
                                 <th>Status</th>
-                                @if (Auth::user()->haspermission('edit-category') || Auth::user()->haspermission('delete-category'))
+                                @if (Auth::user()->haspermission('edit-blog-category') || Auth::user()->haspermission('delete-blog-category'))
                                     <th>Action</th>
                                 @endif
                             </tr>
@@ -53,9 +53,9 @@
                                                 style="font-size: 13px">Inactive</span>
                                         @endif
                                     </td>
-                                    @if (Auth::user()->haspermission('edit-category') || Auth::user()->haspermission('delete-category'))
+                                    @if (Auth::user()->haspermission('edit-blog-category') || Auth::user()->haspermission('delete-blog-category'))
                                         <td>
-                                            @can('edit-category')
+                                            @can('edit-blog-category')
                                                 <button type="button"
                                                     class="btn btn-warning position-relative p-0 avatar-xs rounded editCategory-btn"
                                                     data-bs-toggle="modal" data-bs-target="#editCategoryModal"
@@ -66,7 +66,7 @@
                                                     </span>
                                                 </button>
                                             @endcan
-                                            @can('delete-category')
+                                            @can('delete-blog-category')
                                                 <form action="{{ route('admin.category.destroy', $category->id) }}"
                                                     method="POST"
                                                     class="btn btn-danger position-relative p-0 avatar-xs rounded">

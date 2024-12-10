@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        Gate::authorize('browse-category');
+        Gate::authorize('browse-blog-category');
         $categories = Category::latest('id')->get();
         return view('backend.pages.category.index', compact('categories'));
     }
@@ -33,7 +33,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('add-category');
+        Gate::authorize('add-blog-category');
         $request->validate([
             'category_name' => 'required|string|unique:categories,name',
         ]);
@@ -68,7 +68,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Gate::authorize('edit-category');
+        Gate::authorize('edit-blog-category');
         $category = Category::findOrFail($id);
         $request->validate([
             'category_name' => 'required|string|unique:categories,name,' . $category->id,
@@ -87,7 +87,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        Gate::authorize('delete-category');
+        Gate::authorize('delete-blog-category');
         $category = Category::findOrFail($id);
         $category->delete();
         return redirect()->back()->with('success', "Category deleted successfully.");

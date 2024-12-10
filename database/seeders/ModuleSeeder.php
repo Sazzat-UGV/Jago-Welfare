@@ -15,11 +15,12 @@ class ModuleSeeder extends Seeder
     {
         $module_array = [
             'Dashboard',
-            'Categories',
+            'Blog Categories',
             'Sliders',
             'Testimonials',
             'Features',
             'Modules',
+            'Blogs',
             'Volunteers',
             'FAQs',
             'Galleries',

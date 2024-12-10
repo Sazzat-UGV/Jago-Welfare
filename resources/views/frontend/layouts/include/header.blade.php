@@ -50,8 +50,10 @@
                                     class="nav-link {{ Route::is('faqPage') ? 'active' : '' }}">FAQ</a>
                             </li>
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link">Blog</a>
+                                <a href="{{ route('blogPage') }}"
+                                    class="nav-link {{ Route::is('blogPage') ? 'active' : '' }}">Blog</a>
                             </li>
+
                             <li class="nav-item">
                                 <a href="contact.html" class="nav-link">Contact</a>
                             </li>

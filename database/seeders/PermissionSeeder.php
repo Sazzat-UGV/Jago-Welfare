@@ -17,11 +17,11 @@ class PermissionSeeder extends Seeder
             'Admin Dashboard',
             'Manager Dashboard',
         ];
-        $developerCategoriesPermissionArray = [
-            'Browse Category',
-            'Edit Category',
-            'Add Category',
-            'Delete Category',
+        $developerBlogCategoriesPermissionArray = [
+            'Browse Blog Category',
+            'Edit Blog Category',
+            'Add Blog Category',
+            'Delete Blog Category',
         ];
         $developerModulesPermissionArray = [
             'Browse Module',
@@ -65,6 +65,13 @@ class PermissionSeeder extends Seeder
             'Edit User',
             'Add User',
             'Delete User',
+        ];
+        $developerBlogsPermissionArray = [
+            'Browse Blog',
+            'Read Blog',
+            'Edit Blog',
+            'Add Blog',
+            'Delete Blog',
         ];
         $developerFAQsPermissionArray = [
             'Browse FAQs',
@@ -122,6 +129,15 @@ class PermissionSeeder extends Seeder
                 'slug' => Str::slug($developerFeaturesPermissionArray[$i]),
             ]);
         }
+        //Blogs
+        $developerBlogModule = Module::where('name', 'Blogs')->select('id')->first();
+        for ($i = 0; $i < count($developerBlogsPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerBlogModule->id,
+                'name' => $developerBlogsPermissionArray[$i],
+                'slug' => Str::slug($developerBlogsPermissionArray[$i]),
+            ]);
+        }
 
         //Gallery
         $developerGalleryModule = Module::where('name', 'Features')->select('id')->first();
@@ -141,13 +157,13 @@ class PermissionSeeder extends Seeder
                 'slug' => Str::slug($developerVolunteerPermissionArray[$i]),
             ]);
         }
-        //Categories
-        $developerCategoryModule = Module::where('name', 'Categories')->select('id')->first();
-        for ($i = 0; $i < count($developerCategoriesPermissionArray); $i++) {
+        //Blog Categories
+        $developerBlogCategoryModule = Module::where('name', 'Blog Categories')->select('id')->first();
+        for ($i = 0; $i < count($developerBlogCategoriesPermissionArray); $i++) {
             Permission::updateOrCreate([
-                'module_id' => $developerCategoryModule->id,
-                'name' => $developerCategoriesPermissionArray[$i],
-                'slug' => Str::slug($developerCategoriesPermissionArray[$i]),
+                'module_id' => $developerBlogCategoryModule->id,
+                'name' => $developerBlogCategoriesPermissionArray[$i],
+                'slug' => Str::slug($developerBlogCategoriesPermissionArray[$i]),
             ]);
         }
         //FAQs

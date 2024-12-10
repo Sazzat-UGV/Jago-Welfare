@@ -10,12 +10,12 @@
                     </a>
                 </li>
 
-                @can('browse-category')
+                @can('browse-blog-category')
                     <li>
                         <a href="{{ route('admin.category.index') }}"
                             class="waves-effect @if (Route::is('admin.category.index')) active @endif">
                             <i class="bx bx-box"></i>
-                            <span>Categories</span>
+                            <span>Blog Categories</span>
                         </a>
                     </li>
                 @endcan
@@ -80,6 +80,26 @@
                         </ul>
                     </li>
                 @endcan
+                @can('browse-blog')
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bxs-news"></i>
+                            <span>Blogs</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('browse-blog')
+                                <li class="@if (Route::is('admin.blog.index')) mm-active @endif"><a
+                                        href="{{ route('admin.blog.index') }}"
+                                        class="@if (Route::is('admin.blog.index')) active @endif">Blog List</a></li>
+                            @endcan
+                            @can('add-blog')
+                                <li class="@if (Route::is('admin.blog.create')) mm-active @endif"><a
+                                        href="{{ route('admin.blog.create') }}"
+                                        class="@if (Route::is('admin.blog.create')) active @endif">Add New Blog</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 @can('browse-faqs')
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -133,7 +153,7 @@
                 @can('browse-gallery')
                     <li>
                         <a href="{{ route('admin.gallery.index') }}"
-                            class="waves-effect @if (Route::is('admin.gallery.index')||Route::is('admin.gallery.create')) active @endif">
+                            class="waves-effect @if (Route::is('admin.gallery.index') || Route::is('admin.gallery.create')) active @endif">
                             <i class="bx bxs-photo-album"></i>
                             <span>Galleries</span>
                         </a>

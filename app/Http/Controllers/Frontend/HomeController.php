@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Counter;
 use App\Models\Faq;
 use App\Models\Feature;
@@ -54,6 +55,12 @@ class HomeController extends Controller
     {
         $photos = gallery::latest('id')->paginate(9);
         return view('frontend.pages.gallery', compact('photos'));
+    }
+
+    public function blogPage()
+    {
+        $blogs = Blog::latest('id')->paginate();
+        return view('frontend.pages.blog', compact('blogs'));
     }
 
 }

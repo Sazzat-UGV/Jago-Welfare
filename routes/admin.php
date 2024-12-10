@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\Auth\ProfileController;
 use App\Http\Controllers\Backend\BackupController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CounterController;
 use App\Http\Controllers\Backend\DashboardController;
@@ -58,6 +59,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('faqs', FaqController::class);
         Route::resource('volunteer', VolunteerController::class);
         Route::resource('gallery', GalleryController::class);
+        Route::resource('blog', BlogController::class);
 
         // backup download route
         Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('backupDownload');
