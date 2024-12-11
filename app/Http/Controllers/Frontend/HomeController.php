@@ -65,9 +65,13 @@ class HomeController extends Controller
 
     public function singleBlogPage($id)
     {
-        $blog_detail = Blog::with('category')->first();
+        $blog_detail = Blog::with('category')->where('id', $id)->first();
         $recent_news = Blog::latest('id')->limit(6)->get();
-        return view('frontend.pages.blog.show', compact('blog_detail', 'recent_news'));
+        $tags = Blog::pluck('tags')
+            ->flatMap(function ($item) {
+                return explode(',', $item);
+            })->unique()->take(10)->values();
+        return view('frontend.pages.blog.show', compact('blog_detail', 'recent_news', 'tags'));
     }
 
 }

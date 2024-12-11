@@ -96,18 +96,19 @@
                                 <h3>Recent news</h3>
                             </div>
                             @foreach ($recent_news as $news)
-                            <div class="recent_donet_item">
-                                <div class="recent_donet_img">
-                                    <a href="{{ route('singleBlogPage',$news->id) }}"><img src="{{ asset('uploads/blog') }}/{{ $news->photo }}"
-                                            alt="img"></a>
-                                </div>
-                                <div class="recent_donet_text">
-                                    <div class="sidebar_inner_heading">
-                                        <h4><a href="{{ route('singleBlogPage',$news->id) }}">{{ $news->title }}</a></h4>
+                                <div class="recent_donet_item">
+                                    <div class="recent_donet_img">
+                                        <a href="{{ route('singleBlogPage', $news->id) }}"><img
+                                                src="{{ asset('uploads/blog') }}/{{ $news->photo }}" alt="img"></a>
                                     </div>
-                                    <h6>{{ $news->created_at->format('d M, Y') }}</h6>
+                                    <div class="recent_donet_text">
+                                        <div class="sidebar_inner_heading">
+                                            <h4><a href="{{ route('singleBlogPage', $news->id) }}">{{ $news->title }}</a>
+                                            </h4>
+                                        </div>
+                                        <h6>{{ $news->created_at->format('d M, Y') }}</h6>
+                                    </div>
                                 </div>
-                            </div>
                             @endforeach
 
                         </div>
@@ -118,14 +119,9 @@
                             </div>
                             <div class="popular_tags">
                                 <ul>
-                                    <li><a href="news.html">Poverty</a></li>
-                                    <li><a href="news.html">Education</a></li>
-                                    <li><a href="news.html">Children education</a></li>
-                                    <li><a href="news.html">Food</a></li>
-                                    <li><a href="news.html">Health care</a></li>
-                                    <li><a href="news.html">Welfare</a></li>
-                                    <li><a href="news.html">Donation people</a></li>
-                                    <li><a href="news.html">Charity fund</a></li>
+                                    @foreach ($tags as $tag)
+                                        <li><a href="javascript:void(0)">{{ $tag }}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
