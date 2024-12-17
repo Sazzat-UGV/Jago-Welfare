@@ -67,10 +67,7 @@ class HomeController extends Controller
     {
         $blog_detail = Blog::with('category')->where('id', $id)->first();
         $recent_news = Blog::latest('id')->limit(6)->get();
-        $tags = Blog::pluck('tags')
-            ->flatMap(function ($item) {
-                return explode(',', $item);
-            })->unique()->take(10)->values();
+        $tags = collect(explode(',', $blog_detail->tags))->unique()->values();
         return view('frontend.pages.blog.show', compact('blog_detail', 'recent_news', 'tags'));
     }
 
