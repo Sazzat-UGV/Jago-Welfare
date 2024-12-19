@@ -61,6 +61,11 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('gallery', GalleryController::class);
         Route::resource('blog', BlogController::class);
 
+        // comment route
+        Route::get('comment/{id}', [BlogController::class, 'browseComment'])->name('browseComment');
+        Route::delete('comment/{id}', [BlogController::class, 'deleteComment'])->name('deleteComment');
+        Route::get('comment/status/{id}', [BlogController::class, 'commentStatus'])->name('commentStatus');
+
         // backup download route
         Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('backupDownload');
 

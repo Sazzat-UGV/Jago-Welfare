@@ -39,6 +39,7 @@
                                 <th>Short Description</th>
                                 @if (Auth::user()->haspermission('edit-blog') ||
                                         Auth::user()->haspermission('show-blog') ||
+                                        Auth::user()->haspermission('browse-blog-comment') ||
                                         Auth::user()->haspermission('delete-blog'))
                                     <th>Action</th>
                                 @endif
@@ -84,6 +85,19 @@
                                                     </button>
                                                 </form>
                                             @endcan
+                                            @can('browse-blog-comment')
+                                                @if ($blog->comments_count > 0)
+                                                    <a href="{{ route('admin.browseComment', $blog->id) }}"
+                                                        class="btn btn-success position-relative p-0 avatar-xs rounded editModule-btn">
+                                                        <i class="bx bx-comment mt-2" style="font-size: 16px"></i>
+                                                        <span
+                                                            class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
+                                                            {{ $blog->comments_count < 99 ? $blog->comments_count : '99+' }}
+                                                        </span>
+                                                    </a>
+                                                @endif
+                                            @endcan
+
                                         </td>
                                     @endif
                                 </tr>

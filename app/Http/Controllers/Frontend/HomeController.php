@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Comment;
 use App\Models\Counter;
 use App\Models\Faq;
 use App\Models\Feature;
@@ -12,6 +13,7 @@ use App\Models\Slider;
 use App\Models\Special;
 use App\Models\Testimonial;
 use App\Models\Volunteer;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -69,6 +71,24 @@ class HomeController extends Controller
         $recent_news = Blog::latest('id')->limit(6)->get();
         $tags = collect(explode(',', $blog_detail->tags))->unique()->values();
         return view('frontend.pages.blog.show', compact('blog_detail', 'recent_news', 'tags'));
+    }
+
+    public function submitComment(Request $request)
+    {
+        $request->validate([
+            'blog_id' => 'required|numeric',
+            'full_name' => 'required|string',
+            'email' => 'required|email',
+            'comment' => 'required|string',
+        ]);
+
+        Comment::create([
+            'blog_id' => $request->blog_id,
+            'name' => $request->full_name,
+            'email' => $request->email,
+            'comment' => $request->comment,
+        ]);
+        return redirect()->back()->with('success', "Comment submitted successfully.");
     }
 
 }

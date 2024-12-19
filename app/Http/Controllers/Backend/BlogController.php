@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -18,7 +19,10 @@ class BlogController extends Controller
     public function index()
     {
         Gate::authorize('browse-blog');
-        $blogs = Blog::with('category')->latest('id')->paginate();
+        $blogs = Blog::with(['category'])
+            ->withCount('comments')
+            ->latest('id')
+            ->paginate(10);
         return view('backend.pages.blog.index', compact('blogs'));
     }
 
@@ -164,4 +168,27 @@ class BlogController extends Controller
             ]);
         }
     }
+
+    public function browseComment($id)
+    {
+        Gate::authorize('browse-blog-comment');
+        $comments = Comment::where('blog_id', $id)->latest('id')->paginate(10);
+        return view('backend.pages.blog.comment', compact('comments'));
+    }
+
+    public function deleteComment($id)
+    {
+        Gate::authorize('delete-blog-comment');
+        $comments = Comment::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Comment deleted successfully.');
+    }
+
+    public function commentStatus($id)
+    {
+        $comments = Comment::findOrFail($id);
+        $comments->status = $comments->status == 'Accept' ? 'Pending' : 'Accept';
+        $comments->save();
+        return redirect()->back()->with('success', 'Status changed successfully.');
+    }
+
 }

@@ -72,6 +72,9 @@ class PermissionSeeder extends Seeder
             'Edit Blog',
             'Add Blog',
             'Delete Blog',
+            'Browse Blog Comment',
+            'Delete Blog Comment',
+            'Change Comment Status',
         ];
         $developerFAQsPermissionArray = [
             'Browse FAQs',

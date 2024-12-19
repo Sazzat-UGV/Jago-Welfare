@@ -57,23 +57,49 @@
                         <div class="comment_form_area">
                             <h3>Leave a comment</h3>
                             <div class="comment_form">
-                                <form action="#!" id="comment_form">
+                                <form action="{{ route('submitComment') }}" id="comment_form" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="blog_id" id="" value="{{ $blog_detail->id }}">
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 mb-4">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Enter full name"
-                                                    required="">
+                                                <input type="text" style="margin-bottom: 0px !important;"
+                                                    class="form-control @error('full_name')
+                                                    is-invalid
+                                                @enderror"
+                                                    placeholder="Enter full name" name="full_name"
+                                                    value="{{ old('full_name') }}" required="">
+                                                @error('full_name')
+                                                    <span class="invalid-feedback"
+                                                        role="alert"><strong>{{ $message }}</strong></span>
+                                                @enderror
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 mb-4">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Enter email address"
-                                                    required="">
+                                                <input type="email" style="margin-bottom: 0px !important;"
+                                                    class="form-control @error('email')
+                                                    is-invalid
+                                                @enderror"
+                                                    placeholder="Enter email address" name="email"
+                                                    value="{{ old('email') }}" required="">
+                                                @error('email')
+                                                    <span class="invalid-feedback"
+                                                        role="alert"><strong>{{ $message }}</strong></span>
+                                                @enderror
                                             </div>
                                         </div>
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 mb-4">
                                             <div class="form-group">
-                                                <textarea rows="5" placeholder="Write your comments" class="form-control" required=""></textarea>
+                                                <textarea rows="5" placeholder="Write your comments" style="margin-bottom: 0px !important;"
+                                                    class="form-control @error('comment')
+                                                    is-invalid
+                                                @enderror"
+                                                    name="comment" required="">{{ old('comment') }}</textarea>
+                                                @error('comment')
+                                                    <span class="invalid-feedback"
+                                                        role="alert"><strong>{{ $message }}</strong></span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
