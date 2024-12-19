@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Reply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Image;
@@ -171,24 +173,66 @@ class BlogController extends Controller
 
     public function browseComment($id)
     {
-        Gate::authorize('browse-blog-comment');
-        $comments = Comment::where('blog_id', $id)->latest('id')->paginate(10);
+        Gate::authorize('browse-comment');
+        $comments = Comment::withCount('reply')->where('blog_id', $id)->latest('id')->paginate(10);
         return view('backend.pages.blog.comment', compact('comments'));
     }
 
     public function deleteComment($id)
     {
-        Gate::authorize('delete-blog-comment');
+        Gate::authorize('delete-comment');
         $comments = Comment::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Comment deleted successfully.');
     }
 
     public function commentStatus($id)
     {
+        Gate::authorize('change-comment-status');
         $comments = Comment::findOrFail($id);
         $comments->status = $comments->status == 'Accept' ? 'Pending' : 'Accept';
         $comments->save();
         return redirect()->back()->with('success', 'Status changed successfully.');
     }
 
+    public function replyComment(Request $request)
+    {
+        Gate::authorize('reply-comment');
+        $request->validate([
+            'comment_id' => 'required|numeric',
+            'reply' => 'required|string',
+        ]);
+
+        Reply::create([
+            'comment_id' => $request->comment_id,
+            'name' => Auth::user()->first_name . ' ' . Auth::user()->last_name,
+            'email' => Auth::user()->email,
+            'comment' => $request->reply,
+            'user_type' => 'Admin',
+            'status' => 'Accept',
+        ]);
+        return redirect()->back()->with('success', "Reply submitted successfully.");
+    }
+
+    public function browseReply($id)
+    {
+        Gate::authorize('browse-reply');
+        $replies = Reply::where('comment_id', $id)->latest('id')->paginate(10);
+        return view('backend.pages.blog.reply', compact('replies'));
+    }
+
+    public function replyStatus($id)
+    {
+        Gate::authorize('change-reply-status');
+        $reply = Reply::findOrFail($id);
+        $reply->status = $reply->status == 'Accept' ? 'Pending' : 'Accept';
+        $reply->save();
+        return redirect()->back()->with('success', 'Status changed successfully.');
+    }
+
+    public function deleteReply($id)
+    {
+        Gate::authorize('delete-reply');
+        Reply::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Reply deleted successfully.');
+    }
 }

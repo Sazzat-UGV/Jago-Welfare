@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use App\Models\Blog;
+use App\Models\Reply;
+use App\Models\Slider;
 use App\Models\Comment;
 use App\Models\Counter;
-use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\gallery;
-use App\Models\Slider;
 use App\Models\Special;
-use App\Models\Testimonial;
 use App\Models\Volunteer;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -69,8 +71,11 @@ class HomeController extends Controller
     {
         $blog_detail = Blog::with('category')->where('id', $id)->first();
         $recent_news = Blog::latest('id')->limit(6)->get();
+        $comments = Comment::with(['reply' => function ($query) {
+            $query->where('status', 'Accept');
+        }])->where('blog_id', $id)->where('status', 'Accept')->latest('id')->get();
         $tags = collect(explode(',', $blog_detail->tags))->unique()->values();
-        return view('frontend.pages.blog.show', compact('blog_detail', 'recent_news', 'tags'));
+        return view('frontend.pages.blog.show', compact('blog_detail', 'recent_news', 'tags', 'comments'));
     }
 
     public function submitComment(Request $request)
@@ -90,5 +95,21 @@ class HomeController extends Controller
         ]);
         return redirect()->back()->with('success', "Comment submitted successfully.");
     }
+    public function submitReply(Request $request)
+    {
+        $request->validate([
+            'comment_id' => 'required|numeric',
+            'full_name' => 'required|string',
+            'email' => 'required|email',
+            'reply' => 'required|string',
+        ]);
 
+        Reply::create([
+            'comment_id' => $request->comment_id,
+            'name' => $request->full_name,
+            'email' => $request->email,
+            'comment' => $request->reply,
+        ]);
+        return redirect()->back()->with('success', "Reply submitted successfully.");
+    }
 }

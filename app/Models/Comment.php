@@ -8,4 +8,8 @@ class Comment extends Model
 {
     protected $guarded=['id'];
 
+    public function reply(){
+        return $this->hasMany(Reply::class);
+    }
+
 }

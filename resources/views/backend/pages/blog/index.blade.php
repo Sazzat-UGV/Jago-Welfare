@@ -39,7 +39,7 @@
                                 <th>Short Description</th>
                                 @if (Auth::user()->haspermission('edit-blog') ||
                                         Auth::user()->haspermission('show-blog') ||
-                                        Auth::user()->haspermission('browse-blog-comment') ||
+                                        Auth::user()->haspermission('browse-comment') ||
                                         Auth::user()->haspermission('delete-blog'))
                                     <th>Action</th>
                                 @endif
@@ -85,7 +85,7 @@
                                                     </button>
                                                 </form>
                                             @endcan
-                                            @can('browse-blog-comment')
+                                            @can('browse-comment')
                                                 @if ($blog->comments_count > 0)
                                                     <a href="{{ route('admin.browseComment', $blog->id) }}"
                                                         class="btn btn-success position-relative p-0 avatar-xs rounded editModule-btn">

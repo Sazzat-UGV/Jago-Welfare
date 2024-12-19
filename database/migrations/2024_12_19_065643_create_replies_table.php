@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('comment_id')->constrained('comments')->cascadeOnDelete();
-            $table->string('name');
-            $table->string('email');
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->enum('user_type',['User','Admin'])->default('User');
             $table->text('comment');
             $table->enum('status', ['Accept','Pending'])->default('Pending');
             $table->timestamps();

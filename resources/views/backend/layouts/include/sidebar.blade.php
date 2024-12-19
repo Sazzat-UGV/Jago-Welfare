@@ -83,7 +83,7 @@
                 @can('browse-blog')
                     <li>
                         <a href="javascript: void(0);"
-                            class="has-arrow waves-effect @if (Route::is('admin.browseComment')) mm-active @endif">
+                            class="has-arrow waves-effect @if (Route::is('admin.browseComment') || Route::is('admin.browseReply')) mm-active @endif">
                             <i class="bx bxs-news"></i>
                             <span>Blogs</span>
                         </a>

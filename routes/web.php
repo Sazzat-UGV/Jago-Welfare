@@ -12,6 +12,7 @@ Route::prefix('/')->group(function () {
     Route::get('blog', [HomeController::class, 'blogPage'])->name('blogPage');
     Route::get('blog-details/{id}', [HomeController::class, 'singleBlogPage'])->name('singleBlogPage');
     Route::post('comment', [HomeController::class, 'submitComment'])->name('submitComment');
+    Route::post('reply', [HomeController::class, 'submitReply'])->name('submitReply');
 });
 
 require 'auth.php';

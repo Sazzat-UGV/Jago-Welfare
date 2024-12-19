@@ -66,6 +66,12 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::delete('comment/{id}', [BlogController::class, 'deleteComment'])->name('deleteComment');
         Route::get('comment/status/{id}', [BlogController::class, 'commentStatus'])->name('commentStatus');
 
+        // reply route
+        Route::post('reply', [BlogController::class, 'replyComment'])->name('replyComment');
+        Route::get('reply/{id}', [BlogController::class, 'browseReply'])->name('browseReply');
+        Route::delete('reply/{id}', [BlogController::class, 'deleteReply'])->name('deleteReply');
+        Route::get('reply/status/{id}', [BlogController::class, 'replyStatus'])->name('replyStatus');
+
         // backup download route
         Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('backupDownload');
 
