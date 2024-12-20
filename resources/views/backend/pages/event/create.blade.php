@@ -154,7 +154,7 @@
                             </div>
                             <div class="col-12 mb-4">
                                 <label class="form-label">Short Description<span class="text-danger">*</span></label>
-                                <textarea name="bio" id="" cols="30" rows="5"
+                                <textarea name="short_description" id="" cols="30" rows="5"
                                     class="form-control @error('short_description')
                                             is-invalid
                                         @enderror"

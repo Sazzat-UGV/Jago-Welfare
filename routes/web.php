@@ -13,6 +13,8 @@ Route::prefix('/')->group(function () {
     Route::get('blog-details/{id}', [HomeController::class, 'singleBlogPage'])->name('singleBlogPage');
     Route::post('comment', [HomeController::class, 'submitComment'])->name('submitComment');
     Route::post('reply', [HomeController::class, 'submitReply'])->name('submitReply');
+    Route::get('event', [HomeController::class, 'eventPage'])->name('eventPage');
+    Route::get('event-details/{slug}', [HomeController::class, 'singleEventPage'])->name('singleEventPage');
 });
 
 require 'auth.php';

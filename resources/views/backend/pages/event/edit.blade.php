@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 @section('title')
-    Edit User
+    Edit Event
 @endsection
 @push('style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css"
@@ -14,205 +14,181 @@
 @endpush
 @section('content')
     @include('backend.layouts.include.breadcrumb', [
-        'parent_page' => 'Users',
-        'page_name' => 'Edit User',
+        'parent_page' => 'Events',
+        'page_name' => 'Edit Event',
     ])
     <div class="row">
         <div class="col-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @can('browse-user')
+                    @can('browse-event')
                         <div class="row mb-3">
                             <div class="col-sm-12">
                                 <div class="">
-                                    <a href="{{ route('admin.user.index') }}"
+                                    <a href="{{ route('admin.event.index') }}"
                                         class="btn btn-secondary btn-rounded waves-effect waves-light addContact-modal mb-2">
-                                        <i class="mdi mdi-arrow-left me-1"></i> Back to Users
+                                        <i class="mdi mdi-arrow-left me-1"></i> Back to Events
                                     </a>
                                 </div>
                             </div>
                         </div>
                     @endcan
-                    <form action="{{ route('admin.user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.event.update', $event->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <div class="col-12 col-md-5 mb-4">
-                                <label class="form-label">First Name<span class="text-danger">*</span></label>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Name<span class="text-danger">*</span></label>
                                 <input
-                                    class="form-control @error('first_name')
+                                    class="form-control @error('name')
                                             is-invalid
                                         @enderror"
-                                    type="text" placeholder="Enter first name" name="first_name"
-                                    value="{{ old('first_name', $user->first_name) }}">
-                                @error('first_name')
+                                    type="text" placeholder="Enter event name" name="name"
+                                    value="{{ old('name', $event->name) }}">
+                                @error('name')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-                            <div class="col-12 col-md-5 mb-4">
-                                <label class="form-label">Last Name<span class="text-danger">*</span></label>
+
+
+                            <div class="col-12 col-md-8  mb-4">
+                                <label class="form-label">Locaiton<span class="text-danger">*</span></label>
                                 <input
-                                    class="form-control @error('last_name')
+                                    class="form-control @error('location')
                                             is-invalid
                                         @enderror"
-                                    type="text" placeholder="Enter last name" name="last_name"
-                                    value="{{ old('last_name', $user->last_name) }}">
-                                @error('last_name')
+                                    type="text" name="location" value="{{ old('location', $event->location) }}"
+                                    placeholder="Enter location">
+                                @error('location')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                             <div class="col-12 col-md-2 mb-4">
-                                <label for="role_id" class="form-label">Role<span class="text-danger">*</span></label>
-                                <select
-                                    class="form-select @error('role_id')
+                                <label class="form-label">Date<span class="text-danger">*</span></label>
+                                <input
+                                    class="form-control @error('date')
                                             is-invalid
                                         @enderror"
-                                    name="role_id">
-                                    <option>Select Role</option>
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}"
-                                            @if ($role->id == $user->role_id) selected
-                                            @elseif (old('role_id') == $role->id)
-                                            selected @endif>
-                                            {{ $role->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('role_id')
+                                    type="date" name="date" value="{{ old('date', $event->date) }}">
+                                @error('date')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+                            <div class="col-12 col-md-2 mb-4">
+                                <label class="form-label">Time<span class="text-danger">*</span></label>
+                                <input
+                                    class="form-control @error('time')
+                                            is-invalid
+                                        @enderror"
+                                    type="time" name="time" value="{{ old('time', $event->time) }}">
+                                @error('time')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                             <div class="col-12 col-md-6 mb-4">
-                                <label class="form-label">Email<span class="text-danger">*</span></label>
+                                <label class="form-label">Email</label>
                                 <input
                                     class="form-control @error('email')
                                             is-invalid
                                         @enderror"
-                                    type="email" placeholder="Enter email" name="email"
-                                    value="{{ old('email', $user->email) }}">
+                                    type="text" name="email" value="{{ old('email', $event->email) }}"
+                                    placeholder="Enter email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                             <div class="col-12 col-md-6 mb-4">
-                                <label class="form-label">Password</label>
-                                <input
-                                    class="form-control @error('password')
-                                            is-invalid
-                                        @enderror"
-                                    type="password" placeholder="Enter password" name="password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="col-12 col-md-6 mb-4">
-                                <label class="form-label">Address<span class="text-danger">*</span></label>
-                                <input
-                                    class="form-control @error('address')
-                                            is-invalid
-                                        @enderror"
-                                    type="text" name="address" value="{{ old('address', $user->address) }}"
-                                    placeholder="Enter address">
-                                @error('address')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="col-12 col-md-3 mb-4">
                                 <label class="form-label">Phone<span class="text-danger">*</span></label>
                                 <input
                                     class="form-control @error('phone')
                                             is-invalid
                                         @enderror"
-                                    type="text" name="phone" value="{{ old('phone', $user->phone) }}"
+                                    type="text" name="phone" value="{{ old('phone', $event->phone) }}"
                                     placeholder="Enter phone">
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-                            <div class="col-12 col-md-3 mb-4">
-                                <label class="form-label">Status</label>
-                                <select
-                                    class="form-select @error('status')
-                                        is-invalid
-                                    @enderror"
-                                    name="status">
-                                    <option value="1" {{ old('status', $user->status) == 1 ? 'selected' : '' }}>Active
-                                    </option>
-                                    <option value="0" {{ old('status', $user->status) == 0 ? 'selected' : '' }}>
-                                        Inactive
-                                    </option>
-                                </select>
-                                @error('status')
+
+                            <div class="col-12 col-md-4 mb-4">
+                                <label class="form-label">Price</label>
+                                <input
+                                    class="form-control @error('price')
+                                            is-invalid
+                                        @enderror"
+                                    type="text" name="price" value="{{ old('price', $event->price) }}"
+                                    placeholder="Enter price">
+                                @error('price')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-                            <div class="col-12 col-md-3 mb-4">
-                                <label class="form-label">Date of Birth</label>
+                            <div class="col-12 col-md-4 mb-4">
+                                <label class="form-label">Total Seat</label>
                                 <input
-                                    class="form-control @error('date_of_birth')
+                                    class="form-control @error('total_seat')
                                             is-invalid
                                         @enderror"
-                                    type="date" name="date_of_birth"
-                                    value="{{ old('date_of_birth', $user->date_of_birth) }}">
-                                @error('date_of_birth')
+                                    type="text" name="total_seat" value="{{ old('total_seat', $event->total_seat) }}"
+                                    placeholder="Enter total seat">
+                                @error('total_seat')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-                            <div class="col-12 col-md-3 mb-4">
-                                <label class="form-label">Postal Code</label>
+                            <div class="col-12 col-md-4 mb-4">
+                                <label class="form-label">Booked Seat</label>
                                 <input
-                                    class="form-control @error('postal_code')
+                                    class="form-control @error('booked_seat')
                                             is-invalid
                                         @enderror"
-                                    type="text" name="postal_code"
-                                    value="{{ old('postal_code', $user->postal_code) }}" placeholder="Enter postal code">
-                                @error('postal_code')
+                                    type="text" name="booked_seat" value="{{ old('booked_seat', $event->booked_seat) }}"
+                                    placeholder="Enter booked seat">
+                                @error('booked_seat')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-                            <div class="col-12 col-md-3 mb-4">
-                                <label class="form-label">Country</label>
-                                <input
-                                    class="form-control @error('country')
-                                            is-invalid
-                                        @enderror"
-                                    type="text" name="country" value="{{ old('country', $user->country) }}"
-                                    placeholder="Enter country">
-                                @error('country')
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Description<span class="text-danger">*</span></label>
+                                <textarea name="description" id="description" cols="30" rows="5"
+                                    class="form-control @error('description')
+                                is-invalid
+                                @enderror"
+                                    placeholder="Enter description">{{ old('description', $event->description) }}</textarea>
+                                @error('description')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-                            <div class="col-12 col-md-3 mb-4">
-                                <label class="form-label">City</label>
-                                <input
-                                    class="form-control @error('city')
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Short Description<span class="text-danger">*</span></label>
+                                <textarea name="short_description" id="" cols="30" rows="5"
+                                    class="form-control @error('short_description')
                                             is-invalid
                                         @enderror"
-                                    type="text" name="city" value="{{ old('city', $user->city) }}"
-                                    placeholder="Enter city">
-                                @error('city')
+                                    placeholder="Enter short description">{{ old('short_description', $event->short_description) }}</textarea>
+                                @error('short_description')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                             <div class="col-12 col-md-6 mb-4">
-                                <label class="form-label">Bio</label>
-                                <textarea name="bio" id="" cols="30" rows="9"
-                                    class="form-control @error('bio')
+                                <label class="form-label">Map</label>
+                                <textarea name="map" id="" cols="30" rows="9"
+                                    class="form-control @error('map')
                                             is-invalid
                                         @enderror"
-                                    placeholder="Enter bio">{{ old('bio', $user->bio) }}</textarea>
-                                @error('bio')
+                                    placeholder="Enter map code">{{ old('map', $event->map) }}</textarea>
+                                @error('map')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                             <div class="col-12 col-md-6 mb-4">
-                                <label class="form-label">Profile Photo</label>
+                                <label class="form-label">Photo</label>
                                 <input
-                                    class="form-control dropify @error('profile_photo')
+                                    class="form-control dropify @error('photo')
                                     is-invalid
                                 @enderror"
-                                    type="file" name="profile_photo"
-                                    data-default-file="{{ asset('uploads/profile_photo') }}/{{ $user->profile_photo }}">
-                                @error('profile_photo')
+                                    type="file" name="photo"
+                                    data-default-file="{{ asset('uploads/event') }}/{{ $event->featured_photo }}">
+                                @error('photo')
                                     <span class="text-danger" style="font-size: 11px"
                                         role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -236,5 +212,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $('.dropify').dropify();
+    </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endpush

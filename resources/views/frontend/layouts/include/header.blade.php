@@ -30,7 +30,8 @@
                                     class="nav-link {{ Route::is('aboutPage') ? 'active' : '' }}">About</a>
                             </li>
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link">Events</a>
+                                <a href="{{ route('eventPage') }}"
+                                    class="nav-link {{ Route::is('eventPage') || Route::is('singleEventPage') ? 'active' : '' }}">Events</a>
                             </li>
                             <li class="nav-item">
                                 <a href="contact.html" class="nav-link">Causes</a>
@@ -51,7 +52,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('blogPage') }}"
-                                    class="nav-link {{ Route::is('blogPage') ? 'active' : '' }}">Blog</a>
+                                    class="nav-link {{ Route::is('blogPage') || Route::is('singleBlogPage') ? 'active' : '' }}">Blog</a>
                             </li>
 
                             <li class="nav-item">

@@ -1,221 +1,93 @@
 @extends('backend.layouts.app')
-@section('title')
-    User Profile
-@endsection
+
+@section('title', 'Event Details')
+
 @push('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css"
+        integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        .profile-card-background {
-            background-image: url("{{ asset('uploads/cover_photo') }}/{{ $user->cover_photo }}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .profile-card-background .card-body {
-            background-color: #4a4a4a39;
-        }
-
-        .user-info-list.no-bio {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .user-info-list.no-bio li {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .user-info-list.has-bio li {
-            margin-bottom: 15px;
-        }
-
-        .user-info-list.no-bio {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .user-info-list.no-bio li {
-            flex: 1 1 30%;
-            min-width: 200px;
-        }
-
-        .user-info-list li {
-            word-break: break-word;
-        }
-
-        @media (max-width: 768px) {
-            .user-info-list.no-bio {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .user-info-list.no-bio li {
-                flex: unset;
-                min-width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .profile-card-background {
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-            }
-
-            .user-info-list.no-bio {
-                flex-direction: column;
-            }
-
-            .user-info-list.no-bio li {
-                flex: unset;
-                min-width: 100%;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .avatar-lg {
-                width: 100px;
-                height: 100px;
-            }
+        .dropify-wrapper .dropify-message p {
+            font-size: 20px;
         }
     </style>
 @endpush
 
 @section('content')
     @include('backend.layouts.include.breadcrumb', [
-        'parent_page' => 'Users',
-        'page_name' => 'User Profile',
+        'parent_page' => 'Events',
+        'page_name' => 'Event Details',
     ])
-    <div class="row mt-3">
-        <div class="col-lg-12">
-            <div class="card profile-card-background mx-n4 mt-n4">
-                <div class="card-body">
-                    @can('browse-user')
-                        <div class="row mb-3">
-                            <div class="col-sm-12">
-                                <div class="">
-                                    <a href="{{ route('admin.user.index') }}"
-                                        class="btn btn-secondary btn-rounded waves-effect waves-light addContact-modal mb-2">
-                                        <i class="mdi mdi-arrow-left me-1"></i> Back to Users
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endcan
-                    <div class="text-center mb-4">
-                        <img src="{{ asset('uploads/profile_photo') }}/{{ $user->profile_photo }}" alt="User Photo"
-                            class="avatar-lg rounded-circle mx-auto d-block"
-                            style="border: 3px solid #FABC3F; background-color: white">
-                        <h2 class="mt-3 mb-1" style="font-weight: 600;">{{ $user->first_name }} {{ $user->last_name }}</h2>
-                        <h6 class="mb-3" style="font-weight: 600;">{{ $user->role->name }}</h6>
-                        <div class="mx-auto">
-                            @if ($user->status == 1)
-                                <span class="badge text-bg-success px-2 py-1" style="font-size: 11px">Active</span>
-                            @else
-                                <span class="badge text-bg-danger px-2 py-1" style="font-size: 11px">Deactive</span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <ul class="list-unstyled hstack gap-3 mb-0 flex-grow-1">
-                            @if ($user->country)
-                                <li>
-                                    <i class="bx bx-map align-middle" style="font-weight: 600;"></i>
-                                    <span class="mb-3" style="font-weight: 600;">{{ $user->country }}</span>
-                                </li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
-
-        <div class="{{ $user->bio ? 'col-lg-3' : 'col-lg-12' }}">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="pt-3">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-8">
+                                <div class="text-center">
+                                    <h4>{{ $event->name }}</h4>
+                                    <p class="text-muted mb-4">
+                                        <i class="mdi mdi-calendar me-1"></i>
+                                        {{ \Carbon\Carbon::parse($event->date)->format('F j, Y') }}
+                                        {{ \Carbon\Carbon::parse($event->time)->format('h:i A') }}
+                                    </p>
+                                </div>
+                                <hr>
 
-                    <ul class="list-unstyled user-info-list {{ $user->bio ? 'has-bio' : 'no-bio' }}">
-                        <li>
-                            <div class="d-flex">
-                                <i class="bx bx-envelope font-size-18 text-primary"></i>
-                                <div class="ms-3">
-                                    <h6 class="mb-1 fw-semibold">Email:</h6>
-                                    <span class="text-muted">{{ $user->email }}</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <i class="bx bx-phone-call font-size-18 text-primary"></i>
-                                <div class="ms-3">
-                                    <h6 class="mb-1 fw-semibold">Phone:</h6>
-                                    <span class="text-muted">{{ $user->phone }}</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <i class="bx bx-map-pin font-size-18 text-primary"></i>
-                                <div class="ms-3">
-                                    <h6 class="mb-1 fw-semibold">Address:</h6>
-                                    <span class="text-muted">{{ $user->address }}</span>
-                                </div>
-                            </div>
-                        </li>
-                        @if ($user->date_of_birth)
-                            <li>
-                                <div class="d-flex">
-                                    <i class="bx bx-calendar font-size-18 text-primary"></i>
-                                    <div class="ms-3">
-                                        <h6 class="mb-1 fw-semibold">Date of Birth:</h6>
-                                        {{ $user->date_of_birth }}
+                                <div class="row text-center">
+                                    <div class="col-sm-4">
+                                        <h5 class="font-size-15"><b>Price: </b>{{ $event->price }}<b>$</b></h5>
+                                        <h5 class="font-size-15"><b>Total Seat: </b>{{ $event->total_seat }}</h5>
+                                        <h5 class="font-size-15"><b>Booked Seat: </b>{{ $event->booked_seat }}</h5>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p class="text-muted mb-2">Email</p>
+                                        <h5 class="font-size-15">{{ $event->email }}</h5>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p class="text-muted mb-2">Phone</p>
+                                        <h5 class="font-size-15">{{ $event->phone }}</h5>
                                     </div>
                                 </div>
-                            </li>
-                        @endif
-                        @if ($user->postal_code)
-                            <li>
-                                <div class="d-flex">
-                                    <i class="mdi mdi-post-outline font-size-18 text-primary"></i>
-                                    <div class="ms-3">
-                                        <h6 class="mb-1 fw-semibold">Postal Code:</h6>
-                                        <span class="text-muted">{{ $user->postal_code }}</span>
-                                    </div>
+                                <hr>
+
+                                <div class="my-5 text-center">
+                                    <img src="{{ asset('uploads/event/' . $event->featured_photo) }}" alt="Event Image"
+                                        class="img-thumbnail mx-auto d-block">
                                 </div>
-                            </li>
-                        @endif
-                        @if ($user->city)
-                            <li>
-                                <div class="d-flex">
-                                    <i class="mdi mdi-city font-size-18 text-primary"></i>
-                                    <div class="ms-3">
-                                        <h6 class="mb-1 fw-semibold">City:</h6>
-                                        <span class="text-muted">{{ $user->city }}</span>
-                                    </div>
+                                <hr>
+
+                                <div class="mt-4">
+                                    <h5 class="mb-3">Short Description: </h5>
+                                    <p>{{ $event->short_description }}</p>
+
+                                    <h5 class="mb-3">Description: </h5>
+                                    <p>{!! $event->description !!}</p>
+
+                                    <h5 class="mb-3">Location: </h5>
+                                    <p>{{ $event->location }}</p>
+
+                                    <h5 class="mb-3">Map: </h5>
+                                    <p>{!! $event->map !!}</p>
                                 </div>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </div>
-        @if ($user->bio)
-            <div class="col-lg-9">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="mb-3">Bio</h5>
-                        <p class="text-muted">{{ $user->bio }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        @endif
+        </div>
     </div>
 @endsection
 
 @push('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
+        integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dropify').dropify();
+        });
+    </script>
 @endpush

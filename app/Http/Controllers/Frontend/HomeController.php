@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Faq;
+use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\Reply;
-use App\Models\Slider;
 use App\Models\Comment;
 use App\Models\Counter;
+use App\Models\Event;
+use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\gallery;
+use App\Models\Reply;
+use App\Models\Slider;
 use App\Models\Special;
-use App\Models\Volunteer;
 use App\Models\Testimonial;
+use App\Models\Volunteer;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -74,14 +74,14 @@ class HomeController extends Controller
         $comments = Comment::with(['reply' => function ($query) {
             $query->where('status', 'Accept');
         }])
-        ->where('blog_id', $id)
-        ->where('status', 'Accept')
-        ->latest('id')
-        ->withCount(['reply as reply_count' => function ($query) {
-            $query->where('status', 'Accept');
-        }])
-        ->get();
-    $tags = collect(explode(',', $blog_detail->tags))->unique()->values();
+            ->where('blog_id', $id)
+            ->where('status', 'Accept')
+            ->latest('id')
+            ->withCount(['reply as reply_count' => function ($query) {
+                $query->where('status', 'Accept');
+            }])
+            ->get();
+        $tags = collect(explode(',', $blog_detail->tags))->unique()->values();
         return view('frontend.pages.blog.show', compact('blog_detail', 'recent_news', 'tags', 'comments'));
     }
 
@@ -118,5 +118,18 @@ class HomeController extends Controller
             'comment' => $request->reply,
         ]);
         return redirect()->back()->with('success', "Reply submitted successfully.");
+    }
+
+    public function eventPage()
+    {
+        $events = Event::latest('id')->paginate(4);
+        return view('frontend.pages.event.index', compact('events'));
+    }
+
+    public function singleEventPage($slug)
+    {
+        $event = Event::where('slug', $slug)->first();
+        $recent_events = $events = Event::latest('id')->limit(5)->select('id', 'name', 'slug')->get();
+        return view('frontend.pages.event.show', compact('event', 'recent_events'));
     }
 }
