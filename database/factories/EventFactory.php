@@ -18,10 +18,11 @@ class EventFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'slug' => $this->faker->slug(),
             'short_description' => $this->faker->sentence(3),
             'description' => $this->faker->text(),
             'date' => $this->faker->date(),
-            'mail' => $this->faker->email(),
+            'email' => $this->faker->email(),
             'phone' => $this->faker->phoneNumber(),
             'time' => $this->faker->time(),
             'location' => $this->faker->address() . ', ' . $this->faker->city(),

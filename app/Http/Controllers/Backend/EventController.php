@@ -29,6 +29,7 @@ class EventController extends Controller
     public function create()
     {
         Gate::authorize('add-event');
+        return view('backend.pages.event.create');
 
     }
 
@@ -38,6 +39,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         Gate::authorize('add-event');
+        return $request;
     }
 
     /**
@@ -73,3 +75,17 @@ class EventController extends Controller
         Gate::authorize('delete-event');
     }
 }
+// $table->string('name');
+// $table->string('slug');
+// $table->text('short_description');
+// $table->text('description');
+// $table->string('featured_photo')->default('default-event.png');
+// $table->string('email')->nullable();
+// $table->string('phone');
+// $table->string('date');
+// $table->string('time');
+// $table->string('location');
+// $table->text('map')->nullable();
+// $table->integer('price')->nullable();
+// $table->integer('total_seat')->nullable();
+// $table->integer('booked_seat')->nullable();

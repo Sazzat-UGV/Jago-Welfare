@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->text('short_description');
             $table->text('description');
             $table->string('featured_photo')->default('default-event.png');
-            $table->string('mail');
+            $table->string('email')->nullable();
             $table->string('phone');
             $table->string('date');
             $table->string('time');
