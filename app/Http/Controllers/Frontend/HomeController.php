@@ -73,8 +73,15 @@ class HomeController extends Controller
         $recent_news = Blog::latest('id')->limit(6)->get();
         $comments = Comment::with(['reply' => function ($query) {
             $query->where('status', 'Accept');
-        }])->where('blog_id', $id)->where('status', 'Accept')->latest('id')->get();
-        $tags = collect(explode(',', $blog_detail->tags))->unique()->values();
+        }])
+        ->where('blog_id', $id)
+        ->where('status', 'Accept')
+        ->latest('id')
+        ->withCount(['reply as reply_count' => function ($query) {
+            $query->where('status', 'Accept');
+        }])
+        ->get();
+    $tags = collect(explode(',', $blog_detail->tags))->unique()->values();
         return view('frontend.pages.blog.show', compact('blog_detail', 'recent_news', 'tags', 'comments'));
     }
 

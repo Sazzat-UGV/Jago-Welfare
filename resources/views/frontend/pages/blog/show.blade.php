@@ -35,7 +35,12 @@
                         </div>
 
                         <div class="comment_area_details">
-                            <h3>{{ $comments->count() }} Comments</h3>
+                            @php
+                                $reply = $comments->sum('reply_count');
+                                $comment = $comments->count();
+                                $total_comment = $reply + $comment;
+                            @endphp
+                            <h3>{{ $total_comment }} Comments</h3>
                             <div class="post_comment_wrapper">
                                 @foreach ($comments as $comment)
                                     <div class="post_comment_item">
