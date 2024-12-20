@@ -21,6 +21,7 @@ class ModuleSeeder extends Seeder
             'Features',
             'Modules',
             'Blogs',
+            'Events',
             'Volunteers',
             'FAQs',
             'Galleries',

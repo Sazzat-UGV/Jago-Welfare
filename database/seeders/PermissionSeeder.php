@@ -80,6 +80,13 @@ class PermissionSeeder extends Seeder
             'Delete Reply',
             'Change Reply Status',
         ];
+        $developerEventPermissionArray = [
+            'Browse Event',
+            'Read Event',
+            'Edit Event',
+            'Add Event',
+            'Delete Event',
+        ];
         $developerFAQsPermissionArray = [
             'Browse FAQs',
             'Edit FAQs',
@@ -147,7 +154,7 @@ class PermissionSeeder extends Seeder
         }
 
         //Gallery
-        $developerGalleryModule = Module::where('name', 'Features')->select('id')->first();
+        $developerGalleryModule = Module::where('name', 'Galleries')->select('id')->first();
         for ($i = 0; $i < count($developerGalleryPermissionArray); $i++) {
             Permission::updateOrCreate([
                 'module_id' => $developerGalleryModule->id,
@@ -198,6 +205,15 @@ class PermissionSeeder extends Seeder
                 'module_id' => $developerTestimonialModule->id,
                 'name' => $developerTestimonialsPermissionArray[$i],
                 'slug' => Str::slug($developerTestimonialsPermissionArray[$i]),
+            ]);
+        }
+        //Events
+        $developerEventModule = Module::where('name', 'Events')->select('id')->first();
+        for ($i = 0; $i < count($developerEventPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerEventModule->id,
+                'name' => $developerEventPermissionArray[$i],
+                'slug' => Str::slug($developerEventPermissionArray[$i]),
             ]);
         }
 

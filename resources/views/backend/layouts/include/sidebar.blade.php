@@ -101,6 +101,27 @@
                         </ul>
                     </li>
                 @endcan
+                @can('browse-event')
+                    <li>
+                        <a href="javascript: void(0);"
+                            class="has-arrow waves-effect">
+                            <i class="bx bxs-calendar-event"></i>
+                            <span>Events</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('browse-event')
+                                <li class="@if (Route::is('admin.event.index')) mm-active @endif"><a
+                                        href="{{ route('admin.event.index') }}"
+                                        class="@if (Route::is('admin.event.index')) active @endif">Event List</a></li>
+                            @endcan
+                            @can('add-event')
+                                <li class="@if (Route::is('admin.event.create')) mm-active @endif"><a
+                                        href="{{ route('admin.event.create') }}"
+                                        class="@if (Route::is('admin.event.create')) active @endif">Add New Event</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 @can('browse-faqs')
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">

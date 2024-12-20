@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CounterController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\Export\UserExportController;
 use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Backend\FeatureController;
@@ -60,6 +61,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('volunteer', VolunteerController::class);
         Route::resource('gallery', GalleryController::class);
         Route::resource('blog', BlogController::class);
+        Route::resource('event', EventController::class);
 
         // comment route
         Route::get('comment/{id}', [BlogController::class, 'browseComment'])->name('browseComment');
