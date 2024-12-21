@@ -8,6 +8,45 @@
             border: 0;
             width: 100%;
         }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .boxes {
+            display: flex;
+            gap: 15px;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: #E03C33;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90px;
+            height: 100px;
+        }
+
+
+        .num {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .name {
+            font-size: 0.9rem;
+            text-align: center;
+            color: #fff;
+            margin-top: 5px;
+        }
     </style>
 @endpush
 @section('content')
@@ -32,16 +71,71 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="sidebar_first">
-                        <div class="sidebar_boxed">
-                            <div class="sidebar_heading_main">
-                                <h3>Countdown to Event</h3>
+
+                        @if ($event->date && \Carbon\Carbon::parse($event->date . ' ' . $event->time)->isFuture())
+                            <div class="sidebar_boxed">
+                                <div class="countdown show" data-Date='{{ $event->date }} {{ $event->time }}'>
+                                    <div class="boxes running">
+                                        <div class="box">
+                                            <div class="num">
+                                                <timer><span class="days"></span></timer>
+                                            </div>
+                                            <div class="name">Days</div>
+                                        </div>
+                                        <div class="box">
+                                            <div class="num">
+                                                <timer><span class="hours"></span></timer>
+                                            </div>
+                                            <div class="name">Hours</div>
+                                        </div>
+                                        <div class="box">
+                                            <div class="num">
+                                                <timer><span class="minutes"></span></timer>
+                                            </div>
+                                            <div class="name">Minutes</div>
+                                        </div>
+                                        <div class="box">
+                                            <div class="num">
+                                                <timer><span class="seconds"></span></timer>
+                                            </div>
+                                            <div class="name">Seconds</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="event_countdown">
-                                <p>
-                                    0 days remaining until the event.
-                                </p>
+                        @else
+                            <div class="sidebar_boxed">
+                                <div class="countdown show">
+                                    <div class="boxes running">
+                                        <div class="box">
+                                            <div class="num">
+                                                <timer><span class="">00</span></timer>
+                                            </div>
+                                            <div class="name">Days</div>
+                                        </div>
+                                        <div class="box">
+                                            <div class="num">
+                                                <timer><span class="">00</span></timer>
+                                            </div>
+                                            <div class="name">Hours</div>
+                                        </div>
+                                        <div class="box">
+                                            <div class="num">
+                                                <timer><span class="">00</span></timer>
+                                            </div>
+                                            <div class="name">Minutes</div>
+                                        </div>
+                                        <div class="box">
+                                            <div class="num">
+                                                <timer><span class="">00</span></timer>
+                                            </div>
+                                            <div class="name">Seconds</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endif
+
                         <!-- Project Organizer -->
                         <div class="sidebar_boxed">
                             <div class="sidebar_heading_main">
@@ -138,4 +232,5 @@
     </section>
 @endsection
 @push('script')
+    <script src="{{ asset('assets/frontend/js/multi-countdown.js') }}"></script>
 @endpush
