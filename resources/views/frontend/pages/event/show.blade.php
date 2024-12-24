@@ -180,19 +180,41 @@
                                         <input type="hidden" name="event_id" value="{{ $event->id }}">
                                         <div class="register_now_details">
                                             <div class="mb-3">
-                                                <select name="number_of_tickets" class="form-select" id="">
-                                                    <option selected>How Many Tickets</option>
+                                                <select name="number_of_tickets"
+                                                    class="form-select @error('number_of_tickets')
+                                                    is-invalid
+                                                @enderror"
+                                                    id="">
+                                                    <option value="">How Many Tickets</option>
                                                     @for ($i = 1; $i <= 5; $i++)
-                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                        <option value="{{ $i }}"
+                                                            {{ old('number_of_tickets') == $i ? 'selected' : '' }}>
+                                                            {{ $i }}</option>
                                                     @endfor
                                                 </select>
+                                                @error('number_of_tickets')
+                                                    <span class="invalid-feedback"
+                                                        role="alert"><strong>{{ $message }}</strong></span>
+                                                @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <select class="form-select" name="payment_method" id="">
-                                                    <option selected>Select Payment Method</option>
-                                                    <option value="">PayPal</option>
-                                                    <option value="">Stripe</option>
+                                                <select class="form-select @error('payment_method') is-invalid @enderror"
+                                                    name="payment_method" id="">
+                                                    <option value=""
+                                                        {{ old('payment_method') == '' ? 'selected' : '' }}>Select Payment
+                                                        Method</option>
+                                                    <option value="paypal"
+                                                        {{ old('payment_method') == 'paypal' ? 'selected' : '' }}>PayPal
+                                                    </option>
+                                                    <option value="stripe"
+                                                        {{ old('payment_method') == 'stripe' ? 'selected' : '' }}>Stripe
+                                                    </option>
                                                 </select>
+
+                                                @error('payment_method')
+                                                    <span class="invalid-feedback"
+                                                        role="alert"><strong>{{ $message }}</strong></span>
+                                                @enderror
                                             </div>
                                             <button class="btn btn_theme btn_md w-100">Make Payment</button>
                                         </div>
@@ -208,12 +230,22 @@
                                         @csrf
                                         <div class="register_now_details">
                                             <div class="mb-3">
-                                                <select class="form-select" name="" id="">
+                                                <select
+                                                    class="form-select @error('number_of_tickets')
+                                                    is-invalid
+                                                @enderror"
+                                                    name="number_of_tickets" id="">
                                                     <option selected>How Many Tickets</option>
                                                     @for ($i = 1; $i <= 5; $i++)
-                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                        <option value="{{ $i }}"
+                                                            {{ old('number_of_tickets') == $i ? 'selected' : '' }}>
+                                                            {{ $i }}</option>
                                                     @endfor
                                                 </select>
+                                                @error('number_of_tickets')
+                                                    <span class="invalid-feedback"
+                                                        role="alert"><strong>{{ $message }}</strong></span>
+                                                @enderror
                                             </div>
                                             <button class="btn btn_theme btn_md w-100">Book Now</button>
                                         </div>
