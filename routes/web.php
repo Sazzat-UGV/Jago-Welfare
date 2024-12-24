@@ -15,6 +15,11 @@ Route::prefix('/')->group(function () {
     Route::post('reply', [HomeController::class, 'submitReply'])->name('submitReply');
     Route::get('event', [HomeController::class, 'eventPage'])->name('eventPage');
     Route::get('event-details/{slug}', [HomeController::class, 'singleEventPage'])->name('singleEventPage');
+
+    // event_payment
+//     Route::post('event/ticket/paypal', [::class, 'paypal'])->name('paypal');
+// Route::get('event/ticket/paypal-success', [::class, 'success'])->name('success');
+// Route::get('event/ticket/paypal-cancel', [::class, 'cancel'])->name('cancel');
 });
 
 require 'auth.php';

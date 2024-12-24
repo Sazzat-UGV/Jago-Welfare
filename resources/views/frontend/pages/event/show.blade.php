@@ -143,9 +143,9 @@
                             </div>
                             <div class="event_details_list">
                                 <ul>
-                                    @if ($event->price != 0)
+
                                         <li>Ticket Price: <span>{{ $event->price }}<b>$</b></span></li>
-                                    @endif
+                                    
                                     <li>Location: <span>{{ $event->location }}</span></li>
                                     <li>Date: <span> {{ \Carbon\Carbon::parse($event->date)->format('F j, Y') }}</span>
                                     </li>
@@ -168,39 +168,61 @@
 
                             </div>
                         </div>
-                        @if ($event->price != 0)
-                            <div class="recent_causes_wrapper sidebar_boxed">
-                                <div class="sidebar_heading_main">
-                                    <h3>Buy Ticket</h3>
-                                </div>
-                                <form action="">
-                                    <div class="register_now_details">
-                                        <div class="mb-3">
-                                            <select class="form-select" name="" id="">
-                                                <option selected>Select Payment Method</option>
-                                                <option value="">PayPal</option>
-                                                </option>
-                                                <option value="">Stripe</option>
-                                            </select>
+                        @if ($event->date && \Carbon\Carbon::parse($event->date . ' ' . $event->time)->isFuture())
+                            @if ($event->price != 0)
+                                <div class="recent_causes_wrapper sidebar_boxed">
+                                    <div class="sidebar_heading_main">
+                                        <h3>Buy Ticket</h3>
+                                    </div>
+                                    <form action="" method="POST">
+                                        @csrf
+                                        <div class="register_now_details">
+                                            <div class="mb-3">
+                                                <select class="form-select" name="" id="">
+                                                    <option selected>How Many Tickets</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <select class="form-select" name="" id="">
+                                                    <option selected>Select Payment Method</option>
+                                                    <option value="">PayPal</option>
+                                                    <option value="">Stripe</option>
+                                                </select>
+                                            </div>
+                                            <button class="btn btn_theme btn_md w-100">Make Payment</button>
                                         </div>
-                                        <button class="btn btn_theme btn_md w-100">Make Payment</button>
-                                    </div>
-                                </form>
-                            </div>
-                        @endif
-                        @if ($event->price == 0)
-                            <div class="recent_causes_wrapper sidebar_boxed">
-                                <div class="sidebar_heading_main">
-                                    <h3>Free Booking</h3>
+                                    </form>
                                 </div>
-                                <form action="">
-                                    <div class="register_now_details">
-                                        <button class="btn btn_theme btn_md w-100">Book Now</button>
+                            @endif
+                            @if ($event->price == 0)
+                                <div class="recent_causes_wrapper sidebar_boxed">
+                                    <div class="sidebar_heading_main">
+                                        <h3>Free Booking</h3>
                                     </div>
-                                </form>
-                            </div>
+                                    <form action="" method="POST">
+                                        @csrf
+                                        <div class="register_now_details">
+                                            <div class="mb-3">
+                                                <select class="form-select" name="" id="">
+                                                    <option selected>How Many Tickets</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </div>
+                                            <button class="btn btn_theme btn_md w-100">Book Now</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
                         @endif
-
                         <div class="recent_causes_wrapper sidebar_boxed">
                             <div class="sidebar_heading_main">
                                 <h3>Recent events</h3>
