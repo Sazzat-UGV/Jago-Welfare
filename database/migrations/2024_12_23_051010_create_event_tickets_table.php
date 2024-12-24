@@ -14,14 +14,15 @@ return new class extends Migration
     {
         Schema::create('event_tickets', function (Blueprint $table) {
             $table->id();
+            $table->string('payment_id');
             $table->integer('event_id');
             $table->integer('user_id');
             $table->string('unit_price');
             $table->integer('number_of_tickets');
             $table->integer('total_price');
-            $table->string('payment_id');
             $table->string('payment_method');
             $table->string('payment_status');
+            $table->string('currency');
             $table->timestamps();
         });
     }

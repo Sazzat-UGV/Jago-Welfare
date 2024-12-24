@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
@@ -16,10 +17,10 @@ Route::prefix('/')->group(function () {
     Route::get('event', [HomeController::class, 'eventPage'])->name('eventPage');
     Route::get('event-details/{slug}', [HomeController::class, 'singleEventPage'])->name('singleEventPage');
 
-    // event_payment
-//     Route::post('event/ticket/paypal', [::class, 'paypal'])->name('paypal');
-// Route::get('event/ticket/paypal-success', [::class, 'success'])->name('success');
-// Route::get('event/ticket/paypal-cancel', [::class, 'cancel'])->name('cancel');
+    // event_ticket_payment
+    Route::post('event/ticket/payment', [PaymentController::class, 'eventPayment'])->name('eventPayment');
+    Route::get('event/ticket/paypal-success', [PaymentController::class, 'eventPaypalSuccess'])->name('eventPaypalSuccess');
+    Route::get('event/ticket/paypal-cancel', [PaymentController::class, 'eventPaypalCancel'])->name('eventPaypalCancel');
 });
 
 require 'auth.php';

@@ -144,8 +144,8 @@
                             <div class="event_details_list">
                                 <ul>
 
-                                        <li>Ticket Price: <span>{{ $event->price }}<b>$</b></span></li>
-                                    
+                                    <li>Ticket Price: <span>{{ $event->price }}<b>$</b></span></li>
+
                                     <li>Location: <span>{{ $event->location }}</span></li>
                                     <li>Date: <span> {{ \Carbon\Carbon::parse($event->date)->format('F j, Y') }}</span>
                                     </li>
@@ -174,21 +174,21 @@
                                     <div class="sidebar_heading_main">
                                         <h3>Buy Ticket</h3>
                                     </div>
-                                    <form action="" method="POST">
+                                    <form action="{{ route('eventPayment') }}" method="POST">
                                         @csrf
+                                        <input type="hidden" name="price" value="{{ $event->price }}">
+                                        <input type="hidden" name="event_id" value="{{ $event->id }}">
                                         <div class="register_now_details">
                                             <div class="mb-3">
-                                                <select class="form-select" name="" id="">
+                                                <select name="number_of_tickets" class="form-select" id="">
                                                     <option selected>How Many Tickets</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                    @endfor
                                                 </select>
                                             </div>
                                             <div class="mb-3">
-                                                <select class="form-select" name="" id="">
+                                                <select class="form-select" name="payment_method" id="">
                                                     <option selected>Select Payment Method</option>
                                                     <option value="">PayPal</option>
                                                     <option value="">Stripe</option>
@@ -210,11 +210,9 @@
                                             <div class="mb-3">
                                                 <select class="form-select" name="" id="">
                                                     <option selected>How Many Tickets</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                    @endfor
                                                 </select>
                                             </div>
                                             <button class="btn btn_theme btn_md w-100">Book Now</button>
