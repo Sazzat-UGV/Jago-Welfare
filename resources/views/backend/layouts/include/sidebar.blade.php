@@ -162,6 +162,26 @@
                         </ul>
                     </li>
                 @endcan
+                @can('browse-subscriber')
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bxs-user-detail"></i>
+                            <span>Subscribers</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('browse-subscriber')
+                                <li class="@if (Route::is('admin.subscriber.index')) mm-active @endif"><a
+                                        href="{{ route('admin.subscriber.index') }}"
+                                        class="@if (Route::is('admin.volunteer.index')) active @endif">Subscriber List</a></li>
+                            @endcan
+                            @can('send-message-to-all')
+                                <li class="@if (Route::is('admin.subscriber.sendMessagePage')) mm-active @endif"><a
+                                        href="{{ route('admin.subscriber.sendMessagePage') }}"
+                                        class="@if (Route::is('admin.subscriber.sendMessagePage')) active @endif">Send Message to All</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
 
                 @can('edit-special-section')
                     <li>

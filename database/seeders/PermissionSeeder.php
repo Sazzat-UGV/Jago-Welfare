@@ -119,6 +119,11 @@ class PermissionSeeder extends Seeder
             'Edit Special Section',
             'Edit Counter',
         ];
+        $developerSubscribersPermissionArray = [
+            'Browse Subscriber',
+            'Delete Subscriber',
+            'Send Message to All',
+        ];
         //Dashboard
         $developerDashboardModule = Module::where('name', 'Dashboard')->select('id')->first();
         for ($i = 0; $i < count($developerDashboardPermissionArray); $i++) {
@@ -141,6 +146,15 @@ class PermissionSeeder extends Seeder
                 'module_id' => $developerFeatureModule->id,
                 'name' => $developerFeaturesPermissionArray[$i],
                 'slug' => Str::slug($developerFeaturesPermissionArray[$i]),
+            ]);
+        }
+        //Subscribers
+        $developerSubscriberModule = Module::where('name', 'Subscribers')->select('id')->first();
+        for ($i = 0; $i < count($developerSubscribersPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerSubscriberModule->id,
+                'name' => $developerSubscribersPermissionArray[$i],
+                'slug' => Str::slug($developerSubscribersPermissionArray[$i]),
             ]);
         }
         //Blogs

@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SubscriberMail;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Image;
 
@@ -72,6 +75,30 @@ class BlogController extends Controller
         ]);
 
         $this->image_upload($request, $blog->id);
+        if ($request->send_message_to_subscribers == 1) {
+            $url = url('blog-details/' . $blog->id);
+            $subject = 'New Post Published';
+            $content = "<p style='text-align:center;'>New post has been published. Please visit our website to read the post.</p>
+                        <div style='text-align: center; margin-top: 20px;'>
+                             <a href='{$url}' style='
+                                display: inline-block;
+                                margin-top:10px;
+                                background-color: #4CAF50;
+                                color: #ffffff;
+                                text-decoration: none;
+                                padding: 12px 24px;
+                                border-radius: 5px;
+                                font-size: 16px;
+                                font-weight: bold;'
+                                target='_blank'>
+                                View Post
+                            </a>
+                        </div>";
+            $subscribers = Subscriber::where('status', 1)->select('id', 'email')->get();
+            foreach ($subscribers as $subscriber) {
+                Mail::to($subscriber->email)->send(new SubscriberMail($subject, $content));
+            }
+        }
         return redirect()->route('admin.blog.index')->with('success', 'Blog added successfully.');
     }
 

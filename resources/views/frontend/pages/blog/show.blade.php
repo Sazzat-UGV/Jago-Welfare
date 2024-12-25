@@ -31,7 +31,7 @@
                         </div>
                         <div class="details_text_wrapper">
                             <h2>{{ $blog_detail->title }}</h2>
-                            <p>{{ $blog_detail->description }}</p>
+                            <p>{!! $blog_detail->description !!}</p>
                         </div>
 
                         <div class="comment_area_details">

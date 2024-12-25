@@ -28,6 +28,7 @@ class ModuleSeeder extends Seeder
             'Permissions',
             'Roles',
             'Users',
+            'Subscribers',
             'Settings',
             'Other Sections',
             'Database Backup',

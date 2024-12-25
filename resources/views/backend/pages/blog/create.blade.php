@@ -86,13 +86,27 @@
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-                            <div class="col-12  mb-4">
+                            @php
+
+                                $subscriber = App\Models\Subscriber::where('status', 1)->count();
+                            @endphp
+                            <div class="{{ $subscriber > 0 ? 'col-12 col-md-8' : 'col-12' }} mb-4">
                                 <label class="form-label">Tags</label>
-                                <input type="text" id="tags" name="tags"
-                                    value="{{ old('tags') }}" class="form-control">
+                                <input type="text" id="tags" name="tags" value="{{ old('tags') }}"
+                                    class="form-control">
                                 @error('designation')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
+                            </div>
+                            <div class="{{ $subscriber > 0 ? 'col-12 col-md-4' : 'col-12' }} mb-4">
+                                <label class="form-label">Send Message to All Subscriber?</label>
+                                <select class="form-select" name="send_message_to_subscribers">
+                                    <option value="0"
+                                        {{ old('send_message_to_subscribers', 0) == 0 ? 'selected' : '' }}>No</option>
+                                    <option value="1"
+                                        {{ old('send_message_to_subscribers', 0) == 1 ? 'selected' : '' }}>Yes</option>
+                                </select>
+                                <small class="text-muted">Choose "Yes" to send a message to all subscribers.</small>
                             </div>
 
                             <div class="col-12 mb-4">

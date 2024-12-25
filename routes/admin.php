@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\Setting\EmailConfigurationController;
 use App\Http\Controllers\Backend\Setting\GeneralSettingController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SpecialController;
+use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\VolunteerController;
@@ -62,6 +63,12 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('gallery', GalleryController::class);
         Route::resource('blog', BlogController::class);
         Route::resource('event', EventController::class);
+
+        // subscriber route
+        Route::get('subscriber', [SubscriberController::class, 'index'])->name('subscriber.index');
+        Route::get('subscriber/send-message', [SubscriberController::class, 'sendMessagePage'])->name('subscriber.sendMessagePage');
+        Route::post('subscriber/send-message', [SubscriberController::class, 'sendMessage'])->name('subscriber.sendMessage');
+        Route::delete('subscriber/{id}', [SubscriberController::class, 'destroy'])->name('subscriber.destroy');
 
         // comment route
         Route::get('comment/{id}', [BlogController::class, 'browseComment'])->name('browseComment');
