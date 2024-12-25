@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SubscriberVerificationMail;
 use App\Models\Blog;
 use App\Models\Comment;
 use App\Models\Counter;
@@ -13,9 +14,11 @@ use App\Models\gallery;
 use App\Models\Reply;
 use App\Models\Slider;
 use App\Models\Special;
+use App\Models\Subscriber;
 use App\Models\Testimonial;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -131,5 +134,37 @@ class HomeController extends Controller
         $event = Event::where('slug', $slug)->first();
         $recent_events = $events = Event::latest('id')->limit(5)->select('id', 'name', 'slug')->get();
         return view('frontend.pages.event.show', compact('event', 'recent_events'));
+    }
+
+    public function subscribe(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:subscribers,email',
+        ]);
+        $token = md5(time());
+        Subscriber::create([
+            'email' => $request->email,
+            'token' => $token,
+        ]);
+        $url = Url('subscriber/verify/' . $token . '/' . $request->email);
+        Mail::to($request->email)->send(new SubscriberVerificationMail($url));
+        return redirect()->back()->with('success', 'An email has been sent to you, Please check and verify your email.');
+    }
+
+    public function subscriberVerification($token, $email)
+    {
+        $subscriber = Subscriber::where('email', $email)->where('token', $token)->first();
+        if($subscriber->status==1){
+            return redirect()->route('homePage')->with('warning','Email already verified.');
+        }
+        if ($subscriber) {
+            $subscriber->update([
+                'token' => $token,
+                'status' => 1,
+            ]);
+            return redirect()->route('homePage')->with('success','Your email has been verified successfully.');
+        }else{
+            return redirect()->route('homePage')->with('error','Invalid email or token.');
+        }
     }
 }

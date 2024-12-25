@@ -16,6 +16,8 @@ Route::prefix('/')->group(function () {
     Route::post('reply', [HomeController::class, 'submitReply'])->name('submitReply');
     Route::get('event', [HomeController::class, 'eventPage'])->name('eventPage');
     Route::get('event-details/{slug}', [HomeController::class, 'singleEventPage'])->name('singleEventPage');
+    Route::post('subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
+    Route::get('subscriber/verify/{token}/{email}', [HomeController::class, 'subscriberVerification'])->name('subscriberVerification');
 
     // event_ticket_payment
     Route::post('event/ticket/payment', [PaymentController::class, 'eventPayment'])->name('eventPayment');
