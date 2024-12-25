@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('time');
             $table->string('location');
             $table->text('map')->nullable();
-            $table->integer('price')->nullable();
-            $table->integer('total_seat')->nullable();
+            $table->integer('price')->default(0);
+            $table->integer('total_seat')->default(0);
             $table->integer('booked_seat')->nullable();
             $table->timestamps();
         });

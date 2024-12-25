@@ -158,12 +158,16 @@
                                     @endif
                                     <li>Phone: <span>{{ $event->phone }}</span>
                                     </li>
-                                    <li>Total Seat: <span>{{ $event->total_seat }}</span>
-                                    </li>
+                                    @if($event->total_seat>0)
+                                        <li>Total Seat: <span>{{ $event->total_seat }}</span>
+                                        </li>
+                                    @endif
                                     <li>Booked Seat: <span>{{ $event->booked_seat }}</span>
                                     </li>
+                                    @if ($event->total_seat>0)
                                     <li>Remaining Seat: <span>{{ $event->total_seat - $event->booked_seat }}</span>
                                     </li>
+                                    @endif
                                 </ul>
 
                             </div>
