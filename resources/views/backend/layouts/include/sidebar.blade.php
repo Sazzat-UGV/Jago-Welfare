@@ -291,6 +291,18 @@
                                         class="@if (Route::is('admin.email_configuration_page')) active @endif">Email Configuration</a>
                                 </li>
                             @endcan
+                            @can('terms-conditions')
+                                <li class="@if (Route::is('admin.termscondition.termsConditionPage')) mm-active @endif"><a
+                                        href="{{ route('admin.termscondition.termsConditionPage') }}"
+                                        class="@if (Route::is('admin.termscondition.termsConditionPage')) active @endif">Terms & Conditions</a>
+                                </li>
+                            @endcan
+                            @can('privacy-policy')
+                                <li class="@if (Route::is('admin.privacypolicy.privacyPolicyPage')) mm-active @endif"><a
+                                        href="{{ route('admin.privacypolicy.privacyPolicyPage') }}"
+                                        class="@if (Route::is('admin.privacypolicy.privacyPolicyPage')) active @endif">Privacy Policy</a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 @endif

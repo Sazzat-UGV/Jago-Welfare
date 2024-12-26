@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\FaqController;
 use App\Http\Controllers\Backend\FeatureController;
 use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\ModuleController;
+use App\Http\Controllers\Backend\OtherPageController;
 use App\Http\Controllers\backend\PermissionController;
 use App\Http\Controllers\backend\RoleController;
 use App\Http\Controllers\Backend\Setting\EmailConfigurationController;
@@ -63,6 +64,14 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('gallery', GalleryController::class);
         Route::resource('blog', BlogController::class);
         Route::resource('event', EventController::class);
+
+        // terms condition route
+        Route::get('terms-condition', [OtherPageController::class, 'termsConditionPage'])->name('termscondition.termsConditionPage');
+        Route::post('terms-condition', [OtherPageController::class, 'termsCondition'])->name('termscondition.termsCondition');
+
+        // privacy policy route
+        Route::get('privacy-policy', [OtherPageController::class, 'privacyPolicyPage'])->name('privacypolicy.privacyPolicyPage');
+        Route::post('privacy-policy', [OtherPageController::class, 'privacyPolicy'])->name('privacypolicy.privacyPolicy');
 
         // subscriber route
         Route::get('subscriber', [SubscriberController::class, 'index'])->name('subscriber.index');

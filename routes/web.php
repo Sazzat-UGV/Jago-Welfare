@@ -25,6 +25,10 @@ Route::prefix('/')->group(function () {
     Route::get('event/ticket/cancel', [PaymentController::class, 'eventPaymentCancel'])->name('eventPaymentCancel');
     Route::get('event/ticket/stripe-success', [PaymentController::class, 'eventStripeSuccess'])->name('eventStripeSuccess');
 
+    //other pages
+    Route::get('terms_condition', [HomeController::class, 'termsCondition'])->name('termsCondition');
+    Route::get('privacy_policy', [HomeController::class, 'privacyPolicy'])->name('privacyPolicy');
+
 });
 
 require 'auth.php';

@@ -108,6 +108,8 @@ class PermissionSeeder extends Seeder
         $developerSettingsPermissionArray = [
             'General Setting',
             'Email Configuration',
+            'Terms & Conditions',
+            'Privacy Policy'
         ];
         $developerDatabaseBackupPermissionArray = [
             'Browse Database Backup',

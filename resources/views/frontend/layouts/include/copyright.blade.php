@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="co-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="copyright_left">
-                    <p>Copyright © 2022 All Rights Reserved</p>
+                    <p>Copyright © {{ date('Y') }} All Rights Reserved</p>
                 </div>
             </div>
             <div class="co-lg-6 col-md-6 col-sm-12 col-12">

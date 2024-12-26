@@ -67,11 +67,12 @@
                     <h3>Support</h3>
                     <div class="nav_item_footer">
                         <ul>
-                            <li><a href="faqs.html">Help & FAQ</a></li>
-                            <li><a href="causes.html">Causes</a></li>
-                            <li><a href="events.html">Events</a></li>
-                            <li><a href="contact.html">Contact us</a></li>
-                            <li><a href="terms-service.html">Terms of service</a></li>
+                            <li><a href="{{ route('faqPage') }}">FAQ</a></li>
+                            <li><a href="#">Causes</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="{{ route('privacyPolicy') }}">Privacy Policy</a></li>
+                            <li><a href="{{ route('termsCondition') }}">Terms & Conditions</a></li>
                         </ul>
                     </div>
                 </div>

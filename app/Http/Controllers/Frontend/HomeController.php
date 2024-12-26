@@ -11,6 +11,7 @@ use App\Models\Event;
 use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\gallery;
+use App\Models\OtherPage;
 use App\Models\Reply;
 use App\Models\Slider;
 use App\Models\Special;
@@ -154,17 +155,28 @@ class HomeController extends Controller
     public function subscriberVerification($token, $email)
     {
         $subscriber = Subscriber::where('email', $email)->where('token', $token)->first();
-        if($subscriber->status==1){
-            return redirect()->route('homePage')->with('warning','Email already verified.');
+        if ($subscriber->status == 1) {
+            return redirect()->route('homePage')->with('warning', 'Email already verified.');
         }
         if ($subscriber) {
             $subscriber->update([
                 'token' => $token,
                 'status' => 1,
             ]);
-            return redirect()->route('homePage')->with('success','Your email has been verified successfully.');
-        }else{
-            return redirect()->route('homePage')->with('error','Invalid email or token.');
+            return redirect()->route('homePage')->with('success', 'Your email has been verified successfully.');
+        } else {
+            return redirect()->route('homePage')->with('error', 'Invalid email or token.');
         }
+    }
+
+    public function privacyPolicy()
+    {
+        $data = OtherPage::where('id', 1)->first();
+        return view('frontend.pages.privacy_policy', compact('data'));
+    }
+    public function termsCondition()
+    {
+        $data = OtherPage::where('id', 1)->first();
+        return view('frontend.pages.terms_condition', compact('data'));
     }
 }
