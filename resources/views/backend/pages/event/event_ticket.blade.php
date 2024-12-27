@@ -23,12 +23,13 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Created At</th>
+                                <th>Created at</th>
                                 <th>User</th>
                                 <th>Payment ID</th>
                                 <th>Unit Price</th>
                                 <th>No of Ticket</th>
                                 <th>Total Price</th>
+                                <th>Payment Method</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -37,10 +38,12 @@
                                 <tr>
                                     <th>{{ $index + 1 }}</th>
                                     <td>{{ $ticket->created_at->diffForHumans() }}</td>
-                                    <td>{{ $ticket->created_at->diffForHumans() }}</td>
-                                    <td>{{ $ticket->created_at->diffForHumans() }}</td>
-                                    <td>{{ $ticket->created_at->diffForHumans() }}</td>
-                                    <td>{{ $ticket->created_at->diffForHumans() }}</td>
+                                    <td>{{ $ticket->user_id }}</td>
+                                    <td>{{ $ticket->payment_id }}</td>
+                                    <td>{{ $ticket->unit_price }}<b>$</b></td>
+                                    <td>{{ $ticket->number_of_tickets }}</td>
+                                    <td>{{ $ticket->total_price }}<b>$</b></td>
+                                    <td>ACtion</td>
                                 </tr>
                             @empty
                                 <tr>
@@ -49,7 +52,6 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{-- {{ $events->links('vendor.pagination.admin_dashboard') }} --}}
                 </div>
             </div>
         </div> <!-- end col -->
