@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('site_favicon')->nullable();
             $table->text('site_description')->nullable();
             $table->text('site_keywords')->nullable();
+            $table->text('map')->nullable();
             $table->string('email')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('physical_address')->nullable();

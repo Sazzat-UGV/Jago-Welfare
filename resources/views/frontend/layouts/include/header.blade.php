@@ -56,7 +56,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link">Contact</a>
+                                <a href="{{ route('contactPage') }}" class="nav-link">Contact</a>
                             </li>
                         </ul>
                         <div class="others-options d-flex align-items-center">

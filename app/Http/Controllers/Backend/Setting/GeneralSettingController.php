@@ -61,6 +61,13 @@ class GeneralSettingController extends Controller
             return redirect()->route('admin.general_setting_page', ['stage' => 'social'])->with('success', 'Setting has been updated.');
         }
 
+        if ($request->map) {
+            $setting->update([
+                'map' => $request->map,
+            ]);
+            return redirect()->route('admin.general_setting_page', ['stage' => 'map'])->with('success', 'Setting has been updated.');
+        }
+
         if ($request->hasFile('breadcrumb_image')) {
             $request->validate([
                 'breadcrumb_image' => 'sometimes|image|mimes:png,jpg,jpeg',

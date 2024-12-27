@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactUsMail;
 use App\Mail\SubscriberVerificationMail;
 use App\Models\Blog;
 use App\Models\Comment;
@@ -11,12 +12,14 @@ use App\Models\Event;
 use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\gallery;
+use App\Models\GeneralSetting;
 use App\Models\OtherPage;
 use App\Models\Reply;
 use App\Models\Slider;
 use App\Models\Special;
 use App\Models\Subscriber;
 use App\Models\Testimonial;
+use App\Models\User;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -178,5 +181,28 @@ class HomeController extends Controller
     {
         $data = OtherPage::where('id', 1)->first();
         return view('frontend.pages.terms_condition', compact('data'));
+    }
+
+    public function contactPage()
+    {
+        $setting = GeneralSetting::where('id', 1)->first();
+        return view('frontend.pages.contact', compact('setting'));
+    }
+
+    public function contactSubmit(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required|string',
+            'email' => 'required|email',
+            'subject' => 'required|string',
+            'message' => 'required|string',
+        ]);
+        $fullname = $request->full_name;
+        $email = $request->email;
+        $subject = $request->subject;
+        $mail_message = $request->message;
+        $admin_email = User::where('id', 1)->first()->email;
+        Mail::to($admin_email)->send(new ContactUsMail($fullname, $email, $subject, $mail_message));
+        return redirect()->back()->with('success', 'Thanks for your message. We will contact you soon.');
     }
 }

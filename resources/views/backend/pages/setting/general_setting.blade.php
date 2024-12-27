@@ -43,6 +43,9 @@
                                 <a class="nav-link mb-2 {{ request('stage') == 'social' ? 'active' : '' }}"
                                     id="social_media-tab" data-bs-toggle="pill" href="#social_media" role="tab"
                                     aria-controls="social_media" aria-selected="false">Social Media Links</a>
+                                <a class="nav-link mb-2 {{ request('stage') == 'map' ? 'active' : '' }}" id="map-tab"
+                                    data-bs-toggle="pill" href="#map" role="tab" aria-controls="map"
+                                    aria-selected="false">Map</a>
                             </div>
                         </div>
                         <div class="col-md-9">
@@ -81,7 +84,8 @@
                                                 @enderror
                                             </div>
                                             <div class="col-12 col-md-6 mb-4">
-                                                <label class="form-label">Site Favicon<span class="text-warning" style="font-size: 10px">(Only support ".ico" file.)</span></label>
+                                                <label class="form-label">Site Favicon<span class="text-warning"
+                                                        style="font-size: 10px">(Only support ".ico" file.)</span></label>
                                                 <input
                                                     class="form-control dropify @error('site_favicon')
                                                 is-invalid
@@ -270,6 +274,28 @@
                                                 @enderror
                                             </div>
 
+                                            <div class="col-12">
+                                                <button class="btn btn-success rounded-pill px-4"
+                                                    type="submit">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade {{ request('stage') == 'map' ? 'show active' : '' }}"
+                                    id="map" role="tabpanel" aria-labelledby="map-tab">
+                                    <form action="{{ route('admin.general_setting_submit') }}" method="POST">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-12  mb-4">
+                                                <label class="form-label">Map<span class="text-danger">*</span></label>
+                                                <textarea name="map" id="" cols="30" rows="5" placeholder="Enter ifream code"
+                                                    class="form-control @error('map')
+                                                is-invalid
+                                           @enderror">{{ old('map', $setting->map) }}</textarea> @error('map')
+                                                    <span class="invalid-feedback"
+                                                        role="alert"><strong>{{ $message }}</strong></span>
+                                                @enderror
+                                            </div>
                                             <div class="col-12">
                                                 <button class="btn btn-success rounded-pill px-4"
                                                     type="submit">Save</button>

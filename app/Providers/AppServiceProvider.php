@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use App\Models\GeneralSetting;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Log;
 
 class AppServiceProvider extends ServiceProvider
 {
