@@ -109,6 +109,14 @@
                                                     </button>
                                                 </form>
                                             @endcan
+                                            @can('event-ticket')
+                                            <a href="{{ route('admin.eventTicketPage', $event->id) }}"
+                                                class="btn btn-dark position-relative p-0 avatar-xs rounded editModule-btn">
+                                                <span class="avatar-title bg-transparent">
+                                                    <i class="bx bx-money" style="font-size: 16px"></i>
+                                                </span>
+                                            </a>
+                                            @endcan
                                         </td>
                                     @endif
                                 </tr>

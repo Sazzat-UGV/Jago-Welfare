@@ -230,8 +230,10 @@
                                     <div class="sidebar_heading_main">
                                         <h3>Free Booking</h3>
                                     </div>
-                                    <form action="" method="POST">
+                                    <form action="{{ route('eventFreePayment') }}" method="POST">
                                         @csrf
+                                        <input type="hidden" name="price" value="0">
+                                        <input type="hidden" name="event_id" value="{{ $event->id }}">
                                         <div class="register_now_details">
                                             <div class="mb-3">
                                                 <select

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('total_price');
             $table->string('payment_method');
             $table->string('payment_status');
-            $table->string('currency');
+            $table->string('currency')->nullable();
             $table->timestamps();
         });
     }

@@ -124,10 +124,8 @@ class PaymentController extends Controller
             unset($_SESSION['number_of_tickets']);
             unset($_SESSION['total_price']);
             $event = Event::where('id', session()->get('event_id'))->first();
-            if ($event->total_seat > 0) {
-                $event->booked_seat = $event->booked_seat + session()->get('number_of_tickets');
-                $event->save();
-            }
+            $event->booked_seat = $event->booked_seat + session()->get('number_of_tickets');
+            $event->save();
             return redirect()->route('singleEventPage', $event->slug)->with('success', 'Payment is successfully.');
 
         } else {
@@ -171,5 +169,42 @@ class PaymentController extends Controller
             return redirect()->route('eventPaymentCancel');
         }
 
+    }
+
+    public function eventFreePayment(Request $request)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+        $request->validate([
+            'event_id' => 'required|numeric',
+            'price' => 'required|numeric',
+            'number_of_tickets' => 'required|numeric',
+        ]);
+        $user_id = Auth::user()->id;
+
+        $event = Event::where('id', $request->event_id)->first();
+        if ($event->total_seat > 0) {
+            $remaining_seat = $event->total_seat - $event->booked_seat;
+            if ($event->booked_seat + $request->number_of_tickets > $event->total_seat) {
+                return back()->with('error', 'Sorry, only ' . $remaining_seat . ' seats are available.');
+            }
+        }
+        $total_price = $request->number_of_tickets * $request->price;
+        $payment = new EventTicket;
+        $payment->payment_id = time();
+        $payment->event_id = $request->event_id;
+        $payment->user_id = Auth::user()->id;
+        $payment->unit_price = $request->price;
+        $payment->number_of_tickets = $request->number_of_tickets;
+        $payment->total_price = $total_price;
+        $payment->payment_method = "Free";
+        $payment->payment_status = 'COMPLETED';
+        $payment->save();
+
+        $event = Event::where('id', $request->event_id)->first();
+        $event->booked_seat = $event->booked_seat + $request->number_of_tickets;
+        $event->save();
+        return redirect()->route('singleEventPage', $event->slug)->with('success', 'Booking is successfully.');
     }
 }

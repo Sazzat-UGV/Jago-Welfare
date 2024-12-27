@@ -86,6 +86,7 @@ class PermissionSeeder extends Seeder
             'Edit Event',
             'Add Event',
             'Delete Event',
+            'Event Ticket',
         ];
         $developerFAQsPermissionArray = [
             'Browse FAQs',

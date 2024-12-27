@@ -112,5 +112,9 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         // email configuration setting route
         Route::get('email-configuration', [EmailConfigurationController::class, 'index'])->name('email_configuration_page');
         Route::post('email-configuration', [EmailConfigurationController::class, 'setting_submit'])->name('email_configuration_submit');
+
+        //event routes
+        Route::get('event-ticket/{id}', [EventController::class, 'eventTicketPage'])->name('eventTicketPage');
+
     });
 });

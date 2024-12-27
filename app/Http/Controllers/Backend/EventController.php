@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\EventTicket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -170,5 +171,11 @@ class EventController extends Controller
                 'featured_photo' => $new_photo_name,
             ]);
         }
+    }
+
+    public function eventTicketPage($id)
+    {
+        $eventTicket = EventTicket::where('event_id',$id)->latest('id')->get();
+        return view('backend.pages.event.event_ticket', compact('eventTicket'));
     }
 }

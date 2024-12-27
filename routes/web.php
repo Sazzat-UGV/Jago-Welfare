@@ -22,6 +22,7 @@ Route::prefix('/')->group(function () {
     Route::post('contact', [HomeController::class, 'contactSubmit'])->name('contactSubmit');
 
     // event_ticket_payment
+    Route::post('event/ticket/free/payment', [PaymentController::class, 'eventFreePayment'])->name('eventFreePayment');
     Route::post('event/ticket/payment', [PaymentController::class, 'eventPayment'])->name('eventPayment');
     Route::get('event/ticket/paypal-success', [PaymentController::class, 'eventPaypalSuccess'])->name('eventPaypalSuccess');
     Route::get('event/ticket/cancel', [PaymentController::class, 'eventPaymentCancel'])->name('eventPaymentCancel');
