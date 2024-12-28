@@ -175,7 +175,14 @@ class EventController extends Controller
 
     public function eventTicketPage($id)
     {
-        $eventTicket = EventTicket::where('event_id',$id)->where('payment_status','COMPLETED')->latest('id')->get();
-        return view('backend.pages.event.event_ticket', compact('eventTicket'));
+        $eventTicket = EventTicket::with('user')->where('event_id', $id)->where('payment_status', 'COMPLETED')->latest('id')->get();
+        $total_ticket = EventTicket::where('event_id', $id)->sum('number_of_tickets');
+        return view('backend.pages.event.event_ticket', compact('eventTicket', 'total_ticket'));
+    }
+
+    public function eventTicketInvoice($id)
+    {
+        $TicketInvoice = EventTicket::with('user')->where('id', $id)->first();
+        return view('backend.pages.event.event_ticket_invoice', compact('TicketInvoice'));
     }
 }

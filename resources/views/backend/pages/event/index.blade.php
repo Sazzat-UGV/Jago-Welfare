@@ -54,6 +54,7 @@
                                 <th>Total/Booked Seat</th>
                                 @if (Auth::user()->haspermission('edit-event') ||
                                         Auth::user()->haspermission('read-event') ||
+                                        Auth::user()->haspermission('event-ticket') ||
                                         Auth::user()->haspermission('delete-event'))
                                     <th>Action</th>
                                 @endif
@@ -78,6 +79,7 @@
                                             class="badge bg-danger">{{ $event->booked_seat }}</span></td>
                                     @if (Auth::user()->haspermission('edit-event') ||
                                             Auth::user()->haspermission('read-event') ||
+                                            Auth::user()->haspermission('event-ticket') ||
                                             Auth::user()->haspermission('delete-event'))
                                         <td>
                                             @can('edit-event')
@@ -109,14 +111,22 @@
                                                     </button>
                                                 </form>
                                             @endcan
-                                            @can('event-ticket')
-                                            <a href="{{ route('admin.eventTicketPage', $event->id) }}"
-                                                class="btn btn-dark position-relative p-0 avatar-xs rounded editModule-btn">
-                                                <span class="avatar-title bg-transparent">
-                                                    <i class="bx bx-money" style="font-size: 16px"></i>
-                                                </span>
-                                            </a>
-                                            @endcan
+                                            @php
+                                                $tickets = App\Models\EventTicket::where(
+                                                    'event_id',
+                                                    $event->id,
+                                                )->count();
+                                            @endphp
+                                            @if ($tickets > 0)
+                                                @can('event-ticket')
+                                                    <a href="{{ route('admin.eventTicketPage', $event->id) }}"
+                                                        class="btn btn-dark position-relative p-0 avatar-xs rounded editModule-btn">
+                                                        <span class="avatar-title bg-transparent">
+                                                            <i class="bx bx-money" style="font-size: 16px"></i>
+                                                        </span>
+                                                    </a>
+                                                @endcan
+                                            @endif
                                         </td>
                                     @endif
                                 </tr>

@@ -115,6 +115,6 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
         //event routes
         Route::get('event-ticket/{id}', [EventController::class, 'eventTicketPage'])->name('eventTicketPage');
-
+        Route::get('event-ticket/invoice/{id}', [EventController::class, 'eventTicketInvoice'])->name('eventTicketInvoice');
     });
 });
