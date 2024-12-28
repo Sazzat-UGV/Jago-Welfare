@@ -24,8 +24,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Created at</th>
-                                <th>User</th>
-                                <th>Payment ID</th>
+                                <th>Event Name</th>
                                 <th>Unit Price</th>
                                 <th>No of Ticket</th>
                                 <th>Total Price</th>
@@ -41,24 +40,13 @@
                                 <tr>
                                     <th>{{ $index + 1 }}</th>
                                     <td class="wrap">{{ $ticket->created_at->diffForHumans() }}</td>
-                                    <td class="">
-                                        <span><b>Name:</b> {{ $ticket->user->first_name }}
-                                            {{ $ticket->user->last_name }}</span><br>
-                                        <span><b>Email:</b> {{ $ticket->user->email }}</span><br>
-                                        @if ($ticket->user->phone)
-                                            <span><b>Phone:</b> {{ $ticket->user->phone }}</span><br>
-                                        @endif
-                                        @if ($ticket->user->address)
-                                            <span><b>Address:</b> {{ $ticket->user->address }}</span><br>
-                                        @endif
-                                    </td>
-                                    <td class="wrap">{{ $ticket->payment_id }}</td>
+                                    <td class="wrap">{{ $ticket->event->name }}</td>
                                     <td class="wrap">{{ $ticket->unit_price }} <b>$</b></td>
                                     <td class="wrap">{{ $ticket->number_of_tickets }}</td>
                                     <td class="wrap">{{ $ticket->total_price }} <b>$</b></td>
                                     <td class="wrap">{{ $ticket->payment_method }}</td>
                                     <td>
-                                        <a href="{{ route('admin.eventTicketInvoice',$ticket->id) }}"
+                                        <a href="{{ route('userEventTicketInvoice',$ticket->id) }}"
                                             class="btn btn-dark position-relative p-0 avatar-xs rounded editModule-btn">
                                             <span class="avatar-title bg-transparent">
                                                 <i class="bx bx-spreadsheet" style="font-size: 16px"></i>

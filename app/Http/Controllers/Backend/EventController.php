@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\EventTicket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -175,6 +176,7 @@ class EventController extends Controller
 
     public function eventTicketPage($id)
     {
+        Gate::authorize('event-ticket');
         $eventTicket = EventTicket::with('user')->where('event_id', $id)->where('payment_status', 'COMPLETED')->latest('id')->get();
         $total_ticket = EventTicket::where('event_id', $id)->sum('number_of_tickets');
         return view('backend.pages.event.event_ticket', compact('eventTicket', 'total_ticket'));
@@ -182,7 +184,9 @@ class EventController extends Controller
 
     public function eventTicketInvoice($id)
     {
-        $TicketInvoice = EventTicket::with('user')->where('id', $id)->first();
-        return view('backend.pages.event.event_ticket_invoice', compact('TicketInvoice'));
+        Gate::authorize('event-ticket');
+        $TicketInvoice = EventTicket::with('user', 'event')->where('id', $id)->first();
+        $billed_to = User::where('id', 1)->first();
+        return view('backend.pages.event.event_ticket_invoice', compact('TicketInvoice', 'billed_to'));
     }
 }

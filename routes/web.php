@@ -20,6 +20,8 @@ Route::prefix('/')->group(function () {
     Route::get('subscriber/verify/{token}/{email}', [HomeController::class, 'subscriberVerification'])->name('subscriberVerification');
     Route::get('contact', [HomeController::class, 'contactPage'])->name('contactPage');
     Route::post('contact', [HomeController::class, 'contactSubmit'])->name('contactSubmit');
+    Route::get('user/event/ticket',[HomeController::class,'userEventTicket'])->name('userEventTicket');
+    Route::get('user/event/ticket/invoice/{id}',[HomeController::class,'userEventTicketInvoice'])->name('userEventTicketInvoice');
 
     // event_ticket_payment
     Route::post('event/ticket/free/payment', [PaymentController::class, 'eventFreePayment'])->name('eventFreePayment');

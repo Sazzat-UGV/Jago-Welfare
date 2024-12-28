@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Mail\ContactUsMail;
-use App\Mail\SubscriberVerificationMail;
-use App\Models\Blog;
-use App\Models\Comment;
-use App\Models\Counter;
-use App\Models\Event;
 use App\Models\Faq;
-use App\Models\Feature;
-use App\Models\gallery;
-use App\Models\GeneralSetting;
-use App\Models\OtherPage;
+use App\Models\Blog;
+use App\Models\User;
+use App\Models\Event;
 use App\Models\Reply;
 use App\Models\Slider;
+use App\Models\Comment;
+use App\Models\Counter;
+use App\Models\Feature;
+use App\Models\gallery;
 use App\Models\Special;
-use App\Models\Subscriber;
-use App\Models\Testimonial;
-use App\Models\User;
+use App\Models\OtherPage;
 use App\Models\Volunteer;
+use App\Models\Subscriber;
+use App\Mail\ContactUsMail;
+use App\Models\EventTicket;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use App\Models\GeneralSetting;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\SubscriberVerificationMail;
 
 class HomeController extends Controller
 {
@@ -204,5 +206,18 @@ class HomeController extends Controller
         $admin_email = User::where('id', 1)->first()->email;
         Mail::to($admin_email)->send(new ContactUsMail($fullname, $email, $subject, $mail_message));
         return redirect()->back()->with('success', 'Thanks for your message. We will contact you soon.');
+    }
+
+    public function userEventTicket()
+    {
+        $eventTicket = EventTicket::where('user_id',Auth::user()->id)->where('payment_status', 'COMPLETED')->latest('id')->get();
+        $total_ticket = EventTicket::where('user_id',Auth::user()->id)->sum('number_of_tickets');
+        return view('user_dashboard.event.event_ticket', compact('eventTicket', 'total_ticket'));
+    }
+    public function userEventTicketInvoice($id)
+    {
+        $TicketInvoice = EventTicket::with('user','event')->where('id', $id)->first();
+        $billed_to=User::where('id',1)->first();
+        return view('user_dashboard.event.event_ticket_invoice', compact('TicketInvoice','billed_to'));
     }
 }

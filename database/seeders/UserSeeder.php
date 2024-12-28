@@ -44,5 +44,44 @@ class UserSeeder extends Seeder
             'password' => Hash::make('1234'),
             'remember_token' => Str::random(10),
         ]);
+
+        //create user
+        $administratorRoleId = Role::where('slug', 'User')->first()->id;
+        $first_name = 'System User';
+        $last_name = 'Name';
+        User::updateOrCreate([
+            'role_id' => $administratorRoleId,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'slug' => Str::slug($first_name . ' ' . $last_name),
+            'email' => 'user@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('1234'),
+            'remember_token' => Str::random(10),
+        ]);
+        $first_name = 'System User';
+        $last_name = 'Name1';
+        User::updateOrCreate([
+            'role_id' => $administratorRoleId,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'slug' => Str::slug($first_name . ' ' . $last_name),
+            'email' => 'user1@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('1234'),
+            'remember_token' => Str::random(10),
+        ]);
+        $first_name = 'System User';
+        $last_name = 'Name2';
+        User::updateOrCreate([
+            'role_id' => $administratorRoleId,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'slug' => Str::slug($first_name . ' ' . $last_name),
+            'email' => 'user2@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('1234'),
+            'remember_token' => Str::random(10),
+        ]);
     }
 }

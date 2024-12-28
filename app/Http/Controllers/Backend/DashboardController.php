@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\EventTicket;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,8 @@ class DashboardController extends Controller
 
     public function Defaultdashboard()
     {
-        return view('backend.pages.dashboard.default');
+        $event_ticket_data=EventTicket::where('user_id',Auth::user()->id)->get();
+        return view('backend.pages.dashboard.default',compact('event_ticket_data'));
     }
 
 }

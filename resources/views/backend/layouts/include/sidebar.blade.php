@@ -2,6 +2,7 @@
     <div data-simplebar class="h-100">
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
+
                 <li>
                     <a href="{{ route('admin.dashboard') }}"
                         class="waves-effect @if (Route::is('admin.dashboard')) active @endif">
@@ -10,6 +11,14 @@
                     </a>
                 </li>
 
+                @if (Auth::user()->role->name == 'User')
+                    <li>
+                        <a href="{{ route('userEventTicket') }}" class="waves-effect @if (Route::is('userEventTicket') || Route::is('userEventTicketInvoice')) active @endif">
+                            <i class="bx bxs-calendar-event"></i>
+                            <span>Event Ticket</span>
+                        </a>
+                    </li>
+                @endif
                 @can('browse-blog-category')
                     <li>
                         <a href="{{ route('admin.category.index') }}"
@@ -103,8 +112,7 @@
                 @endcan
                 @can('browse-event')
                     <li>
-                        <a href="javascript: void(0);"
-                            class="has-arrow waves-effect">
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bxs-calendar-event"></i>
                             <span>Events</span>
                         </a>
