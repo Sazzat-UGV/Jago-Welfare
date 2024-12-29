@@ -34,9 +34,9 @@
                                     class="nav-link {{ Route::is('eventPage') || Route::is('singleEventPage') ? 'active' : '' }}">Events</a>
                             </li>
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link">Causes</a>
+                                <a href="{{ route('causePage') }}"
+                                    class="nav-link {{ Route::is('causePage') || Route::is('singleCausePage') ? 'active' : '' }}">Causes</a>
                             </li>
-
                             <li class="nav-item">
                                 <a href="{{ route('volunteerPage') }}"
                                     class="nav-link {{ Route::is('volunteerPage') ? 'active' : '' }}">Volunteers</a>
@@ -54,10 +54,11 @@
                                 <a href="{{ route('blogPage') }}"
                                     class="nav-link {{ Route::is('blogPage') || Route::is('singleBlogPage') ? 'active' : '' }}">Blog</a>
                             </li>
-
                             <li class="nav-item">
-                                <a href="{{ route('contactPage') }}" class="nav-link">Contact</a>
+                                <a href="{{ route('contactPage') }}"
+                                    class="nav-link {{ Route::is('contactPage') ? 'active' : '' }}">Contact</a>
                             </li>
+
                         </ul>
                         <div class="others-options d-flex align-items-center">
 

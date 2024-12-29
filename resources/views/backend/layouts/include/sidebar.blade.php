@@ -13,7 +13,8 @@
 
                 @if (Auth::user()->role->name == 'User')
                     <li>
-                        <a href="{{ route('userEventTicket') }}" class="waves-effect @if (Route::is('userEventTicket') || Route::is('userEventTicketInvoice')) active @endif">
+                        <a href="{{ route('userEventTicket') }}"
+                            class="waves-effect @if (Route::is('userEventTicket') || Route::is('userEventTicketInvoice')) active @endif">
                             <i class="bx bxs-calendar-event"></i>
                             <span>Event Ticket</span>
                         </a>
@@ -126,6 +127,26 @@
                                 <li class="@if (Route::is('admin.event.create')) mm-active @endif"><a
                                         href="{{ route('admin.event.create') }}"
                                         class="@if (Route::is('admin.event.create')) active @endif">Add New Event</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('browse-cause')
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-diamond"></i>
+                            <span>Causes</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            @can('browse-cause')
+                                <li class="@if (Route::is('admin.cause.index')) mm-active @endif"><a
+                                        href="{{ route('admin.cause.index') }}"
+                                        class="@if (Route::is('admin.cause.index')) active @endif">Cause List</a></li>
+                            @endcan
+                            @can('add-cause')
+                                <li class="@if (Route::is('admin.cause.create')) mm-active @endif"><a
+                                        href="{{ route('admin.cause.create') }}"
+                                        class="@if (Route::is('admin.cause.create')) active @endif">Add New Cause</a></li>
                             @endcan
                         </ul>
                     </li>

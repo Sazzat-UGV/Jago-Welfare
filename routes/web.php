@@ -22,6 +22,8 @@ Route::prefix('/')->group(function () {
     Route::post('contact', [HomeController::class, 'contactSubmit'])->name('contactSubmit');
     Route::get('user/event/ticket',[HomeController::class,'userEventTicket'])->name('userEventTicket');
     Route::get('user/event/ticket/invoice/{id}',[HomeController::class,'userEventTicketInvoice'])->name('userEventTicketInvoice');
+    Route::get('cause', [HomeController::class, 'causePage'])->name('causePage');
+    Route::get('cause-details/{slug}', [HomeController::class, 'singleCausePage'])->name('singleCausePage');
 
     // event_ticket_payment
     Route::post('event/ticket/free/payment', [PaymentController::class, 'eventFreePayment'])->name('eventFreePayment');
@@ -29,6 +31,12 @@ Route::prefix('/')->group(function () {
     Route::get('event/ticket/paypal-success', [PaymentController::class, 'eventPaypalSuccess'])->name('eventPaypalSuccess');
     Route::get('event/ticket/cancel', [PaymentController::class, 'eventPaymentCancel'])->name('eventPaymentCancel');
     Route::get('event/ticket/stripe-success', [PaymentController::class, 'eventStripeSuccess'])->name('eventStripeSuccess');
+
+    // cause_payment
+    Route::post('cause/payment', [PaymentController::class, 'causePayment'])->name('causePayment');
+    Route::get('cause/paypal-success', [PaymentController::class, 'causePaypalSuccess'])->name('causePaypalSuccess');
+    Route::get('cause/cancel', [PaymentController::class, 'causePaymentCancel'])->name('causePaymentCancel');
+    Route::get('cause/stripe-success', [PaymentController::class, 'causeStripeSuccess'])->name('causeStripeSuccess');
 
     //other pages
     Route::get('terms_condition', [HomeController::class, 'termsCondition'])->name('termsCondition');

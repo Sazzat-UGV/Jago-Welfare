@@ -2,29 +2,30 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Faq;
+use App\Http\Controllers\Controller;
+use App\Mail\ContactUsMail;
+use App\Mail\SubscriberVerificationMail;
 use App\Models\Blog;
-use App\Models\User;
-use App\Models\Event;
-use App\Models\Reply;
-use App\Models\Slider;
+use App\Models\Cause;
 use App\Models\Comment;
 use App\Models\Counter;
+use App\Models\Event;
+use App\Models\EventTicket;
+use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\gallery;
-use App\Models\Special;
-use App\Models\OtherPage;
-use App\Models\Volunteer;
-use App\Models\Subscriber;
-use App\Mail\ContactUsMail;
-use App\Models\EventTicket;
-use App\Models\Testimonial;
-use Illuminate\Http\Request;
 use App\Models\GeneralSetting;
-use App\Http\Controllers\Controller;
+use App\Models\OtherPage;
+use App\Models\Reply;
+use App\Models\Slider;
+use App\Models\Special;
+use App\Models\Subscriber;
+use App\Models\Testimonial;
+use App\Models\User;
+use App\Models\Volunteer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SubscriberVerificationMail;
 
 class HomeController extends Controller
 {
@@ -210,14 +211,27 @@ class HomeController extends Controller
 
     public function userEventTicket()
     {
-        $eventTicket = EventTicket::where('user_id',Auth::user()->id)->where('payment_status', 'COMPLETED')->latest('id')->get();
-        $total_ticket = EventTicket::where('user_id',Auth::user()->id)->sum('number_of_tickets');
+        $eventTicket = EventTicket::where('user_id', Auth::user()->id)->where('payment_status', 'COMPLETED')->latest('id')->get();
+        $total_ticket = EventTicket::where('user_id', Auth::user()->id)->sum('number_of_tickets');
         return view('user_dashboard.event.event_ticket', compact('eventTicket', 'total_ticket'));
     }
     public function userEventTicketInvoice($id)
     {
-        $TicketInvoice = EventTicket::with('user','event')->where('id', $id)->first();
-        $billed_to=User::where('id',1)->first();
-        return view('user_dashboard.event.event_ticket_invoice', compact('TicketInvoice','billed_to'));
+        $TicketInvoice = EventTicket::with('user', 'event')->where('id', $id)->first();
+        $billed_to = User::where('id', 1)->first();
+        return view('user_dashboard.event.event_ticket_invoice', compact('TicketInvoice', 'billed_to'));
+    }
+
+    public function causePage()
+    {
+        $causes = Cause::latest('id')->paginate(6);
+        return view('frontend.pages.cause.index', compact('causes'));
+    }
+
+    public function singleCausePage($slug)
+    {
+        $cause = Cause::where('slug', $slug)->first();
+        $recent_cause = Cause::latest('id')->limit(5)->get();
+        return view('frontend.pages.cause.show', compact('cause', 'recent_cause'));
     }
 }

@@ -88,6 +88,13 @@ class PermissionSeeder extends Seeder
             'Delete Event',
             'Event Ticket',
         ];
+        $developerCausePermissionArray = [
+            'Browse Cause',
+            'Read Cause',
+            'Edit Cause',
+            'Add Cause',
+            'Delete Cause',
+        ];
         $developerFAQsPermissionArray = [
             'Browse FAQs',
             'Edit FAQs',
@@ -110,7 +117,7 @@ class PermissionSeeder extends Seeder
             'General Setting',
             'Email Configuration',
             'Terms & Conditions',
-            'Privacy Policy'
+            'Privacy Policy',
         ];
         $developerDatabaseBackupPermissionArray = [
             'Browse Database Backup',
@@ -149,6 +156,16 @@ class PermissionSeeder extends Seeder
                 'module_id' => $developerFeatureModule->id,
                 'name' => $developerFeaturesPermissionArray[$i],
                 'slug' => Str::slug($developerFeaturesPermissionArray[$i]),
+            ]);
+        }
+
+        //Causes
+        $developerCauseModule = Module::where('name', 'Causes')->select('id')->first();
+        for ($i = 0; $i < count($developerCausePermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $developerCauseModule->id,
+                'name' => $developerCausePermissionArray[$i],
+                'slug' => Str::slug($developerCausePermissionArray[$i]),
             ]);
         }
         //Subscribers

@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\Auth\ProfileController;
 use App\Http\Controllers\Backend\BackupController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CauseController;
 use App\Http\Controllers\Backend\CounterController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\EventController;
@@ -64,6 +65,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::resource('gallery', GalleryController::class);
         Route::resource('blog', BlogController::class);
         Route::resource('event', EventController::class);
+        Route::resource('cause', CauseController::class);
 
         // terms condition route
         Route::get('terms-condition', [OtherPageController::class, 'termsConditionPage'])->name('termscondition.termsConditionPage');
