@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Models\Cause;
 use App\Models\CauseDonation;
+use App\Models\Event;
 use App\Models\EventTicket;
 use App\Models\Role;
+use App\Models\Subscriber;
+use App\Models\Testimonial;
 use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -41,10 +47,22 @@ class DashboardController extends Controller
 
     public function Admindashboard()
     {
-        $total_user = User::where('role_id', 4)->count();
-        $new_register_users = User::with('role:id,name')->select('id', 'role_id', 'first_name', 'last_name', 'email', 'created_at')->latest('id')->whereNot('id', 1)->limit(5)->get();
+        $total_user = User::where('role_id', 4)->whereNotNull('email_verified_at')->count();
+        $total_cause = Cause::count();
+        $total_event = Event::count();
+        $total_testimonial = Testimonial::count();
+        $total_volunteer = Volunteer::count();
+        $total_subscriber = Subscriber::count();
+        $total_blog = Blog::count();
+        $new_register_users = User::with('role:id,name')->select('id', 'role_id', 'first_name', 'last_name', 'email', 'created_at')->latest('id')->whereNotIn('id', [1, 2])->limit(5)->get();
         return view('backend.pages.dashboard.admin', compact(
             'total_user',
+            'total_cause',
+            'total_event',
+            'total_blog',
+            'total_volunteer',
+            'total_testimonial',
+            'total_subscriber',
             'new_register_users',
         ));
     }
@@ -56,9 +74,9 @@ class DashboardController extends Controller
 
     public function Defaultdashboard()
     {
-        $event_ticket_data=EventTicket::where('user_id',Auth::user()->id)->get();
-        $cause_donation_data=CauseDonation::where('user_id',Auth::user()->id)->get();
-        return view('backend.pages.dashboard.default',compact('event_ticket_data','cause_donation_data'));
+        $event_ticket_data = EventTicket::where('user_id', Auth::user()->id)->get();
+        $cause_donation_data = CauseDonation::where('user_id', Auth::user()->id)->get();
+        return view('backend.pages.dashboard.default', compact('event_ticket_data', 'cause_donation_data'));
     }
 
 }
