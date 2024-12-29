@@ -50,9 +50,9 @@
                                 <th>Name</th>
                                 <th>Goal</th>
                                 <th>Raised</th>
-                                <th>Options</th>
                                 @if (Auth::user()->haspermission('edit-cause') ||
                                         Auth::user()->haspermission('read-cause') ||
+                                        Auth::user()->haspermission('cause-donation') ||
                                         Auth::user()->haspermission('delete-cause'))
                                     <th>Action</th>
                                 @endif
@@ -67,7 +67,6 @@
                                     <td class="wrap">{{ $cause->name }}</td>
                                     <td class="wrap"><b>$</b>{{ $cause->goal }}</td>
                                     <td class="wrap"><b>$</b>{{ $cause->raised }}</td>
-                                    <td class="wrap">optiid</td>
                                     @if (Auth::user()->haspermission('edit-cause') ||
                                             Auth::user()->haspermission('read-cause') ||
                                             Auth::user()->haspermission('delete-cause'))
@@ -101,6 +100,16 @@
                                                     </button>
                                                 </form>
                                             @endcan
+                                            @if ($cause->raised > 0)
+                                                @can('cause-donation')
+                                                    <a href="{{ route('admin.causeDonationPage', $cause->id) }}"
+                                                        class="btn btn-dark position-relative p-0 avatar-xs rounded editModule-btn">
+                                                        <span class="avatar-title bg-transparent">
+                                                            <i class="bx bx-money" style="font-size: 16px"></i>
+                                                        </span>
+                                                    </a>
+                                                @endcan
+                                            @endif
                                         </td>
                                     @endif
                                 </tr>

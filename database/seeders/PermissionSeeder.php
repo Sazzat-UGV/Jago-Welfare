@@ -94,6 +94,7 @@ class PermissionSeeder extends Seeder
             'Edit Cause',
             'Add Cause',
             'Delete Cause',
+            'Cause Donation',
         ];
         $developerFAQsPermissionArray = [
             'Browse FAQs',

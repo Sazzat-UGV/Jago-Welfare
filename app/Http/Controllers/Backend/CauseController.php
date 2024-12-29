@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use Image;
+use App\Models\User;
 use App\Models\Cause;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\CauseDonation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 
@@ -141,5 +143,20 @@ class CauseController extends Controller
                 'featured_photo' => $new_photo_name,
             ]);
         }
+    }
+
+    public function causeDonationPage($id)
+    {
+        Gate::authorize('cause-donation');
+        $causeDonation = CauseDonation::with('user')->where('cause_id', $id)->where('payment_status', 'COMPLETED')->latest('id')->get();
+        return view('backend.pages.cause.cause_donation', compact('causeDonation'));
+    }
+
+    public function causeDonationInvoice($id)
+    {
+        Gate::authorize('cause-donation');
+        $cause_donation = CauseDonation::with('user', 'cause')->where('id', $id)->first();
+        $billed_to = User::where('id', 1)->first();
+        return view('backend.pages.cause.cause_donation_invoice', compact('cause_donation', 'billed_to'));
     }
 }

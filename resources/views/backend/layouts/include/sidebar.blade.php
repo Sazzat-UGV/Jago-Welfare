@@ -14,9 +14,16 @@
                 @if (Auth::user()->role->name == 'User')
                     <li>
                         <a href="{{ route('userEventTicket') }}"
-                            class="waves-effect @if (Route::is('userEventTicket') || Route::is('userEventTicketInvoice')) active @endif">
+                            class="waves-effect">
                             <i class="bx bxs-calendar-event"></i>
                             <span>Event Ticket</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('userCauseDonation') }}"
+                            class="waves-effect">
+                            <i class="bx bx-diamond"></i>
+                            <span>Cause Donation</span>
                         </a>
                     </li>
                 @endif

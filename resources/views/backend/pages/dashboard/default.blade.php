@@ -46,6 +46,26 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 col-md-3">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-medium">Total Cause Donation</p>
+                            <h4 class="mb-0">${{ $cause_donation_data->sum('amount') }}</h4>
+                        </div>
+
+                        <div class="flex-shrink-0 align-self-center">
+                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
+                                <span class="avatar-title">
+                                    <i class="bx bx-diamond font-size-24"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @push('script')

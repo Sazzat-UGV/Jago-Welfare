@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CauseDonation;
 use App\Models\EventTicket;
 use App\Models\Role;
 use App\Models\User;
@@ -56,7 +57,8 @@ class DashboardController extends Controller
     public function Defaultdashboard()
     {
         $event_ticket_data=EventTicket::where('user_id',Auth::user()->id)->get();
-        return view('backend.pages.dashboard.default',compact('event_ticket_data'));
+        $cause_donation_data=CauseDonation::where('user_id',Auth::user()->id)->get();
+        return view('backend.pages.dashboard.default',compact('event_ticket_data','cause_donation_data'));
     }
 
 }

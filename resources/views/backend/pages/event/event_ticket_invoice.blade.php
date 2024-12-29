@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="invoice-title">
-                        <h4 class="float-end font-size-16">Order # {{ $TicketInvoice->payment_id }}</h4>
+                        <h4 class="float-end font-size-16">Order #{{ $TicketInvoice->payment_id }}</h4>
                         <div class="auth-logo mb-4">
                             <img src="{{ asset('uploads/settings') }}/{{ $setting->site_logo }}" alt="logo"
                                 class="auth-logo-dark" height="30">
@@ -70,7 +70,7 @@
                                 <tr>
                                     <td>01</td>
                                     <td>{{ $TicketInvoice->event->name }}</td>
-                                    <td class="text-end">${{ $TicketInvoice->unit_price }}</td>
+                                    <td class="text-end">{{ $TicketInvoice->unit_price }}$</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-end">No of Tikets</td>
@@ -81,7 +81,7 @@
                                         <strong>Total</strong>
                                     </td>
                                     <td class="border-0 text-end">
-                                        <h4 class="m-0">${{ $TicketInvoice->total_price }}</h4>
+                                        <h4 class="m-0">{{ $TicketInvoice->total_price }}$</h4>
                                     </td>
                                 </tr>
                             </tbody>

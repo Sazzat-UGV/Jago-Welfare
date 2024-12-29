@@ -178,8 +178,7 @@ class EventController extends Controller
     {
         Gate::authorize('event-ticket');
         $eventTicket = EventTicket::with('user')->where('event_id', $id)->where('payment_status', 'COMPLETED')->latest('id')->get();
-        $total_ticket = EventTicket::where('event_id', $id)->sum('number_of_tickets');
-        return view('backend.pages.event.event_ticket', compact('eventTicket', 'total_ticket'));
+        return view('backend.pages.event.event_ticket', compact('eventTicket'));
     }
 
     public function eventTicketInvoice($id)

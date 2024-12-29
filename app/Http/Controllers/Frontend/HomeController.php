@@ -7,6 +7,7 @@ use App\Mail\ContactUsMail;
 use App\Mail\SubscriberVerificationMail;
 use App\Models\Blog;
 use App\Models\Cause;
+use App\Models\CauseDonation;
 use App\Models\Comment;
 use App\Models\Counter;
 use App\Models\Event;
@@ -212,8 +213,7 @@ class HomeController extends Controller
     public function userEventTicket()
     {
         $eventTicket = EventTicket::where('user_id', Auth::user()->id)->where('payment_status', 'COMPLETED')->latest('id')->get();
-        $total_ticket = EventTicket::where('user_id', Auth::user()->id)->sum('number_of_tickets');
-        return view('user_dashboard.event.event_ticket', compact('eventTicket', 'total_ticket'));
+        return view('user_dashboard.event.event_ticket', compact('eventTicket'));
     }
     public function userEventTicketInvoice($id)
     {
@@ -233,5 +233,16 @@ class HomeController extends Controller
         $cause = Cause::where('slug', $slug)->first();
         $recent_cause = Cause::latest('id')->limit(5)->get();
         return view('frontend.pages.cause.show', compact('cause', 'recent_cause'));
+    }
+    public function userCauseDonation()
+    {
+        $cause_donation = CauseDonation::where('user_id', Auth::user()->id)->where('payment_status', 'COMPLETED')->latest('id')->get();
+        return view('user_dashboard.cause.cause_donation', compact('cause_donation'));
+    }
+    public function userCauseDonationInvoice($id)
+    {
+        $donationInvoice = CauseDonation::with('user', 'cause')->where('id', $id)->first();
+        $billed_to = User::where('id', 1)->first();
+        return view('user_dashboard.cause.cause_donation_invoice', compact('donationInvoice', 'billed_to'));
     }
 }

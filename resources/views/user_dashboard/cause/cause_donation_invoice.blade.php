@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="invoice-title">
-                        <h4 class="float-end font-size-16">Order #{{ $TicketInvoice->payment_id }}</h4>
+                        <h4 class="float-end font-size-16">Order #{{ $donationInvoice->payment_id }}</h4>
                         <div class="auth-logo mb-4">
                             <img src="{{ asset('uploads/settings') }}/{{ $setting->site_logo }}" alt="logo"
                                 class="auth-logo-dark" height="30">
@@ -34,10 +34,10 @@
                         <div class="col-sm-6 text-sm-end">
                             <address class="mt-2 mt-sm-0">
                                 <strong>Shipped To:</strong><br>
-                                {{ $TicketInvoice->user->first_name }} {{ $TicketInvoice->user->last_name ?? ' ' }}<br>
-                                {{ $TicketInvoice->user->email }}<br>
-                                {{ $TicketInvoice->user->phone }}<br>
-                                {{ $TicketInvoice->user->address }}<br>
+                                {{ $donationInvoice->user->first_name }} {{ $donationInvoice->user->last_name ?? ' ' }}<br>
+                                {{ $donationInvoice->user->email }}<br>
+                                {{ $donationInvoice->user->phone }}<br>
+                                {{ $donationInvoice->user->address }}<br>
                             </address>
                         </div>
                     </div>
@@ -45,12 +45,12 @@
                         <div class="col-sm-6 mt-3">
                             <address>
                                 <strong>Payment Method:</strong><br>
-                                {{ $TicketInvoice->payment_method }}<br>
+                                {{ $donationInvoice->payment_method }}<br>
                             </address>
                         </div>
                         <div class="col-sm-6 mt-3 text-sm-end">
                             <address>
-                                <strong>Order Date:</strong><br>{{ $TicketInvoice->created_at->format('F d, Y') }}<br><br>
+                                <strong>Order Date:</strong><br>{{ $donationInvoice->created_at->format('F d, Y') }}<br><br>
                             </address>
                         </div>
                     </div>
@@ -69,19 +69,15 @@
                             <tbody>
                                 <tr>
                                     <td>01</td>
-                                    <td>{{ $TicketInvoice->event->name }}</td>
-                                    <td class="text-end">{{ $TicketInvoice->unit_price }}$</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="text-end">No of Tikets</td>
-                                    <td class="text-end">{{ $TicketInvoice->number_of_tickets }}</td>
+                                    <td>{{ $donationInvoice->cause->name }}</td>
+                                    <td class="text-end">{{ $donationInvoice->amount }}$</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="border-0 text-end">
                                         <strong>Total</strong>
                                     </td>
                                     <td class="border-0 text-end">
-                                        <h4 class="m-0">{{ $TicketInvoice->total_price }}$</h4>
+                                        <h4 class="m-0">{{ $donationInvoice->amount }}$</h4>
                                     </td>
                                 </tr>
                             </tbody>

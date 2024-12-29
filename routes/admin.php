@@ -115,8 +115,12 @@ Route::prefix('/admin')->as('admin.')->group(function () {
         Route::get('email-configuration', [EmailConfigurationController::class, 'index'])->name('email_configuration_page');
         Route::post('email-configuration', [EmailConfigurationController::class, 'setting_submit'])->name('email_configuration_submit');
 
-        //event routes
+        //event ticket routes
         Route::get('event-ticket/{id}', [EventController::class, 'eventTicketPage'])->name('eventTicketPage');
         Route::get('event-ticket/invoice/{id}', [EventController::class, 'eventTicketInvoice'])->name('eventTicketInvoice');
+
+        //cause donation routes
+        Route::get('cause-donation/{id}', [CauseController::class, 'causeDonationPage'])->name('causeDonationPage');
+        Route::get('cause-donation/invoice/{id}', [CauseController::class, 'causeDonationInvoice'])->name('causeDonationInvoice');
     });
 });

@@ -24,6 +24,8 @@ Route::prefix('/')->group(function () {
     Route::get('user/event/ticket/invoice/{id}',[HomeController::class,'userEventTicketInvoice'])->name('userEventTicketInvoice');
     Route::get('cause', [HomeController::class, 'causePage'])->name('causePage');
     Route::get('cause-details/{slug}', [HomeController::class, 'singleCausePage'])->name('singleCausePage');
+    Route::get('user/cause/donation',[HomeController::class,'userCauseDonation'])->name('userCauseDonation');
+    Route::get('user/cause/donation/invoice/{id}',[HomeController::class,'userCauseDonationInvoice'])->name('userCauseDonationInvoice');
 
     // event_ticket_payment
     Route::post('event/ticket/free/payment', [PaymentController::class, 'eventFreePayment'])->name('eventFreePayment');
