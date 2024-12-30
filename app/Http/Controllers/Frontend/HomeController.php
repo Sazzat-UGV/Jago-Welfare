@@ -35,10 +35,20 @@ class HomeController extends Controller
         $sliders = Slider::latest('id')->get();
         $special = Special::where('id', 1)->first();
         $features = Feature::where('status', 1)->get();
+        $causes = Cause::latest('id')->limit(3)->get();
+        $event = Event::latest('id')->limit(4);
+        $events = Event::latest('id')->limit(4)->get();
+        $counter = Counter::where('id', 1)->first();
+        $blogs = Blog::latest('id')->take(3)->get();
         return view('frontend.pages.home', compact(
             'sliders',
             'special',
             'features',
+            'blogs',
+            'causes',
+            'events',
+            'counter',
+            'event',
         ));
     }
 
