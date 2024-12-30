@@ -54,6 +54,18 @@ class DashboardController extends Controller
         $total_volunteer = Volunteer::count();
         $total_subscriber = Subscriber::count();
         $total_blog = Blog::count();
+        // statistics
+        $monthlyData = collect(range(1, 12))->mapWithKeys(function ($month) {
+            return [
+                now()->startOfYear()->addMonths($month - 1)->format('F') => [
+                    'tickets' => EventTicket::whereMonth('created_at', $month)->sum('total_price'),
+                    'donations' => CauseDonation::whereMonth('created_at', $month)->sum('amount'),
+                ],
+            ];
+        });
+        $ticket_booked_amount = EventTicket::sum('total_price');
+        $donation_amount = CauseDonation::sum('amount');
+
         $new_register_users = User::with('role:id,name')->select('id', 'role_id', 'first_name', 'last_name', 'email', 'created_at')->latest('id')->whereNotIn('id', [1, 2])->limit(5)->get();
         return view('backend.pages.dashboard.admin', compact(
             'total_user',
@@ -64,6 +76,9 @@ class DashboardController extends Controller
             'total_testimonial',
             'total_subscriber',
             'new_register_users',
+            'ticket_booked_amount',
+            'donation_amount',
+            'monthlyData'
         ));
     }
 

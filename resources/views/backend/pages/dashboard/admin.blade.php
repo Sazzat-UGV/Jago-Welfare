@@ -152,6 +152,22 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Monthly Earnings</h4>
+                    <canvas id="monthlyStats" width="800"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card pb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Total Earnings</h4>
+                    <canvas id="totalEarning" height="500"></canvas>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -200,4 +216,58 @@
     </div>
 @endsection
 @push('script')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const barCtx = document.getElementById('monthlyStats');
+
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode(array_keys($monthlyData->toArray())) !!},
+                datasets: [
+                    {
+                        label: 'Tickets Sold (in USD)',
+                        data: {!! json_encode($monthlyData->pluck('tickets')->values()) !!},
+                        backgroundColor: '#34C38F',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Donations (in USD)',
+                        data: {!! json_encode($monthlyData->pluck('donations')->values()) !!}, // Donation data
+                        backgroundColor: '#556EE6',
+                        borderWidth: 1
+                    }
+                ]
+
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const pieCtx = document.getElementById('totalEarning');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: [
+                    'Tickets',
+                    'Donation',
+                ],
+                datasets: [{
+                    label: 'Total Earnings',
+                    data: [{{ $ticket_booked_amount }}, {{ $donation_amount }}],
+                    backgroundColor: [
+                        '#34C38F',
+                        '#556EE6',
+                    ],
+                    hoverOffset: 4
+                }]
+            }
+        });
+    </script>
 @endpush
