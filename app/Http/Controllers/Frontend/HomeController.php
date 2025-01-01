@@ -37,7 +37,6 @@ class HomeController extends Controller
         $features = Feature::where('status', 1)->get();
         $causes = Cause::latest('id')->limit(3)->get();
         $event = Event::latest('id')->limit(4);
-        $events = Event::latest('id')->limit(4)->get();
         $counter = Counter::where('id', 1)->first();
         $blogs = Blog::latest('id')->take(3)->get();
         return view('frontend.pages.home', compact(
@@ -46,7 +45,6 @@ class HomeController extends Controller
             'features',
             'blogs',
             'causes',
-            'events',
             'counter',
             'event',
         ));

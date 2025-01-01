@@ -50,7 +50,7 @@
                     <div class="nav_item_footer">
                         <ul>
                             <li><a href="{{ route('aboutPage') }}">About us</a></li>
-                            <li><a href="#">Causes</a></li>
+                            <li><a href="{{ route('causePage') }}">Causes</a></li>
                             <li><a href="{{ route('eventPage') }}">Events</a></li>
                             <li><a href="{{ route('galleryPage') }}">Gallery</a></li>
                         </ul>
@@ -64,7 +64,7 @@
                     <div class="nav_item_footer">
                         <ul>
                             <li><a href="{{ route('faqPage') }}">FAQ</a></li>
-                            <li><a href="#">Contact us</a></li>
+                            <li><a href="{{ route('contactPage') }}">Contact us</a></li>
                             <li><a href="{{ route('privacyPolicy') }}">Privacy Policy</a></li>
                             <li><a href="{{ route('termsCondition') }}">Terms & Conditions</a></li>
                         </ul>

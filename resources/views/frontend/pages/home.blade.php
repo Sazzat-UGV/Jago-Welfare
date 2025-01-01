@@ -240,7 +240,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    @foreach ($event->take(3)->get() as $levent)
+                    @foreach ($event->skip(1)->take(3)->get() as $levent)
                         <div class="event_left_side_wrapper">
                             <div class="event_content_area small_content_padding">
                                 <div class="event_heading_area">
